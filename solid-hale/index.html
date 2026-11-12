@@ -102,11 +102,12 @@ a{color:#1F2124}a:hover{color:#000}
 .burger span:last-child{width:18px;margin-left:8px}
 .mnav-t:checked~.hdr .burger span:first-child{transform:translateY(5px) rotate(45deg)}
 .mnav-t:checked~.hdr .burger span:last-child{width:26px;margin-left:0;transform:translateY(-5px) rotate(-45deg)}
-.mnav{display:none!important;position:absolute;left:0;right:0;top:69px;height:calc(100vh - 69px);height:calc(100dvh - 69px);overflow-y:auto;background:#17191B;flex-direction:column;align-items:stretch!important;gap:0!important;padding:12px 24px 40px;border-top:1px solid rgba(255,255,255,.08)}
+.mnav{display:none!important;position:absolute;left:0;right:0;top:69px;height:calc(100vh - 69px);height:calc(100dvh - 69px);overflow-y:auto;background:#17191B;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important;padding:8px 24px 110px;border-top:1px solid rgba(255,255,255,.08)}
 .mnav-t:checked~.hdr .mnav{display:flex!important}
-.mnav .navl{font:800 30px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.mnav .navl{font:800 27px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .mnav .navl:hover{border-bottom-color:rgba(255,255,255,.08)}
-.mextra{display:block;padding-top:32px}
+.mnav>*{flex:none!important}
+.mextra{display:block;padding-top:28px}
 .stick:has(.mnav-t:checked){background:#17191B!important;animation:none!important}
 body:has(.mnav-t:checked){overflow:hidden}
 .feat{grid-template-columns:repeat(2,minmax(0,1fr))!important}
