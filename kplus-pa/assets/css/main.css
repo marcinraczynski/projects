@@ -304,3 +304,141 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .form{min-width:0}
 .field{min-width:0}
 .field input,.field textarea{width:100%;min-width:0}
+
+/* =====================================================================
+   Responsywność (krok 2). Breakpointy: 1280, 1024, 768, 480.
+   ===================================================================== */
+.menu{display:none}
+
+@media (max-width:1279px){
+  :root{--pad-x:64px;--pad-y:96px}
+  .head{gap:56px}
+  .head__aside,.services .head__aside,.exp .head__aside,.team .head__aside{width:min(400px,40%)}
+  .hero__text{flex-basis:520px}
+  .hero__visual img{width:440px;height:440px}
+  .bento{grid-template-columns:1fr 1fr}
+  .bento__row2{grid-template-columns:1fr 1fr}
+  .cloud{left:auto;right:32px}
+  .how__cycle{gap:40px}
+  .cycle{flex:0 0 560px;height:480px}
+  .cycle__name{display:none}
+  .project__img{flex-basis:46%}
+  .project{gap:40px;padding-right:40px}
+  .contact .box{gap:56px}
+  .form{flex-basis:480px}
+  .footer{padding-left:64px;padding-right:64px}
+  .when .box{gap:56px}
+  .when__left{flex-basis:360px}
+}
+
+@media (max-width:1023px){
+  :root{--pad-x:40px;--pad-y:80px;--nav-h:72px}
+  .nav__in{padding:0 24px}
+  .nav__links,.nav__right > .lang{display:none}
+  .nav__burger{display:flex;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;margin-right:-10px;align-items:center}
+  .nav__burger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:transform .25s}
+  .nav__burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+  .nav__burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+  .menu{position:fixed;inset:var(--nav-h) 0 0;z-index:49;background:var(--white);display:flex;flex-direction:column;justify-content:space-between;padding:32px 24px 40px;overflow:auto}
+  .menu[hidden]{display:none}
+  .menu ul{display:flex;flex-direction:column}
+  .menu li a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:28px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+  .menu__foot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:32px}
+  .menu-open body{overflow:hidden}
+
+  .head{flex-direction:column;align-items:flex-start;gap:24px}
+  .head__aside,.services .head__aside,.exp .head__aside,.team .head__aside{width:auto;max-width:640px}
+  .approach .head__aside{padding-top:0}
+
+  .hero .box{min-height:0;gap:40px;padding-top:48px}
+  .hero__top{flex-direction:column;align-items:stretch;gap:24px}
+  .hero__text{flex-basis:auto;max-width:640px}
+  .hero__visual img{width:min(440px,100%);height:auto}
+  .topics{grid-template-columns:repeat(3,minmax(220px,1fr));overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--pad-x) * -1);padding:0 var(--pad-x) 4px;scrollbar-width:none}
+  .topics::-webkit-scrollbar{display:none}
+  .topic{scroll-snap-align:start}
+
+  .pillars{grid-template-columns:1fr;margin-top:40px}
+  .pillar{gap:32px}
+  .svc-grid{grid-template-columns:repeat(2,1fr);margin-top:40px}
+
+  .when .box{flex-direction:column;gap:40px}
+  .when__left{flex-basis:auto}
+  .counter{display:none}
+  .when__item p{font-size:22px}
+
+  .how__cycle{flex-direction:column;align-items:stretch;gap:32px;margin-top:40px}
+  .cycle{flex:none;width:100%;max-width:420px;height:auto;aspect-ratio:720/600;margin:0 auto}
+  .stage .t-display{font-size:44px}
+
+  .bento,.bento__row2{grid-template-columns:1fr 1fr}
+  .kpi,.bento__row2 .kpi{height:auto;min-height:320px;gap:32px;padding:32px}
+  .cloud{top:32px;right:24px}
+  .awards-logos{gap:16px;flex-wrap:wrap}
+  .awards-logos img{max-width:30%}
+
+  .project{flex-direction:column;gap:0;padding:12px}
+  .project__img{flex:none;width:100%;height:auto;aspect-ratio:560/520}
+  .project__body{padding:28px 16px 20px}
+
+  .team__grid{grid-template-columns:repeat(2,1fr);margin-top:40px}
+  .person__photo{height:auto;aspect-ratio:288/440}
+  .consultants{height:auto;min-height:100%;gap:40px}
+
+  .contact .box{flex-direction:column;gap:40px}
+  .form{flex-basis:auto;width:100%;padding:32px}
+
+  .footer{padding:48px 24px 32px;gap:32px}
+  .footer__top{flex-direction:column;align-items:flex-start;gap:24px}
+  .footer__links{flex-wrap:wrap;gap:12px 24px}
+  .footer__bottom{flex-direction:column;align-items:flex-start;gap:16px}
+  .footer__bottom ul{flex-wrap:wrap;gap:8px 20px}
+}
+
+@media (max-width:767px){
+  :root{--gutter:12px;--pad-x:24px;--pad-y:64px}
+  .section{padding-top:6px;padding-bottom:6px}
+  .box--plain{padding-top:56px;padding-bottom:56px}
+  .hero .box{padding-top:40px;padding-bottom:32px}
+  .svc-grid{grid-template-columns:1fr}
+  .svc{padding:24px;gap:16px}
+  .pillar{padding:24px}
+  .bento,.bento__row2{grid-template-columns:1fr}
+  .bento__row2{gap:16px}
+  .kpi,.bento__row2 .kpi{min-height:0;padding:28px}
+  .project__img{aspect-ratio:4/3}
+  .when__item{gap:16px;padding:20px 0}
+  .when__item .t-num{width:28px;padding-top:4px}
+  .when__item p{font-size:20px}
+  .when__item .plus{margin-top:4px}
+  .stage .t-display{font-size:40px}
+  .stage__desc{font-size:18px}
+  .form__row{grid-template-columns:1fr}
+  .form{padding:24px}
+  .bio__panel{padding:72px 24px 40px}
+}
+
+@media (max-width:479px){
+  .team__grid{grid-template-columns:1fr}
+  .person__photo{aspect-ratio:4/5}
+  .consultants{min-height:0}
+  .hero__btns .btn{flex:1 1 auto}
+  .chip{font-size:12px}
+  .project__meta{gap:10px}
+  .awards-logos img{max-width:28%}
+}
+@media (max-width:1023px){
+  .topics{display:flex;gap:20px;scroll-padding-inline:var(--pad-x)}
+  .topic{flex:0 0 min(300px,78%)}
+  .topics::after{content:"";flex:0 0 1px}
+  .years__levels{font-size:12px;gap:8px}
+  .years__levels span:last-child{text-align:right}
+}
+@media (max-width:767px){
+  .hero__visual img{width:min(320px,100%)}
+}
+@media (max-width:1023px){
+  /* backdrop-filter tworzy blok zawierający dla position:fixed – wyłączamy, żeby menu zajęło cały ekran */
+  .nav{background:var(--white);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .hero__visual img{width:min(360px,100%)}
+}
