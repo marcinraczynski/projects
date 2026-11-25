@@ -299,3 +299,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .footer__bottom ul{display:flex;gap:24px}
 .footer a:hover{text-decoration:underline;text-underline-offset:3px}
 @media (max-width:1023px){.br-d{display:none}}
+.kpi p.kpi__num{color:inherit}
+.kpi--light p.kpi__num,.kpi--line p.kpi__num{color:var(--ink)}
+.form{min-width:0}
+.field{min-width:0}
+.field input,.field textarea{width:100%;min-width:0}
