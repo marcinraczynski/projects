@@ -442,3 +442,31 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .nav{background:var(--white);-webkit-backdrop-filter:none;backdrop-filter:none}
   .hero__visual img{width:min(360px,100%)}
 }
+
+/* ===== Krok 3: stany animacji (GSAP) i panel bio ===== */
+.when__item,.when__item .t-num{transition:color .35s ease}
+.segs i{transition:background-color .35s ease}
+.cycle__halo{fill:var(--accent);opacity:0;transition:opacity .4s ease}
+.cycle__dot{fill:var(--white);stroke:#D3D2CC;transition:fill .4s ease,stroke .4s ease}
+.cycle__node text{fill:var(--grey-2);transition:fill .4s ease}
+.cycle__node.is-done .cycle__dot{fill:var(--ink);stroke:var(--ink)}
+.cycle__node.is-active .cycle__dot{fill:var(--accent);stroke:var(--accent)}
+.cycle__node.is-active .cycle__halo{opacity:.14}
+.cycle__node.is-done text,.cycle__node.is-active text{fill:var(--white)}
+.cycle__name,.stage__list li,.stage__list li .t-num{transition:color .35s ease,border-color .35s ease}
+.stage__swap{transition:opacity .25s ease,transform .25s ease}
+.stage.is-swapping .stage__swap{opacity:0;transform:translateY(8px)}
+@media (min-width:1024px) and (min-height:760px) and (prefers-reduced-motion:no-preference){
+  .project{position:sticky;top:calc(var(--nav-h) + 24px);transform-origin:50% 0;will-change:transform}
+  .project:nth-of-type(2){top:calc(var(--nav-h) + 48px)}
+  .project:nth-of-type(3){top:calc(var(--nav-h) + 72px)}
+}
+html.bio-open{overflow:hidden}
+.bio__scrim{opacity:0;transition:opacity .35s ease}
+.bio__panel{transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.bio.is-open .bio__scrim{opacity:1}
+.bio.is-open .bio__panel{transform:none}
+.bio__panel:focus{outline:none}
+@media (prefers-reduced-motion:reduce){
+  .bio__scrim,.bio__panel,.stage__swap,.when__item,.segs i{transition:none}
+}
