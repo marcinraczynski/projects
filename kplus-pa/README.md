@@ -10,7 +10,7 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 
 ## Stan
 - [x] 1. Szkielet PL, tokeny, wszystkie sekcje, desktop
-- [ ] 2. Mobile  - [ ] 3. GSAP, panel bio  - [ ] 4. Hero z bryłami  - [ ] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
+- [x] 2. Mobile  - [ ] 3. GSAP, panel bio  - [ ] 4. Hero z bryłami  - [ ] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
 
 ## Assety tymczasowe
 - `tomasz-alberski.webp`: zdjęcie z sesji (1.1), bo w Figmie jest tylko 590 px. Podmienić na oryginał.
