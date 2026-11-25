@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K+PR – Budujemy reputację. Wzmacniamy marki.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: doradztwo strategiczne z kreatywnym DNA, lekko i nowocześnie
+   IDEA: znak „+” jako cegiełka – z plusów składają się bryły czterech obszarów oferty
+   PICTURE: żywa bryła z plusów w świetlistej przestrzeni (tarcza, spirala, znak K+, słupki danych)
+   COLOUR and TYPE: jasna szarość, grafit złagodzony do #2B2B2B, żółty #F7E14C jako akcent w bryłach i na paskach; Inter
+   LAYOUT: węższy tekst po lewej, bryła po prawej, cztery białe karty oferty w jednej linii na dole */
+:root{--ink:#111111;--sub:#4E4E4E;--mute:#767676;--line:#D9D9D9;--soft:#F3F3EF;--yel:#F7E14C}
+*{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html,body{background:#fff;color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+nav{height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+nav .links{display:flex;gap:32px;font-size:15px;font-weight:500;align-items:center}
+nav .links a{color:var(--ink);text-decoration:none}
+nav .lang{color:var(--mute);font-size:14px;margin-left:12px}nav .lang b{color:var(--ink);font-weight:500}
+.hero{position:relative;margin:0 24px;border-radius:16px;background:var(--soft);overflow:hidden;height:calc(100vh - 112px);height:calc(100svh - 112px);min-height:540px;isolation:isolate}
+.atmo{position:absolute;inset:-10%;z-index:0;filter:blur(70px);pointer-events:none}
+.atmo i{position:absolute;border-radius:50%}
+.atmo .a1{width:46%;height:60%;left:50%;top:6%;background:radial-gradient(circle,rgba(247,225,76,.6),rgba(247,225,76,0) 70%);animation:f1 18s ease-in-out infinite alternate}
+.atmo .a2{width:55%;height:70%;left:62%;top:30%;background:radial-gradient(circle,rgba(206,218,233,1),rgba(206,218,233,0) 70%);animation:f2 22s ease-in-out infinite alternate}
+.atmo .a3{width:44%;height:55%;left:26%;top:-12%;background:radial-gradient(circle,rgba(255,255,255,1),rgba(255,255,255,0) 70%);animation:f3 16s ease-in-out infinite alternate}
+.atmo .a4{width:30%;height:40%;left:80%;top:-6%;background:radial-gradient(circle,rgba(247,225,76,.4),rgba(247,225,76,0) 70%);animation:f2 26s ease-in-out infinite alternate-reverse}
+.atmo .a5{width:34%;height:44%;left:44%;top:62%;background:radial-gradient(circle,rgba(255,255,255,.9),rgba(255,255,255,0) 70%);animation:f1 20s ease-in-out infinite alternate-reverse}
+@keyframes f1{to{transform:translate(-8%,10%) scale(1.15)}}
+@keyframes f2{to{transform:translate(-10%,-8%) scale(.9)}}
+@keyframes f3{to{transform:translate(12%,8%) scale(1.2)}}
+.floor{position:absolute;z-index:1;left:54%;right:8%;bottom:25%;height:14%;background:radial-gradient(50% 40% at 50% 50%,rgba(17,17,17,.09),rgba(17,17,17,0) 70%);filter:blur(8px);pointer-events:none}
+.grain{position:absolute;inset:0;z-index:2;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.fade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,var(--soft) 0%,rgba(243,243,239,.8) 26%,rgba(243,243,239,0) 44%)}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.copy{position:absolute;left:96px;top:39%;transform:translateY(-50%);z-index:3;max-width:600px}
+.copy h1{white-space:nowrap;font-size:clamp(36px,3.6vw,54px);line-height:1.05;font-weight:600;letter-spacing:-.025em}
+.copy p{margin-top:22px;font-size:17px;line-height:1.55;color:var(--sub);max-width:420px}
+.copy .more{margin-top:30px;display:inline-flex;gap:10px;align-items:center;font-size:15px;font-weight:500;color:var(--ink);text-decoration:none}
+.offer{position:absolute;left:24px;right:24px;bottom:24px;z-index:3}
+.offer h2{font-size:14px;font-weight:500;color:var(--sub);margin:0 0 14px 72px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}
+.step{display:flex;flex-direction:column;cursor:pointer;border:0;text-align:left;font:inherit;color:var(--ink);padding:18px 22px 20px;border-radius:12px;background:rgba(255,255,255,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .4s,box-shadow .4s}
+.step .bar{height:3px;border-radius:2px;background:rgba(17,17,17,.08);position:relative;overflow:hidden;margin-bottom:14px}
+.step .bar i{position:absolute;inset:0;background:var(--yel);transform:scaleX(0);transform-origin:left}
+.step .t{display:flex;gap:10px;align-items:baseline;font-size:15px;font-weight:500;white-space:nowrap}
+.step .n{font-size:13px;color:var(--mute);font-weight:500}
+.step .d{margin-top:6px;font-size:13px;line-height:1.5;text-wrap:pretty;color:var(--mute);transition:color .4s}
+.step.on{background:#fff;box-shadow:0 10px 30px rgba(17,17,17,.06)}
+.step.on .d{color:var(--sub)}
+.step:not(.on) .t span:last-child{color:var(--sub)}
+.step:hover{background:rgba(255,255,255,.85)}
+.step:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.note{max-width:1240px;margin:28px auto 80px;padding:0 96px;color:var(--sub);font-size:15px;line-height:1.6}
+@media (max-width:1100px){.copy{left:28px;right:28px;top:24%}.copy h1{font-size:38px}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.offer h2{margin-left:4px}nav .links{display:none}.fade{background:linear-gradient(180deg,var(--soft) 0%,rgba(243,243,239,0) 45%)}}
+@media (prefers-reduced-motion:reduce){.atmo i{animation:none}}
+@media (max-width:700px){.copy{top:28px;transform:none;left:24px;right:24px}.copy h1{white-space:normal;font-size:32px}.copy p{font-size:15px;margin-top:14px}.copy .more{margin-top:18px}.offer{left:12px;right:12px;bottom:12px}.steps{grid-template-columns:1fr!important}.step:not(.on){display:none}nav{padding:0 20px}.hero{margin:0 12px}}
+</style>
+</head>
+<body>
+<nav><svg width="117" height="40" viewBox="0 0 117 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M97.5351 27.4631H102.236C104.584 27.4631 106.274 29.0559 106.274 31.3298C106.274 33.6038 104.554 35.2868 102.236 35.2868H99.3813V40H97.5351V27.4631ZM102.09 33.5888C103.435 33.5888 104.388 32.6371 104.388 31.3298C104.388 30.0225 103.435 29.146 102.09 29.146H99.3813V33.5888H102.09Z" fill="black"/><path d="M108.085 27.4631H112.891C115.53 27.4631 117 28.9857 117 30.9542C117 32.3316 116.227 33.4435 114.918 33.6589V34.0145C115.761 34.2449 116.89 35.0914 116.89 36.9146V39.995H115.008V37.0599C115.008 35.9329 114.311 35.2317 112.982 35.2317H109.931V39.995H108.085V27.4581V27.4631ZM112.806 33.5337C114.115 33.5337 115.104 32.6221 115.104 31.3148C115.104 30.1127 114.261 29.1661 112.736 29.1661H109.936V33.5387H112.806V33.5337Z" fill="black"/><path d="M41.9398 0.956687C42.2659 0.956687 42.4064 1.18208 42.4565 1.28225C42.5017 1.37742 42.592 1.63287 42.3913 1.88831L29.107 18.6326C28.51 19.3839 28.51 20.4307 29.107 21.1821L42.4264 37.9314C42.6271 38.1868 42.5418 38.4372 42.4917 38.5374C42.4465 38.6326 42.301 38.863 41.9749 38.863H30.4967C29.9147 38.863 29.3729 38.6025 29.0117 38.1467L17.3829 23.4861C16.4097 22.2589 14.9549 21.5577 13.3896 21.5577H1.97659C1.41472 21.5577 0.958196 21.1019 0.958196 20.5409V1.57777C0.958196 1.26222 1.21907 1.00176 1.53512 1.00176H11.7893C12.1054 1.00176 12.3662 1.26222 12.3662 1.57777V15.7726C12.3662 17.1149 13.4248 18.1718 14.7793 18.1718C15.5067 18.1718 16.184 17.8412 16.6455 17.2602L29.0067 1.68296C29.3679 1.22716 29.9097 0.966703 30.4917 0.966703H41.9348M30.4917 0.0100273C29.6187 0.0100273 28.796 0.405721 28.2542 1.09192L15.893 16.6692C15.592 17.0498 15.1806 17.2151 14.7793 17.2151C14.0418 17.2151 13.3244 16.6541 13.3244 15.7776V1.58278C13.3244 0.736301 12.6371 0.0500983 11.7893 0.0500983H1.53512C0.687294 0.0500983 0 0.736301 0 1.58278V20.5459C0 21.6329 0.882945 22.5194 1.97659 22.5194H13.3896C14.6539 22.5194 15.8478 23.0954 16.6304 24.0821L28.2592 38.7428C28.801 39.424 29.6238 39.8247 30.4967 39.8247H41.9749C43.2592 39.8247 43.9716 38.3471 43.1739 37.3453L29.8545 20.596C29.5385 20.1953 29.5385 19.6344 29.8545 19.2337L43.1388 2.48937C43.9365 1.48761 43.2191 0.0100273 41.9398 0.0100273H30.4917Z" fill="black"/><path d="M87.1958 16.9246H70.2393V0H64.2744V16.9246H47.3179V22.885H64.2744V39.8146H70.2393V22.885H87.1958V16.9246Z" fill="black"/></svg><div class="links"><a href="#">Sektory</a><a href="#">Kompetencje</a><a href="#">Realizacje</a><a href="#">Newsroom</a><a href="#">O nas</a><a href="#">Kontakt</a><span class="lang"><b>PL</b> | EN</span></div></nav>
+<section class="hero" id="hero">
+  <div class="atmo"><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i><i class="a5"></i></div>
+  <div class="floor"></div>
+  <canvas id="gl"></canvas>
+  <div class="fade"></div>
+  <div class="grain"></div>
+  <div class="copy">
+    <h1>Budujemy reputację.<br>Wzmacniamy marki.</h1>
+    <p>Łączymy strategiczne doradztwo z kreatywną komunikacją. Pracujemy z zarządami i markami od diagnozy, przez kreację, po pomiar efektów.</p>
+    <a class="more" href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2v8h9" stroke="#111" stroke-width="1.5"/><path d="M9 7l3 3-3 3" stroke="#111" stroke-width="1.5"/></svg>Zobacz więcej</a>
+  </div>
+  <div class="offer"><div class="steps" id="steps"></div></div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+{
+const STEPS=[
+ ['01','Reputacja i ryzyko','Doradzamy zarządom w ważnych decyzjach i przygotowujemy firmy na kryzys.'],
+ ['02','Zmiana i transformacja','Prowadzimy komunikację restrukturyzacji, fuzji i nowych modeli pracy.'],
+ ['03','Marka i kampanie','Budujemy rozpoznawalność: premiery, kampanie, twórcy i social media.'],
+ ['04','Dane, ESG i AI','Mierzymy efekty, mówimy o ESG na faktach i dbamy o wizerunek w AI.']
+];
+const stepsEl=document.getElementById('steps');
+const nb=s=>s.replace(/(^|\s)([A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,2})\s/g,'$1$2\u00A0').replace(/(^|\s)([A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,2})\s/g,'$1$2\u00A0');
+stepsEl.innerHTML=STEPS.map((s,i)=>`<button class="step" data-i="${i}"><div class="bar"><i></i></div><div class="t"><span class="n">${s[0]}</span><span>${s[1]}</span></div><div class="d">${nb(s[2])}</div></button>`).join('');
+document.querySelectorAll('.copy p').forEach(p=>p.textContent=nb(p.textContent));
+const hero=document.getElementById('hero'),cv=document.getElementById('gl');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const N=2800;const R=(a,b)=>a+Math.random()*(b-a);
+// ---------- shapes: return {p:[...], y:[...yellow mask]} ----------
+function fill(pts,ys){const p=[],y=[];for(let i=0;i<N;i++){const k=i%pts.length;p.push(...pts[k]);y.push(ys[k]);}return {p,y};}
+function sphereShell(){const pts=[],ys=[];
+  // core: 3D plus (the K+ sign) protected inside
+  const L=.5,T=.17,D=.15,st=.06;for(let x=-L;x<=L+1e-6;x+=st)for(let y=-L;y<=L+1e-6;y+=st)for(let z=-D;z<=D+1e-6;z+=st){const v=Math.abs(x)<=T&&Math.abs(y)<=L,h=Math.abs(y)<=T&&Math.abs(x)<=L;if(!(v||h))continue;
+    const surf=Math.abs(z)>D-st*.6||Math.abs(x)>L-st*.6||Math.abs(y)>L-st*.6||(v&&!h&&Math.abs(x)>T-st*.6)||(h&&!v&&Math.abs(y)>T-st*.6);if(!surf)continue;pts.push([x,y,z]);ys.push(Math.abs(z)>D-st*.6?1:0);}
+  // shell: latitude / longitude lines
+  for(let la=-3;la<=3;la++){const phi=la/4*Math.PI/2,rr=Math.cos(phi)*1.0,yy=Math.sin(phi)*1.0;const n=Math.max(20,Math.round(90*Math.cos(phi)));for(let i=0;i<n;i++){const a=i/n*Math.PI*2;pts.push([Math.cos(a)*rr,yy,Math.sin(a)*rr]);ys.push(0);}}
+  for(let lo=0;lo<10;lo++){const a=lo/10*Math.PI;for(let i=0;i<60;i++){const phi=i/60*Math.PI*2;pts.push([Math.cos(phi)*Math.cos(a),Math.sin(phi),Math.cos(phi)*Math.sin(a)]);ys.push(0);}}
+  return fill(pts,ys);}
+function morphCube(){const pts=[],ys=[];const n=12,s=1.3/(n-1);
+  for(let x=0;x<n;x++)for(let y=0;y<n;y++)for(let z=0;z<n;z++){if(!(x==0||y==0||z==0||x==n-1||y==n-1||z==n-1))continue;pts.push([(x-(n-1)/2)*s,(y-(n-1)/2)*s,(z-(n-1)/2)*s]);const edge=[x==0||x==n-1,y==0||y==n-1,z==0||z==n-1].filter(Boolean).length>=2;ys.push(edge&&Math.random()<.5?1:0);}
+  return fill(pts,ys);}
+function ripple(){const pts=[],ys=[];for(let r=.06;r<=1.45;r+=.085){const n=Math.max(8,Math.round(r*58));for(let i=0;i<n;i++){const a=i/n*Math.PI*2;pts.push([Math.cos(a)*r,0,Math.sin(a)*r]);ys.push(r<.3?1:0);}}return fill(pts,ys);}
+function network(){const pts=[],ys=[];const layers=[3,5,5,3],X=[-1.2,-.4,.4,1.2];const nodes=[];
+  layers.forEach((n,li)=>{for(let i=0;i<n;i++){const a=i/n*Math.PI*2+li*.55,r=n>3?.82:.5;nodes.push({l:li,p:[X[li],Math.sin(a)*r,Math.cos(a)*r*.8]});}});
+  const ga=Math.PI*(3-Math.sqrt(5));
+  nodes.forEach(nd=>{for(let i=0;i<30;i++){const y=1-i/29*2,r=Math.sqrt(1-y*y),a=ga*i;pts.push([nd.p[0]+Math.cos(a)*r*.075,nd.p[1]+y*.075,nd.p[2]+Math.sin(a)*r*.075]);ys.push(nd.l==3?1:0);}});
+  const d2=(a,b)=>(a.p[1]-b.p[1])**2+(a.p[2]-b.p[2])**2;
+  for(const a of nodes){const nx=nodes.filter(b=>b.l===a.l+1).sort((p,q)=>d2(a,p)-d2(a,q)).slice(0,a.l===2?2:3);
+    for(const b of nx)for(let k=1;k<14;k++){const u=k/14;pts.push([a.p[0]+(b.p[0]-a.p[0])*u,a.p[1]+(b.p[1]-a.p[1])*u,a.p[2]+(b.p[2]-a.p[2])*u]);ys.push(0);}}
+  return fill(pts,ys);}
+const KINDS=[sphereShell(),morphCube(),ripple(),network()];
+// order each shape left→right so morphs sweep
+const SH=KINDS.map(s=>{const idx=[...Array(N).keys()].sort((a,b)=>(s.p[a*3]+s.p[a*3+1]*.25)-(s.p[b*3]+s.p[b*3+1]*.25));const p=new Float32Array(N*3),y=new Float32Array(N);idx.forEach((k,i)=>{p[i*3]=s.p[k*3];p[i*3+1]=s.p[k*3+1];p[i*3+2]=s.p[k*3+2];y[i]=s.y[k];});return {p,y};});
+// ---------- three ----------
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(30,1,.1,100);cam.position.set(0,.2,6.6);
+const geo=new THREE.BufferGeometry();
+const pA=new Float32Array(SH[0].p),pB=new Float32Array(SH[0].p),yA=new Float32Array(SH[0].y),yB=new Float32Array(SH[0].y),ord=new Float32Array(N),jit=new Float32Array(N);
+for(let i=0;i<N;i++){ord[i]=i/N;jit[i]=Math.random();}
+geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(N*3),3));
+geo.setAttribute('aA',new THREE.BufferAttribute(pA,3));geo.setAttribute('aB',new THREE.BufferAttribute(pB,3));
+geo.setAttribute('aYA',new THREE.BufferAttribute(yA,1));geo.setAttribute('aYB',new THREE.BufferAttribute(yB,1));
+geo.setAttribute('aO',new THREE.BufferAttribute(ord,1));geo.setAttribute('aJ',new THREE.BufferAttribute(jit,1));
+const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
+ uniforms:{uT:{value:1},uTime:{value:0},uPx:{value:1},uSize:{value:30},uKA:{value:0},uKB:{value:0}},
+ vertexShader:`attribute vec3 aA;attribute vec3 aB;attribute float aYA;attribute float aYB;attribute float aO;attribute float aJ;
+  uniform float uT;uniform float uTime;uniform float uPx;uniform float uSize;uniform float uKA;uniform float uKB;
+  varying float vY;varying float vD;varying float vM;
+  float ease(float t){return t<.5?4.*t*t*t:1.-pow(-2.*t+2.,3.)/2.;}
+  vec3 rotY(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(c*p.x-s*p.z,p.y,s*p.x+c*p.z);}
+  vec3 rotX(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(p.x,c*p.y-s*p.z,s*p.y+c*p.z);}
+  vec3 fx(vec3 p,float k){
+    if(k<0.5){ float r=length(p); if(r>.8){ p=rotY(p,uTime*.22); } else { p=rotY(p,.45+sin(uTime*.7)*.5)*(1.+.035*sin(uTime*2.)); } }   // reputacja: znak w osłonie
+    else if(k<1.5){ float s=.5+.5*sin(uTime*.9); vec3 sph=normalize(p+vec3(.0001))*.82; p=rotY(mix(p,sph,s),uTime*.2); }     // zmiana: sześcian <-> kula
+    else if(k<2.5){ float r=length(p.xz); p.y=.3*sin(r*6.-uTime*2.6)*exp(-r*.6); p=rotX(p,.32); }                          // marka: fala zasięgu
+    else { p=rotX(p,sin(uTime*.4+p.x)*.06); }                  // dane i AI: sieć
+    return p; }
+  void main(){float d=aO*.42+aJ*.1;float t=ease(clamp((uT-d)/.48,0.,1.));
+   vec3 a=fx(aA,uKA),b=fx(aB,uKB);
+   vec3 mid=mix(a,b,.5);vec3 lift=normalize(mid+vec3(.0001))*.24+vec3(0.,.16,0.);
+   vec3 p=mix(a,b,t)+lift*sin(3.14159*t);
+   vec4 mv=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mv;
+   vD=clamp((-mv.z-5.65)/1.8,0.,1.);vM=sin(3.14159*t);vY=mix(aYA,aYB,t);
+   float px=fract(uTime*.32)*2.8-1.4; float pulse=exp(-pow((p.x-px)*7.,2.)); float wA=uKA>2.5?1.-t:0., wB=uKB>2.5?t:0.; vY=max(vY,pulse*(wA+wB));
+   gl_PointSize=uSize*uPx*(1.+vY*.3)*mix(1.4,.78,vD)/(-mv.z);}`,
+ fragmentShader:`varying float vY;varying float vD;varying float vM;
+  void main(){vec2 c=gl_PointCoord-.5;float soft=mix(.018,.07,vD);float w=mix(.075,.085,vD);float L=.40;
+   float h=(1.-smoothstep(w-soft,w+soft,abs(c.y)))*(1.-smoothstep(L-soft,L+soft,abs(c.x)));
+   float v=(1.-smoothstep(w-soft,w+soft,abs(c.x)))*(1.-smoothstep(L-soft,L+soft,abs(c.y)));
+   float m=max(h,v);if(m<.02)discard;
+   vec3 bg=vec3(.90,.905,.89);vec3 ink=mix(vec3(.1),bg,vD*.6);vec3 yel=mix(vec3(.95,.76,0.),vec3(.98,.88,.35),vD*.4);vec3 col=mix(ink,yel,smoothstep(.2,.8,vY));
+   float a=mix(1.,.42,vD)*m;a*=1.-vM*.25;if(vY>.5)a=max(a,mix(1.,.8,vD)*m);
+   gl_FragColor=vec4(col,a);}`});
+const pts=new THREE.Points(geo,mat);const grp=new THREE.Group();grp.add(pts);scene.add(grp);
+function size(){const W=hero.clientWidth,H=hero.clientHeight;const dpr=Math.min(2,devicePixelRatio||1);renderer.setPixelRatio(dpr);renderer.setSize(W,H,false);cam.aspect=W/H;cam.updateProjectionMatrix();mat.uniforms.uPx.value=dpr*(H/820);
+  const narrow=W<1100;const mob=W<700;grp.position.set(narrow?0:1.9*(W/H)/1.8*0.66,mob?-.05:(narrow?-.2:.55),0);grp.scale.setScalar(mob?.5:(narrow?.62:.9));}
+addEventListener('resize',size);size();
+// ---------- steps ----------
+let cur=0,tStart=0;const DUR=6500;const els=[...stepsEl.children];
+function paint(){els.forEach((e,i)=>{e.classList.toggle('on',i===cur);e.querySelector('i').style.transform='scaleX(0)';});}
+function go(i){const prev=cur;cur=(i+STEPS.length)%STEPS.length;pA.set(pB);yA.set(yB);pB.set(SH[cur].p);yB.set(SH[cur].y);
+  mat.uniforms.uKA.value=prev;mat.uniforms.uKB.value=cur;
+  ['aA','aB','aYA','aYB'].forEach(k=>geo.attributes[k].needsUpdate=true);mat.uniforms.uT.value=0;tStart=performance.now();paint();}
+els.forEach(e=>e.onclick=()=>{if(+e.dataset.i!==cur)go(+e.dataset.i);else tStart=performance.now();});paint();
+let mx=0,my=0,tx=0,ty=0;hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-.5;ty=(e.clientY-r.top)/r.height-.5;});
+let last=performance.now(),ph=0;
+function frame(now){const dt=Math.min(50,now-last);last=now;mat.uniforms.uTime.value=now/1000;
+  if(mat.uniforms.uT.value<1)mat.uniforms.uT.value=Math.min(1,mat.uniforms.uT.value+dt/(reduce?1:2600));
+  const el=now-tStart;els[cur].querySelector('i').style.transform=`scaleX(${Math.min(1,el/DUR)})`;
+  if(!reduce&&el>DUR)go(cur+1);
+  mx+=(tx-mx)*.04;my+=(ty-my)*.04;ph+=dt*.00022;
+  grp.rotation.y=-.45+Math.sin(ph)*.4+mx*.4;grp.rotation.x=.18+Math.sin(ph*.6)*.05+my*.2;
+  renderer.render(scene,cam);requestAnimationFrame(frame);}
+tStart=performance.now();requestAnimationFrame(frame);
+}
+</script>
+</body>
+</html>
