@@ -12,6 +12,7 @@ Zasady:
 | --- | --- |
 | Solid Hale, strona główna | https://marcinraczynski.github.io/projects/solid-hale/ |
 | K+PR, hero | https://marcinraczynski.github.io/projects/kplus-hero/ |
+| K+ Group, Public Affairs (landing) | https://marcinraczynski.github.io/projects/kplus-pa/ |
 | K+PR, hero wersja 1 | https://marcinraczynski.github.io/projects/kplus-hero-v1/ |
 
 Gałąź `gh-pages` jest nieaktualna (dawne źródło podglądu Solid Hale).
