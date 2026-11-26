@@ -10,7 +10,7 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 
 ## Stan
 - [x] 1. Szkielet PL, tokeny, wszystkie sekcje, desktop
-- [x] 2. Mobile  - [x] 3. GSAP, panel bio  - [x] 4. Hero z bryłami  - [x] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
+- [x] 2. Mobile  - [x] 3. GSAP, panel bio  - [x] 4. Hero z bryłami  - [x] 5. PHP  - [x] 6. EN  - [ ] 7. Akceptacja i FTP
 
 ## Assety tymczasowe
 - `tomasz-alberski.webp`: zdjęcie z sesji (1.1), bo w Figmie jest tylko 590 px. Podmienić na oryginał.
@@ -38,3 +38,9 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 - `dry_run => true` w `config.php` zapisuje maila do pliku zamiast wysyłać (do testów na serwerze).
 - Na GitHub Pages PHP nie działa, więc formularz pokazuje tam komunikat błędu. Działa dopiero na serwerze K+.
 - Wymagania: PHP 7.4+ z `mbstring` i `openssl`.
+
+## Wersja EN (krok 6)
+- `en/index.html` (ścieżki do zasobów przez `../`), formularz wysyła do `../send.php` z `lang=en`, komunikaty serwera po angielsku.
+- Kotwice EN: `#services`, `#how-we-work`, `#experience`, `#team`, `#contact`.
+- Skrypty rozpoznają język po `<html lang>` (menu, „Stage”, separator tysięcy w licznikach).
+- Tłumaczenie przygotował Claude; nazwy usług i etapów bez zmian. Do akceptacji przez K+.

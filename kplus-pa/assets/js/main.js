@@ -5,7 +5,8 @@
   if (!btn || !menu) return;
   function set(open) {
     btn.setAttribute('aria-expanded', String(open));
-    btn.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    var en = document.documentElement.lang === 'en';
+    btn.setAttribute('aria-label', open ? (en ? 'Close menu' : 'Zamknij menu') : (en ? 'Open menu' : 'Otwórz menu'));
     menu.hidden = !open;
     document.documentElement.classList.toggle('menu-open', open);
     if (open) { var a = menu.querySelector('a'); if (a) a.focus(); }

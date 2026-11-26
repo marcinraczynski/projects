@@ -54,7 +54,8 @@ function respond(bool $ok, string $message, array $errors = [], int $code = 200)
 {
     global $wantsJson;
     if (!$wantsJson) {
-        $back = './' . ($GLOBALS['lang'] === 'en' ? 'en/' : '') . '?form=' . ($ok ? 'ok' : 'error') . '#kontakt';
+        $en = $GLOBALS['lang'] === 'en';
+        $back = './' . ($en ? 'en/' : '') . '?form=' . ($ok ? 'ok' : 'error') . ($en ? '#contact' : '#kontakt');
         header('Location: ' . $back, true, 303);
         exit;
     }
