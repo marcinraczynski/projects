@@ -86,23 +86,33 @@
     }
     return { p: p, y: y, th: .17, k: 3 };
   }
+  /* Sieć interesariuszy: organizacja w centrum, kluczowi interesariusze wokół (koalicja = pierścień),
+     dalsze otoczenie na zewnątrz, połączenia pokazują wzajemne zależności. */
   function network() {
-    var p = [], y = [], layers = [3, 5, 5, 3], X = [-1.2, -.4, .4, 1.2], nodes = [];
-    layers.forEach(function (n, li) {
-      for (var i = 0; i < n; i++) {
-        var a = i / n * Math.PI * 2 + li * .55, r = n > 3 ? .82 : .5;
-        nodes.push({ l: li, p: [X[li], Math.sin(a) * r, Math.cos(a) * r * .8] });
-      }
-    });
-    nodes.forEach(function (nd) { fib(16, .08, nd.p).forEach(function (q) { p.push(q); y.push(nd.l === 3 ? 1 : 0); }); });
-    var d2 = function (a, b) { return Math.pow(a.p[1] - b.p[1], 2) + Math.pow(a.p[2] - b.p[2], 2); };
-    nodes.forEach(function (a) {
-      var nx = nodes.filter(function (b) { return b.l === a.l + 1; }).sort(function (q, r) { return d2(a, q) - d2(a, r); }).slice(0, a.l === 2 ? 2 : 3);
-      nx.forEach(function (b) {
-        var len = Math.hypot(b.p[0] - a.p[0], b.p[1] - a.p[1], b.p[2] - a.p[2]), m = Math.round(len / .11);
-        for (var k = 1; k < m; k++) { var u = k / m; p.push([a.p[0] + (b.p[0] - a.p[0]) * u, a.p[1] + (b.p[1] - a.p[1]) * u, a.p[2] + (b.p[2] - a.p[2]) * u]); y.push(0); }
+    var p = [], y = [], nodes = [];
+    var add = function (pos, r, n, acc) { nodes.push({ p: pos }); fib(n, r, pos).forEach(function (q) { p.push(q); y.push(acc ? 1 : 0); }); return nodes.length - 1; };
+    var link = function (i, j) {
+      var A = nodes[i].p, B = nodes[j].p, len = Math.hypot(B[0] - A[0], B[1] - A[1], B[2] - A[2]), m = Math.round(len / .09);
+      for (var k = 2; k < m - 1; k++) { var u = k / m; p.push([A[0] + (B[0] - A[0]) * u, A[1] + (B[1] - A[1]) * u, A[2] + (B[2] - A[2]) * u]); y.push(0); }
+    };
+    var hub = add([0, 0, 0], .17, 34, true);
+    var prim = [], sec = [], i;
+    for (i = 0; i < 6; i++) {
+      var a = i / 6 * Math.PI * 2 + .3;
+      prim.push(add([Math.cos(a) * .82, Math.sin(a) * .7, (i % 2 ? .38 : -.38)], .1, 18, i === 1 || i === 4));
+    }
+    for (i = 0; i < 6; i++) {
+      [-.38, .38].forEach(function (off, j) {
+        if (i % 3 === 2 && j === 1) return;
+        var a = i / 6 * Math.PI * 2 + .3 + off, z = (i % 2 ? .38 : -.38) + (j ? .35 : -.35);
+        sec.push({ from: prim[i], idx: add([Math.cos(a) * 1.3, Math.sin(a) * 1.08, z], .06, 10, false) });
       });
-    });
+    }
+    prim.forEach(function (n, k) { link(hub, n); link(n, prim[(k + 1) % 6]); });
+    sec.forEach(function (sc) { link(sc.from, sc.idx); });
+    /* kilka powiązań między dalszymi interesariuszami */
+    for (i = 1; i < sec.length; i += 3) link(sec[i].idx, sec[(i + 1) % sec.length].idx);
+    link(prim[0], prim[3]);
     return { p: p, y: y, th: .13, k: 3 };
   }
 
@@ -206,7 +216,7 @@
     if (k === 0) { a = Math.sin(t * .5) * .4; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 2) { a = t * .2; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 3) { var r = Math.hypot(x, z); y = .3 * Math.sin(r * 6 - t * 2.6) * Math.exp(-r * .6); c = Math.cos(.32); s = Math.sin(.32); X = x; Y = c * y - s * z; Z = s * y + c * z; }
-    else { a = Math.sin(t * .4 + x) * .06; c = Math.cos(a); s = Math.sin(a); X = x; Y = c * y - s * z; Z = s * y + c * z; }
+    else { a = t * .15; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; Y = y + Math.sin(t * .8 + x * 3) * .02; }
     o[0] = X; o[1] = Y; o[2] = Z;
   }
   /* Światło akcentu przechodzące przez bryłę */
@@ -215,7 +225,7 @@
     if (k === 0) return band((x + y) * .72, ((t / 2.8) % 1) * 3.4 - 1.7, 4.5);
     if (k === 2) return band(-y, ((t / 3.2) % 1) * 2.8 - 1.4, 5);
     if (k === 3) return band(Math.hypot(x, z), ((t / 2.6) % 1) * 1.9, 6);
-    return band(x, ((t / 3.2) % 1) * 2.8 - 1.4, 7);
+    return band(Math.hypot(x, y, z), ((t / 3) % 1) * 1.7, 6);  /* sieć: impuls od centrum do interesariuszy */
   }
 
   /* ---------- sekwencja: plus → sieć → plus → kula → plus → fala ---------- */
