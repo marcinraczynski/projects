@@ -1,5 +1,5 @@
 /* K+ PA – hero: bryła z punktów i linii (three.js r128, plik lokalny).
-   Pętla: plus → sieć → plus → kula → plus → fala. Paski tematów pokazują postęp, klik w temat przełącza bryłę.
+   Pętla: plus → pierścienie → plus → kula → plus → fala. Paski tematów pokazują postęp, klik w temat przełącza bryłę.
    Na bazie projektu kplus-hero; kolory przestawione na granat K+ PA.
    Bez WebGL zostaje statyczny obraz bryły; przy prefers-reduced-motion bryła stoi i nie przełącza się sama. */
 (function () {
@@ -86,38 +86,35 @@
     }
     return { p: p, y: y, th: .17, k: 3 };
   }
-  /* Sieć interesariuszy: organizacja w centrum, kluczowi interesariusze wokół (koalicja = pierścień),
-     dalsze otoczenie na zewnątrz, połączenia pokazują wzajemne zależności. */
-  function network() {
-    var p = [], y = [], nodes = [];
-    var add = function (pos, r, n, acc) { nodes.push({ p: pos }); fib(n, r, pos).forEach(function (q) { p.push(q); y.push(acc ? 1 : 0); }); return nodes.length - 1; };
-    var link = function (i, j) {
-      var A = nodes[i].p, B = nodes[j].p, len = Math.hypot(B[0] - A[0], B[1] - A[1], B[2] - A[2]), m = Math.round(len / .09);
-      for (var k = 2; k < m - 1; k++) { var u = k / m; p.push([A[0] + (B[0] - A[0]) * u, A[1] + (B[1] - A[1]) * u, A[2] + (B[2] - A[2]) * u]); y.push(0); }
+  /* Koalicja: trzy splecione pierścienie (układ boromeuszowski). Żaden nie trzyma się sam,
+     razem tworzą trwałą całość. Akcent tam, gdzie pierścienie się przeplatają. */
+  function rings() {
+    var p = [], y = [], A = 1.02, B = .5, TR_ = .07, NA = 64, NT = 3, k, i, j;
+    var curve = function (k, th) { var u = A * Math.cos(th), v = B * Math.sin(th); return k === 0 ? [u, v, 0] : k === 1 ? [0, u, v] : [v, 0, u]; };
+    var near = function (q, k) {
+      var best = 9;
+      for (var m = 0; m < 3; m++) if (m !== k) for (var s = 0; s < 72; s++) { var c = curve(m, s / 72 * Math.PI * 2); best = Math.min(best, Math.hypot(q[0] - c[0], q[1] - c[1], q[2] - c[2])); }
+      return best;
     };
-    var hub = add([0, 0, 0], .17, 34, true);
-    var prim = [], sec = [], i;
-    for (i = 0; i < 6; i++) {
-      var a = i / 6 * Math.PI * 2 + .3;
-      prim.push(add([Math.cos(a) * .82, Math.sin(a) * .7, (i % 2 ? .38 : -.38)], .1, 18, i === 1 || i === 4));
+    for (k = 0; k < 3; k++) for (i = 0; i < NA; i++) {
+      var th = i / NA * Math.PI * 2, c = curve(k, th), c2 = curve(k, th + .01);
+      var t = [c2[0] - c[0], c2[1] - c[1], c2[2] - c[2]], tl = Math.hypot(t[0], t[1], t[2]);
+      t = [t[0] / tl, t[1] / tl, t[2] / tl];
+      /* normalna płaszczyzny pierścienia i druga oś przekroju rury */
+      var n = k === 0 ? [0, 0, 1] : k === 1 ? [1, 0, 0] : [0, 1, 0];
+      var bq = [t[1] * n[2] - t[2] * n[1], t[2] * n[0] - t[0] * n[2], t[0] * n[1] - t[1] * n[0]];
+      var hot = near(c, k) < .3;
+      for (j = 0; j < NT; j++) {
+        var ph = j / NT * Math.PI * 2 + (i % 2) * Math.PI / NT, cs = Math.cos(ph) * TR_, sn = Math.sin(ph) * TR_;
+        p.push([c[0] + n[0] * cs + bq[0] * sn, c[1] + n[1] * cs + bq[1] * sn, c[2] + n[2] * cs + bq[2] * sn]);
+        y.push(hot ? 1 : 0);
+      }
     }
-    for (i = 0; i < 6; i++) {
-      [-.38, .38].forEach(function (off, j) {
-        if (i % 3 === 2 && j === 1) return;
-        var a = i / 6 * Math.PI * 2 + .3 + off, z = (i % 2 ? .38 : -.38) + (j ? .35 : -.35);
-        sec.push({ from: prim[i], idx: add([Math.cos(a) * 1.3, Math.sin(a) * 1.08, z], .06, 10, false) });
-      });
-    }
-    prim.forEach(function (n, k) { link(hub, n); link(n, prim[(k + 1) % 6]); });
-    sec.forEach(function (sc) { link(sc.from, sc.idx); });
-    /* kilka powiązań między dalszymi interesariuszami */
-    for (i = 1; i < sec.length; i += 3) link(sec[i].idx, sec[(i + 1) % sec.length].idx);
-    link(prim[0], prim[3]);
-    return { p: p, y: y, th: .13, k: 3 };
+    return { p: p, y: y, th: .15, k: 3 };
   }
 
-  /* 0 = plus, 1 = sieć, 2 = kula, 3 = fala (kolejność jak tematy 01–03) */
-  var RAW = [plusShape(), network(), sphereShell(), ripple()];
+  /* 0 = plus, 1 = pierścienie, 2 = kula, 3 = fala (kolejność jak tematy 01–03) */
+  var RAW = [plusShape(), rings(), sphereShell(), ripple()];
   var N = Math.max.apply(null, RAW.map(function (s) { return s.p.length; }));
 
   function edges(s) {
@@ -216,7 +213,12 @@
     if (k === 0) { a = Math.sin(t * .5) * .4; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 2) { a = t * .2; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 3) { var r = Math.hypot(x, z); y = .3 * Math.sin(r * 6 - t * 2.6) * Math.exp(-r * .6); c = Math.cos(.32); s = Math.sin(.32); X = x; Y = c * y - s * z; Z = s * y + c * z; }
-    else { a = t * .15; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; Y = y + Math.sin(t * .8 + x * 3) * .02; }
+    else {
+      /* pierścienie: powolny obrót wokół osi (1,1,1), widać, jak się przeplatają */
+      a = t * .22; c = Math.cos(a); s = Math.sin(a);
+      var q = .57735, d = (x + y + z) * q, cx = q * (z - y), cy = q * (x - z), cz = q * (y - x);
+      X = x * c + cx * s + q * d * (1 - c); Y = y * c + cy * s + q * d * (1 - c); Z = z * c + cz * s + q * d * (1 - c);
+    }
     o[0] = X; o[1] = Y; o[2] = Z;
   }
   /* Światło akcentu przechodzące przez bryłę */
@@ -225,10 +227,10 @@
     if (k === 0) return band((x + y) * .72, ((t / 2.8) % 1) * 3.4 - 1.7, 4.5);
     if (k === 2) return band(-y, ((t / 3.2) % 1) * 2.8 - 1.4, 5);
     if (k === 3) return band(Math.hypot(x, z), ((t / 2.6) % 1) * 1.9, 6);
-    return band(Math.hypot(x, y, z), ((t / 3) % 1) * 1.7, 6);  /* sieć: impuls od centrum do interesariuszy */
+    return band(Math.atan2(y, x) / Math.PI, ((t / 3.4) % 1) * 2.6 - 1.3, 7);  /* pierścienie: światło obiega całość */
   }
 
-  /* ---------- sekwencja: plus → sieć → plus → kula → plus → fala ---------- */
+  /* ---------- sekwencja: plus → pierścienie → plus → kula → plus → fala ---------- */
   var SEQ = [0, 1, 0, 2, 0, 3], HOLD = [2600, 5200], TR = 2300;
   var si = 1, kA = 1, kB = 1, T = 1, tStart = 0, stateStart = 0;
   var ord = new Float32Array(N), jit = new Float32Array(N);
@@ -316,7 +318,7 @@
     reduce = m.matches; select(cur); if (reduce) { pause(); T = 1; render(performance.now()); } else { last = performance.now(); loop(); }
   });
 
-  /* Start na temacie 01 (sieć). */
+  /* Start na temacie 01 (pierścienie). */
   var now0 = performance.now();
   setIdx(gA, SH[1].E); setIdx(gB, SH[1].E);
   tStart = now0 - HOLD[0]; stateStart = now0;
