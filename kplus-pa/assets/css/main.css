@@ -144,7 +144,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .svc__body{display:flex;flex-direction:column;gap:12px}
 .svc__body p{color:var(--grey)}
 .svc:hover{background:#E7EDF8}
-.svc:hover .svc__top .plus{transform:rotate(45deg);color:var(--accent)}
+.svc:hover .svc__top .plus{transform:rotate(90deg) scale(1.15);color:var(--accent)}
 
 /* ---------- Kiedy warto ---------- */
 .when .box{display:flex;gap:80px;align-items:flex-start;padding-top:120px;padding-bottom:120px;
@@ -159,11 +159,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .segs i{flex:1;height:3px;border-radius:2px;background:#3A3A3A}
 .segs i.on{background:var(--accent-light)}
 .when__list{flex:1 1 0;min-width:0}
-.when__item{display:flex;gap:28px;align-items:flex-start;padding:24px 0;border-bottom:1px solid #2A2A2A;color:#3F3F3F}
+.when__item{display:flex;gap:28px;align-items:flex-start;padding:24px 0;border-bottom:1px solid #22304D;color:#2E3F63}
 .when__item .t-num{width:56px;flex:none;padding-top:8px}
 .when__item p{flex:1;font-size:var(--fs-h3);font-weight:500;line-height:1.25;letter-spacing:-.01em}
 .when__item .plus{--s:20px;margin-top:8px;color:var(--accent-light);visibility:hidden}
-.when__item.is-past{color:#6B6B6B}
+.when__item.is-past{color:#5D6F95}
 .when__item.is-active{color:var(--white)}
 .when__item.is-active .t-num{color:var(--accent-light)}
 .when__item.is-active p{font-weight:600}
@@ -207,7 +207,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .years__bars{display:flex;gap:6px}
 .years__bars i{flex:1;height:6px;border-radius:3px;background:var(--accent-light)}
 .years__levels{display:flex;justify-content:space-between;font-size:14px;font-weight:500;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--on-dark-muted)}
-.cloud{position:absolute;left:350px;top:48px;width:110px;height:110px}
 .dots{display:grid;grid-template-columns:repeat(8,10px);gap:6px 6px}
 .dots i{width:10px;height:10px;border-radius:50%}
 .awards-logos{display:flex;align-items:center;justify-content:space-between;max-width:555px}
@@ -227,8 +226,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .chip{border:1px solid currentColor;border-radius:var(--r-chip);padding:5px 12px;font-size:14px;font-weight:500;line-height:1.4;letter-spacing:.06em;text-transform:uppercase}
 .project__client{font-weight:500}
 .project__awards{display:flex;flex-direction:column;gap:10px}
-.project__awards li{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:500;line-height:1.5}
-.project__awards svg{width:16px;height:16px;flex:none}
+.project__awards li{display:flex;align-items:flex-start;gap:10px;font-size:16px;font-weight:500;line-height:1.5}
+.project__awards svg{width:16px;height:16px;flex:none;margin-top:4px}
 .project--bg{background:var(--bg)}
 .project--bg .project__meta .t-num{color:var(--accent)}
 .project--bg .chip{border-color:var(--line)}
@@ -318,7 +317,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .hero__visual img{width:440px;height:440px}
   .bento{grid-template-columns:1fr 1fr}
   .bento__row2{grid-template-columns:1fr 1fr}
-  .cloud{left:auto;right:32px}
   .how__cycle{gap:40px}
   .cycle{flex:0 0 560px;height:480px}
   .cycle__name{display:none}
@@ -373,7 +371,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   .bento,.bento__row2{grid-template-columns:1fr 1fr}
   .kpi,.bento__row2 .kpi{height:auto;min-height:320px;gap:32px;padding:32px}
-  .cloud{top:32px;right:24px}
   .awards-logos{gap:16px;flex-wrap:wrap}
   .awards-logos img{max-width:30%}
 
@@ -478,3 +475,39 @@ html.bio-open{overflow:hidden}
 .topic{cursor:pointer}
 .topic:hover .topic__title{color:var(--ink)}
 .topic__bar i{will-change:transform}
+
+/* ===== Krok 5: formularz – błędy, status, sukces ===== */
+.form__body{display:flex;flex-direction:column;gap:16px;min-width:0}
+.field__error{font-size:14px;line-height:1.4;font-weight:500;color:#B3261E}
+.field.is-invalid input,.field.is-invalid textarea{border-color:#B3261E;background:var(--white)}
+.consent.is-invalid input{border-color:#B3261E}
+.consent__error{margin-top:-8px;padding-left:30px}
+.consent input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.form__status{font-size:15px;line-height:1.5;font-weight:500;min-height:0}
+.form__status:empty{display:none}
+.form__status.is-error{color:#B3261E}
+.form.is-sending .btn{opacity:.6;pointer-events:none}
+.form__done{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;min-height:420px;outline:none}
+.form__body[hidden],.form__done[hidden]{display:none}
+.form__done .t-body{color:var(--grey)}
+.form__done-icon{width:56px;height:56px;border-radius:50%;background:var(--accent);color:var(--white);display:flex;align-items:center;justify-content:center}
+.form__done-icon .plus{--s:22px}
+@media (max-width:767px){.form__done{min-height:320px}}
+
+/* ===== Poprawki po przeglądzie ===== */
+.when--pin .box{max-height:100vh;overflow:hidden;position:relative;padding-bottom:64px}
+.when__item .t-num{color:inherit}
+.cycle__core{fill:var(--white);transition:fill .5s ease}
+.cycle__plus{fill:var(--ink);transition:opacity .3s ease}
+.cycle__check{stroke:var(--white);stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s ease .2s}
+.cycle.is-complete .cycle__core{fill:var(--accent)}
+.cycle.is-complete .cycle__plus{opacity:0}
+.cycle.is-complete .cycle__check{stroke-dashoffset:0}
+.stage__tick{order:3;margin-left:auto;flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.6);transition:opacity .3s ease,transform .3s ease;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 0a12 12 0 1 1 0 24a12 12 0 0 1 0-24zm-1.6 15.2l-3.5-3.5-1.4 1.4 4.9 4.9 8.5-8.5-1.4-1.4z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 0a12 12 0 1 1 0 24a12 12 0 0 1 0-24zm-1.6 15.2l-3.5-3.5-1.4 1.4 4.9 4.9 8.5-8.5-1.4-1.4z'/%3E%3C/svg%3E") center/contain no-repeat}
+.stage__list li.is-done .stage__tick{opacity:1;transform:none}
+.stage__list li.is-done{color:var(--ink)}
+.contact__data a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);transition:border-color .2s}
+.contact__data a:hover{border-color:currentColor}
+@media (prefers-reduced-motion:reduce){.cycle__core,.cycle__plus,.cycle__check,.stage__tick{transition:none}}

@@ -40,19 +40,27 @@
     var label = li.querySelector('span:last-child').firstChild.textContent;
     return { name: label, desc: sr ? sr.textContent.replace(/^:\s*/, '') : '' };
   });
-  var howIdx = -1, swapT = null;
+  var cycle = $('.cycle');
+  var howIdx = -1, howDone = null, swapT = null;
+  /* "Monitor & Adapt": "& Adapt" w nowej linii, żeby znak & nie zostawał sam na końcu wiersza. */
+  var esc = function (t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+  var nameHtml = function (t) { return esc(t).replace(/\s&amp;\s/, '<br>&amp;&nbsp;'); };
   function setHow(i, progress) {
     if (arc && progress != null) arc.style.strokeDashoffset = String(1 - progress);
     i = Math.max(0, Math.min(stages.length - 1, i));
-    if (i === howIdx) return;
-    var first = howIdx === -1;
-    howIdx = i;
-    nodes.forEach(function (el, k) { el.classList.toggle('is-done', k < i); el.classList.toggle('is-active', k === i); });
-    names.forEach(function (el, k) { el.classList.toggle('is-done', k < i); el.classList.toggle('is-active', k === i); });
-    stageLis.forEach(function (el, k) { el.classList.toggle('is-active', k === i); });
+    /* Po przejściu całej drogi: wszystkie etapy zaliczone, środek koła granatowy z ptaszkiem. */
+    var done = progress != null && progress >= .97;
+    if (i === howIdx && done === howDone) return;
+    var first = howIdx === -1, changed = i !== howIdx;
+    howIdx = i; howDone = done;
+    if (cycle) cycle.classList.toggle('is-complete', done);
+    nodes.forEach(function (el, k) { el.classList.toggle('is-done', k < i || done); el.classList.toggle('is-active', k === i && !done); });
+    names.forEach(function (el, k) { el.classList.toggle('is-done', k < i || done); el.classList.toggle('is-active', k === i && !done); });
+    stageLis.forEach(function (el, k) { el.classList.toggle('is-active', k === i); el.classList.toggle('is-done', k < i || done); });
+    if (!changed) return;
     function fill() {
       kicker.textContent = 'Etap ' + pad(i + 1) + ' / ' + pad(stages.length);
-      sName.textContent = stages[i].name;
+      sName.innerHTML = nameHtml(stages[i].name);
       sDesc.textContent = stages[i].desc;
       stage.classList.remove('is-swapping');
     }
@@ -93,9 +101,15 @@
     if (when && whenItems.length) {
       setWhen(0);
       if (c.desktop) {
-        /* Lista przesuwa się w przypiętej sekcji, jeśli nie mieści się w oknie (lewa kolumna stoi). */
+        /* Sekcja ma najwyżej wysokość okna; lista przesuwa się w środku, lewa kolumna stoi.
+           Dzięki temu pod listą nie zostaje puste miejsce po odpięciu. */
         var list = $('.when__list');
-        var overflow = function () { return Math.max(0, when.offsetHeight - window.innerHeight); };
+        var wbox = $('.box', when);
+        when.classList.add('when--pin');
+        var overflow = function () {
+          var padB = parseFloat(getComputedStyle(wbox).paddingBottom) || 0;
+          return Math.max(0, list.offsetTop + list.offsetHeight - (wbox.clientHeight - padB));
+        };
         gsap.to(list, {
           y: function () { return -overflow(); }, ease: 'none',
           scrollTrigger: {
@@ -156,14 +170,6 @@
         scrollTrigger: { trigger: '.years', start: 'top 90%', once: true } });
     }
 
-    /* Chmura 5100 gęstnieje */
-    var dotsCloud = $$('.cloud circle');
-    if (dotsCloud.length) {
-      gsap.from(dotsCloud, { scale: 0, opacity: 0, transformOrigin: '50% 50%', duration: .5, ease: 'back.out(2)',
-        stagger: { each: .02, from: 'center' },
-        scrollTrigger: { trigger: '.cloud', start: 'top 90%', once: true } });
-    }
-
     /* 40 kropek zapala się po kolei */
     var dots = $$('.dots i');
     if (dots.length) {
@@ -184,7 +190,8 @@
     }
 
     return function () {
-      gsap.set($$('.pillar, .svc, .project, .when__list, .years__bars i, .cloud circle, .dots i'), { clearProps: 'all' });
+      gsap.set($$('.pillar, .svc, .project, .when__list, .years__bars i, .dots i'), { clearProps: 'all' });
+      when && when.classList.remove('when--pin');
       if (arc) arc.style.strokeDashoffset = '';
       counters.forEach(function (b, k) { b.innerHTML = finals[k]; });
     };

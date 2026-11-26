@@ -213,8 +213,9 @@
         <svg viewBox="0 0 720 600">
           <circle cx="390" cy="290" r="200" fill="none" stroke="#C9C8C2" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>
           <path class="cycle__arc" d="M390 90 A200 200 0 0 1 390 490 A200 200 0 0 1 390 90" pathLength="1" fill="none" stroke="#16294D" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset=".75"/>
-          <circle cx="390" cy="290" r="92" fill="#fff"/>
-          <path d="M389 260h2v60h-2zM360 289h60v2h-60z" fill="#111"/>
+          <circle class="cycle__core" cx="390" cy="290" r="92"/>
+          <path class="cycle__plus" d="M389 260h2v60h-2zM360 289h60v2h-60z"/>
+          <path class="cycle__check" d="M360 292l20 20 42-44" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
           <g class="cycle__nodes" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing=".84" text-anchor="middle">
             <g class="cycle__node is-done"><circle class="cycle__halo" cx="390" cy="90" r="34"/><circle class="cycle__dot" cx="390" cy="90" r="23.5"/><text x="390" y="95">01</text></g>
             <g class="cycle__node is-active"><circle class="cycle__halo" cx="590" cy="290" r="34"/><circle class="cycle__dot" cx="590" cy="290" r="23.5"/><text x="590" y="295">02</text></g>
@@ -232,10 +233,10 @@
         <p class="t-display stage__swap stage__name" aria-hidden="true">Strategize</p>
         <p class="t-lead stage__desc stage__swap" aria-hidden="true">Cele, priorytety, scenariusze i&nbsp;strategia działania.</p>
         <ol class="stage__list">
-          <li><span class="t-num">01</span><span>Understand<span class="sr-only">: Diagnoza biznesu, otoczenia, interesariuszy i&nbsp;ryzyk.</span></span></li>
-          <li class="is-active"><span class="t-num">02</span><span>Strategize<span class="sr-only">: Cele, priorytety, scenariusze i&nbsp;strategia działania.</span></span></li>
-          <li><span class="t-num">03</span><span>Engage<span class="sr-only">: Dialog, relacje, argumentacja i&nbsp;komunikacja.</span></span></li>
-          <li><span class="t-num">04</span><span>Monitor &amp; Adapt<span class="sr-only">: Stała analiza zmian, ewaluacja i&nbsp;aktualizacja taktyki.</span></span></li>
+          <li><span class="stage__tick" aria-hidden="true"></span><span class="t-num">01</span><span>Understand<span class="sr-only">: Diagnoza biznesu, otoczenia, interesariuszy i&nbsp;ryzyk.</span></span></li>
+          <li class="is-active"><span class="stage__tick" aria-hidden="true"></span><span class="t-num">02</span><span>Strategize<span class="sr-only">: Cele, priorytety, scenariusze i&nbsp;strategia działania.</span></span></li>
+          <li><span class="stage__tick" aria-hidden="true"></span><span class="t-num">03</span><span>Engage<span class="sr-only">: Dialog, relacje, argumentacja i&nbsp;komunikacja.</span></span></li>
+          <li><span class="stage__tick" aria-hidden="true"></span><span class="t-num">04</span><span>Monitor &amp; Adapt<span class="sr-only">: Stała analiza zmian, ewaluacja i&nbsp;aktualizacja taktyki.</span></span></li>
         </ol>
       </div>
     </div>
@@ -267,7 +268,6 @@
       <article class="kpi kpi--accent">
         <p class="kpi__num"><b data-count="5100">5&#8239;100</b><span>Sojuszników</span></p>
         <p class="t-small">Tyle osób i&nbsp;podmiotów zaangażowaliśmy w&nbsp;ramach jednego z&nbsp;naszych projektów Public Affairs.</p>
-        <svg class="cloud" width="110" height="110" aria-hidden="true" focusable="false" viewBox="0 0 110 110"><circle cx="53.1" cy="54.6" r="2.46" fill="#fff" opacity="0.87"/><circle cx="52.8" cy="42.2" r="1.23" fill="#fff" opacity="0.60"/><circle cx="42.9" cy="58.7" r="0.88" fill="#fff" opacity="0.82"/><circle cx="33.6" cy="30.8" r="1.86" fill="#fff" opacity="0.56"/><circle cx="57.7" cy="17.0" r="1.97" fill="#fff" opacity="0.77"/><circle cx="25.5" cy="66.1" r="0.98" fill="#fff" opacity="0.44"/><circle cx="44.4" cy="81.2" r="2.10" fill="#fff" opacity="0.62"/><circle cx="56.1" cy="56.4" r="0.86" fill="#fff" opacity="0.43"/><circle cx="58.0" cy="46.9" r="1.43" fill="#fff" opacity="0.44"/><circle cx="37.7" cy="45.2" r="1.63" fill="#fff" opacity="0.94"/><circle cx="53.7" cy="69.1" r="1.37" fill="#fff" opacity="0.50"/><circle cx="54.5" cy="55.3" r="1.90" fill="#fff" opacity="0.86"/><circle cx="91.0" cy="80.7" r="1.98" fill="#fff" opacity="0.92"/><circle cx="54.0" cy="51.8" r="1.24" fill="#fff" opacity="0.38"/><circle cx="42.5" cy="55.4" r="1.51" fill="#fff" opacity="0.68"/><circle cx="61.2" cy="44.4" r="2.55" fill="#fff" opacity="0.62"/><circle cx="58.5" cy="57.5" r="0.85" fill="#fff" opacity="0.68"/><circle cx="47.0" cy="93.3" r="2.65" fill="#fff" opacity="0.94"/><circle cx="67.0" cy="63.4" r="2.60" fill="#fff" opacity="0.39"/><circle cx="59.7" cy="52.2" r="2.33" fill="#fff" opacity="0.87"/><circle cx="62.7" cy="48.3" r="1.62" fill="#fff" opacity="0.50"/><circle cx="53.2" cy="55.2" r="1.89" fill="#fff" opacity="0.72"/><circle cx="51.5" cy="79.9" r="1.75" fill="#fff" opacity="0.71"/><circle cx="37.6" cy="67.6" r="1.65" fill="#fff" opacity="0.79"/><circle cx="63.2" cy="54.0" r="1.51" fill="#fff" opacity="0.80"/><circle cx="65.2" cy="91.4" r="1.86" fill="#fff" opacity="0.72"/><circle cx="53.5" cy="58.5" r="2.23" fill="#fff" opacity="0.81"/><circle cx="62.1" cy="62.7" r="2.38" fill="#fff" opacity="0.69"/><circle cx="86.5" cy="60.8" r="1.08" fill="#fff" opacity="0.76"/><circle cx="61.4" cy="44.7" r="0.92" fill="#fff" opacity="0.65"/><circle cx="39.0" cy="58.0" r="2.63" fill="#fff" opacity="0.92"/><circle cx="51.1" cy="61.9" r="1.03" fill="#fff" opacity="0.37"/><circle cx="80.0" cy="62.4" r="1.09" fill="#fff" opacity="0.50"/><circle cx="53.9" cy="65.6" r="0.97" fill="#fff" opacity="0.56"/><circle cx="54.9" cy="54.8" r="1.04" fill="#fff" opacity="0.58"/><circle cx="64.4" cy="53.4" r="2.29" fill="#fff" opacity="0.73"/><circle cx="40.7" cy="56.5" r="2.17" fill="#fff" opacity="0.75"/><circle cx="33.2" cy="22.3" r="2.70" fill="#fff" opacity="0.63"/><circle cx="45.8" cy="51.5" r="0.83" fill="#fff" opacity="0.78"/><circle cx="55.0" cy="54.7" r="1.81" fill="#fff" opacity="0.45"/><circle cx="56.6" cy="61.8" r="1.80" fill="#fff" opacity="0.57"/><circle cx="68.2" cy="46.5" r="1.28" fill="#fff" opacity="0.46"/><circle cx="52.4" cy="29.6" r="1.64" fill="#fff" opacity="0.74"/><circle cx="59.1" cy="52.1" r="2.20" fill="#fff" opacity="0.73"/><circle cx="57.1" cy="52.9" r="1.67" fill="#fff" opacity="0.96"/><circle cx="47.6" cy="38.4" r="0.98" fill="#fff" opacity="0.66"/><circle cx="56.6" cy="60.8" r="2.53" fill="#fff" opacity="0.77"/><circle cx="61.1" cy="30.8" r="1.69" fill="#fff" opacity="0.58"/><circle cx="61.5" cy="59.9" r="0.85" fill="#fff" opacity="0.48"/><circle cx="66.4" cy="63.2" r="1.04" fill="#fff" opacity="0.65"/><circle cx="63.6" cy="55.1" r="1.67" fill="#fff" opacity="0.75"/><circle cx="61.3" cy="51.9" r="2.19" fill="#fff" opacity="0.38"/><circle cx="68.0" cy="44.7" r="2.47" fill="#fff" opacity="0.60"/><circle cx="58.1" cy="59.0" r="1.57" fill="#fff" opacity="0.68"/><circle cx="53.4" cy="77.1" r="1.13" fill="#fff" opacity="0.75"/><circle cx="81.9" cy="19.8" r="2.29" fill="#fff" opacity="0.83"/><circle cx="32.2" cy="51.3" r="1.22" fill="#fff" opacity="0.61"/><circle cx="65.1" cy="41.6" r="1.40" fill="#fff" opacity="0.80"/><circle cx="71.2" cy="57.1" r="1.84" fill="#fff" opacity="0.83"/><circle cx="47.8" cy="54.0" r="2.08" fill="#fff" opacity="0.84"/><circle cx="46.0" cy="50.0" r="2.08" fill="#fff" opacity="0.79"/><circle cx="64.2" cy="46.9" r="1.85" fill="#fff" opacity="0.46"/><circle cx="37.8" cy="39.2" r="2.13" fill="#fff" opacity="0.71"/><circle cx="46.8" cy="42.8" r="1.94" fill="#fff" opacity="0.64"/><circle cx="55.6" cy="62.9" r="2.56" fill="#fff" opacity="0.53"/><circle cx="54.6" cy="48.4" r="1.22" fill="#fff" opacity="0.54"/><circle cx="59.1" cy="54.0" r="1.77" fill="#fff" opacity="0.78"/><circle cx="58.8" cy="56.1" r="1.00" fill="#fff" opacity="0.96"/><circle cx="61.7" cy="57.0" r="2.44" fill="#fff" opacity="0.88"/><circle cx="35.4" cy="60.4" r="1.07" fill="#fff" opacity="0.89"/></svg>
       </article>
       <div class="bento__row2">
         <article class="kpi kpi--light">
@@ -309,7 +309,7 @@
             <p class="t-small project__text">Wieloletnia strategia Public Affairs, działania w&nbsp;otoczeniu legislacyjnym, budowanie szerokiej koalicji interesariuszy na&nbsp;poziomie lokalnym, krajowym i&nbsp;europejskim.</p>
           </div>
           <ul class="project__awards" aria-label="Nagrody">
-            <li><svg aria-hidden="true"><use href="#i-award"/></svg>4 × Złote Spinacze, w&nbsp;tym Advocacy i&nbsp;Public Affairs oraz Efektywność</li>
+            <li><svg aria-hidden="true"><use href="#i-award"/></svg>4 × Złote Spinacze, w&nbsp;tym Advocacy<br class="br-d"> i&nbsp;Public&nbsp;Affairs oraz&nbsp;Efektywność</li>
             <li><svg aria-hidden="true"><use href="#i-award"/></svg>Nominacja do&nbsp;kampanii XX-lecia Złotych Spinaczy</li>
           </ul>
         </div>
@@ -325,7 +325,7 @@
             <p class="t-small project__text">Kompleksowa strategia społecznego zabezpieczenia inwestycji zagranicznej, dialog z&nbsp;interesariuszami, wsparcie konsultacji społecznych i&nbsp;zarządzanie ryzykiem reputacyjnym.</p>
           </div>
           <ul class="project__awards" aria-label="Nagrody">
-            <li><svg aria-hidden="true"><use href="#i-award"/></svg>3 × Złote Spinacze, w&nbsp;tym złoto w&nbsp;kategorii Advocacy i&nbsp;Public Affairs</li>
+            <li><svg aria-hidden="true"><use href="#i-award"/></svg>3 × Złote Spinacze, w&nbsp;tym złoto w&nbsp;kategorii<br class="br-d"> Advocacy i&nbsp;Public&nbsp;Affairs</li>
             <li><svg aria-hidden="true"><use href="#i-award"/></svg>Nominacja do&nbsp;SABRE Awards EMEA 2023</li>
           </ul>
         </div>
@@ -393,11 +393,12 @@
       <h2 class="t-h1" id="kontakt-title">Porozmawiajmy o&nbsp;Twoim wyzwaniu</h2>
       <p class="t-body">Opisz krótko sytuację. Odezwiemy się, aby umówić rozmowę. Wszystkie informacje traktujemy poufnie.</p>
       <dl class="contact__data">
-        <div><dt>E-mail</dt><dd>[DO UZUPEŁNIENIA]</dd></div>
-        <div><dt>Telefon</dt><dd>[DO UZUPEŁNIENIA]</dd></div>
+        <div><dt>E-mail</dt><dd><a href="mailto:aknowska@kplus.agency">aknowska@kplus.agency</a></dd></div>
+        <div><dt>Telefon</dt><dd><a href="tel:+48512962913">+48&nbsp;512&nbsp;962&nbsp;913</a></dd></div>
       </dl>
     </div>
-    <form class="form" action="send.php" method="post" novalidate>
+    <form class="form" id="contact-form" action="send.php" method="post" novalidate>
+      <div class="form__body">
       <div class="form__row">
         <div class="field"><label for="f-name">Imię i&nbsp;nazwisko*</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
         <div class="field"><label for="f-org">Organizacja</label><input id="f-org" name="organization" type="text" autocomplete="organization"></div>
@@ -409,8 +410,16 @@
       <div class="field"><label for="f-msg">Wiadomość*</label><textarea id="f-msg" name="message" required></textarea></div>
       <div class="hp" aria-hidden="true"><label for="f-web">Strona www</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="ts" value="">
-      <label class="consent"><input type="checkbox" name="consent" value="1" required><span>Wyrażam zgodę na&nbsp;przetwarzanie moich danych w&nbsp;celu odpowiedzi na&nbsp;zapytanie. Więcej w <a href="#polityka-prywatnosci">Polityce prywatności</a>.</span></label>
-      <div class="form__send"><button class="btn btn--primary" type="submit">Wyślij wiadomość</button></div>
+      <input type="hidden" name="lang" value="pl">
+      <label class="consent"><input type="checkbox" id="f-consent" name="consent" value="1" required><span>Wyrażam zgodę na&nbsp;przetwarzanie moich danych w&nbsp;celu odpowiedzi na&nbsp;zapytanie. Więcej w <a href="#polityka-prywatnosci">Polityce prywatności</a>.</span></label>
+      <div class="form__send"><button class="btn btn--primary" type="submit" data-sending="Wysyłanie…">Wyślij wiadomość</button></div>
+      <p class="form__status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="form__done" hidden tabindex="-1">
+        <span class="form__done-icon" aria-hidden="true"><span class="plus"></span></span>
+        <h3 class="t-h3">Dziękujemy</h3>
+        <p class="t-body">Wiadomość dotarła. Odezwiemy się&nbsp;wkrótce, aby umówić rozmowę.</p>
+      </div>
     </form>
   </div>
 </section>
