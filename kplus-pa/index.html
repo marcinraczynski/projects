@@ -397,7 +397,8 @@
         <div><dt>Telefon</dt><dd>[DO UZUPEŁNIENIA]</dd></div>
       </dl>
     </div>
-    <form class="form" action="send.php" method="post" novalidate>
+    <form class="form" id="contact-form" action="send.php" method="post" novalidate>
+      <div class="form__body">
       <div class="form__row">
         <div class="field"><label for="f-name">Imię i&nbsp;nazwisko*</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
         <div class="field"><label for="f-org">Organizacja</label><input id="f-org" name="organization" type="text" autocomplete="organization"></div>
@@ -409,8 +410,16 @@
       <div class="field"><label for="f-msg">Wiadomość*</label><textarea id="f-msg" name="message" required></textarea></div>
       <div class="hp" aria-hidden="true"><label for="f-web">Strona www</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="ts" value="">
-      <label class="consent"><input type="checkbox" name="consent" value="1" required><span>Wyrażam zgodę na&nbsp;przetwarzanie moich danych w&nbsp;celu odpowiedzi na&nbsp;zapytanie. Więcej w <a href="#polityka-prywatnosci">Polityce prywatności</a>.</span></label>
-      <div class="form__send"><button class="btn btn--primary" type="submit">Wyślij wiadomość</button></div>
+      <input type="hidden" name="lang" value="pl">
+      <label class="consent"><input type="checkbox" id="f-consent" name="consent" value="1" required><span>Wyrażam zgodę na&nbsp;przetwarzanie moich danych w&nbsp;celu odpowiedzi na&nbsp;zapytanie. Więcej w <a href="#polityka-prywatnosci">Polityce prywatności</a>.</span></label>
+      <div class="form__send"><button class="btn btn--primary" type="submit" data-sending="Wysyłanie…">Wyślij wiadomość</button></div>
+      <p class="form__status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="form__done" hidden tabindex="-1">
+        <span class="form__done-icon" aria-hidden="true"><span class="plus"></span></span>
+        <h3 class="t-h3">Dziękujemy</h3>
+        <p class="t-body">Wiadomość dotarła. Odezwiemy się&nbsp;wkrótce, aby umówić rozmowę.</p>
+      </div>
     </form>
   </div>
 </section>

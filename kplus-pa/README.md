@@ -10,7 +10,7 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 
 ## Stan
 - [x] 1. Szkielet PL, tokeny, wszystkie sekcje, desktop
-- [x] 2. Mobile  - [x] 3. GSAP, panel bio  - [x] 4. Hero z bryłami  - [ ] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
+- [x] 2. Mobile  - [x] 3. GSAP, panel bio  - [x] 4. Hero z bryłami  - [x] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
 
 ## Assety tymczasowe
 - `tomasz-alberski.webp`: zdjęcie z sesji (1.1), bo w Figmie jest tylko 590 px. Podmienić na oryginał.
@@ -29,3 +29,12 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 - Pętla: plus → sieć → plus → kula → plus → fala. Paski tematów pokazują postęp, klik (albo strzałki na klawiaturze) przełącza bryłę.
 - Animacja pauzuje, gdy hero jest poza ekranem lub karta jest w tle.
 - Bez WebGL zostaje statyczny `bryla-siec.png`; przy `prefers-reduced-motion` bryła stoi i nie przełącza się sama (klik nadal działa).
+
+## Formularz (krok 5)
+- `send.php` wysyła zapytanie przez SMTP (PHPMailer 6.12 w `lib/PHPMailer/`, licencja LGPL w `LICENSE.txt`) i odpowiada w JSON. Bez JS wraca na stronę z `?form=ok|error#kontakt`.
+- Konfiguracja: skopiuj `config.example.php` jako `config.php` obok `send.php` i wpisz dane SMTP oraz adres odbiorcy. `config.php` jest w `.gitignore`, a `.htaccess` blokuje dostęp do niego i do `lib/`.
+- Antyspam: honeypot `website` (bot dostaje udawany sukces), minimalny czas wypełnienia (pole `ts` z JS, domyślnie 3 s), limit 5 wysyłek z IP na godzinę (plik w katalogu tymczasowym PHP).
+- Walidacja w przeglądarce i na serwerze; błędy przy polach, komunikat sukcesu w miejscu formularza.
+- `dry_run => true` w `config.php` zapisuje maila do pliku zamiast wysyłać (do testów na serwerze).
+- Na GitHub Pages PHP nie działa, więc formularz pokazuje tam komunikat błędu. Działa dopiero na serwerze K+.
+- Wymagania: PHP 7.4+ z `mbstring` i `openssl`.
