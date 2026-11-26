@@ -1,5 +1,5 @@
 /* K+ PA – hero: bryła z punktów i linii (three.js r128, plik lokalny).
-   Pętla: plus → sieć → plus → kula → plus → fala. Paski tematów pokazują postęp, klik w temat przełącza bryłę.
+   Pętla: plus → mapa → plus → kula → plus → fala. Paski tematów pokazują postęp, klik w temat przełącza bryłę.
    Na bazie projektu kplus-hero; kolory przestawione na granat K+ PA.
    Bez WebGL zostaje statyczny obraz bryły; przy prefers-reduced-motion bryła stoi i nie przełącza się sama. */
 (function () {
@@ -86,38 +86,49 @@
     }
     return { p: p, y: y, th: .17, k: 3 };
   }
-  /* Sieć interesariuszy: organizacja w centrum, kluczowi interesariusze wokół (koalicja = pierścień),
-     dalsze otoczenie na zewnątrz, połączenia pokazują wzajemne zależności. */
-  function network() {
-    var p = [], y = [], nodes = [];
-    var add = function (pos, r, n, acc) { nodes.push({ p: pos }); fib(n, r, pos).forEach(function (q) { p.push(q); y.push(acc ? 1 : 0); }); return nodes.length - 1; };
-    var link = function (i, j) {
-      var A = nodes[i].p, B = nodes[j].p, len = Math.hypot(B[0] - A[0], B[1] - A[1], B[2] - A[2]), m = Math.round(len / .09);
-      for (var k = 2; k < m - 1; k++) { var u = k / m; p.push([A[0] + (B[0] - A[0]) * u, A[1] + (B[1] - A[1]) * u, A[2] + (B[2] - A[2]) * u]); y.push(0); }
+  /* Mapa interesariuszy jak mapa myśli: organizacja w centrum, gałęzie do kluczowych grup,
+     od nich mniejsze odgałęzienia. Węzły to okręgi, gałęzie to łuki; całość prawie płaska. */
+  function mindMap() {
+    var p = [], y = [];
+    var ring = function (c, r, acc) {
+      var n = Math.max(8, Math.round(Math.PI * 2 * r / .055));
+      for (var i = 0; i < n; i++) { var a = i / n * Math.PI * 2; p.push([c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r, c[2]]); y.push(acc ? 1 : 0); }
     };
-    var hub = add([0, 0, 0], .17, 34, true);
-    var prim = [], sec = [], i;
-    for (i = 0; i < 6; i++) {
-      var a = i / 6 * Math.PI * 2 + .3;
-      prim.push(add([Math.cos(a) * .82, Math.sin(a) * .7, (i % 2 ? .38 : -.38)], .1, 18, i === 1 || i === 4));
-    }
-    for (i = 0; i < 6; i++) {
-      [-.38, .38].forEach(function (off, j) {
-        if (i % 3 === 2 && j === 1) return;
-        var a = i / 6 * Math.PI * 2 + .3 + off, z = (i % 2 ? .38 : -.38) + (j ? .35 : -.35);
-        sec.push({ from: prim[i], idx: add([Math.cos(a) * 1.3, Math.sin(a) * 1.08, z], .06, 10, false) });
+    var branch = function (A, ra, B, rb, bend) {
+      var dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L;
+      var M = [(A[0] + B[0]) / 2 + nx * bend * L, (A[1] + B[1]) / 2 + ny * bend * L, (A[2] + B[2]) / 2];
+      var m = Math.round(L / .06);
+      for (var k = 0; k <= m; k++) {
+        var u = k / m, v = 1 - u, q = [v * v * A[0] + 2 * v * u * M[0] + u * u * B[0], v * v * A[1] + 2 * v * u * M[1] + u * u * B[1], v * v * A[2] + 2 * v * u * M[2] + u * u * B[2]];
+        if (Math.hypot(q[0] - A[0], q[1] - A[1]) < ra + .03 || Math.hypot(q[0] - B[0], q[1] - B[1]) < rb + .03) continue;
+        p.push(q); y.push(0);
+      }
+    };
+    var C = [0, 0, 0];
+    ring(C, .24, true); ring(C, .13, true);
+    /* kluczowe grupy: kąt, odległość, głębokość, odgałęzienia [kąt względny, odległość] */
+    var G = [
+      [.35, .78, .12, [[-.45, .5], [.4, .46]]],
+      [1.55, .7, -.1, [[-.5, .44], [.15, .52], [.6, .4]]],
+      [2.65, .82, .08, [[-.35, .48], [.45, .44]]],
+      [3.75, .74, -.12, [[0, .5]]],
+      [5.0, .8, .1, [[-.75, .44], [.05, .52], [.8, .46]]]
+    ];
+    G.forEach(function (g, gi) {
+      var P = [Math.cos(g[0]) * g[1], Math.sin(g[0]) * g[1] * .82, g[2]];
+      ring(P, .12, gi === 1 || gi === 4);
+      branch(C, .24, P, .12, gi % 2 ? .12 : -.12);
+      g[3].forEach(function (s) {
+        var a = g[0] + s[0], Q = [P[0] + Math.cos(a) * s[1], P[1] + Math.sin(a) * s[1] * .82, g[2] + (s[0] > 0 ? .1 : -.1)];
+        ring(Q, .06, false);
+        branch(P, .12, Q, .06, s[0] > 0 ? .18 : -.18);
       });
-    }
-    prim.forEach(function (n, k) { link(hub, n); link(n, prim[(k + 1) % 6]); });
-    sec.forEach(function (sc) { link(sc.from, sc.idx); });
-    /* kilka powiązań między dalszymi interesariuszami */
-    for (i = 1; i < sec.length; i += 3) link(sec[i].idx, sec[(i + 1) % sec.length].idx);
-    link(prim[0], prim[3]);
-    return { p: p, y: y, th: .13, k: 3 };
+    });
+    return { p: p, y: y, th: .1, k: 2 };
   }
 
-  /* 0 = plus, 1 = sieć, 2 = kula, 3 = fala (kolejność jak tematy 01–03) */
-  var RAW = [plusShape(), network(), sphereShell(), ripple()];
+  /* 0 = plus, 1 = mapa, 2 = kula, 3 = fala (kolejność jak tematy 01–03) */
+  var RAW = [plusShape(), mindMap(), sphereShell(), ripple()];
   var N = Math.max.apply(null, RAW.map(function (s) { return s.p.length; }));
 
   function edges(s) {
@@ -216,7 +227,10 @@
     if (k === 0) { a = Math.sin(t * .5) * .4; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 2) { a = t * .2; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 3) { var r = Math.hypot(x, z); y = .3 * Math.sin(r * 6 - t * 2.6) * Math.exp(-r * .6); c = Math.cos(.32); s = Math.sin(.32); X = x; Y = c * y - s * z; Z = s * y + c * z; }
-    else { a = t * .15; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; Y = y + Math.sin(t * .8 + x * 3) * .02; }
+    else {
+      /* mapa: kołysze się na boki, żeby było widać, że ma głębię, ale zawsze czyta się jak mapa */
+      a = Math.sin(t * .35) * .45; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; Y = y + Math.sin(t * .9 + x * 2.5) * .015;
+    }
     o[0] = X; o[1] = Y; o[2] = Z;
   }
   /* Światło akcentu przechodzące przez bryłę */
@@ -225,10 +239,10 @@
     if (k === 0) return band((x + y) * .72, ((t / 2.8) % 1) * 3.4 - 1.7, 4.5);
     if (k === 2) return band(-y, ((t / 3.2) % 1) * 2.8 - 1.4, 5);
     if (k === 3) return band(Math.hypot(x, z), ((t / 2.6) % 1) * 1.9, 6);
-    return band(Math.hypot(x, y, z), ((t / 3) % 1) * 1.7, 6);  /* sieć: impuls od centrum do interesariuszy */
+    return band(Math.hypot(x, y), ((t / 3) % 1) * 1.9, 5.5);  /* mapa: impuls od centrum przez kolejne gałęzie */
   }
 
-  /* ---------- sekwencja: plus → sieć → plus → kula → plus → fala ---------- */
+  /* ---------- sekwencja: plus → mapa → plus → kula → plus → fala ---------- */
   var SEQ = [0, 1, 0, 2, 0, 3], HOLD = [2600, 5200], TR = 2300;
   var si = 1, kA = 1, kB = 1, T = 1, tStart = 0, stateStart = 0;
   var ord = new Float32Array(N), jit = new Float32Array(N);
@@ -316,7 +330,7 @@
     reduce = m.matches; select(cur); if (reduce) { pause(); T = 1; render(performance.now()); } else { last = performance.now(); loop(); }
   });
 
-  /* Start na temacie 01 (sieć). */
+  /* Start na temacie 01 (mapa). */
   var now0 = performance.now();
   setIdx(gA, SH[1].E); setIdx(gB, SH[1].E);
   tStart = now0 - HOLD[0]; stateStart = now0;
