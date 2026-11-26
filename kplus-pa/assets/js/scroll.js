@@ -8,6 +8,7 @@
   gsap.registerPlugin(ST);
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var EN = document.documentElement.lang === 'en';
   var pad = function (n) { return (n < 10 ? '0' : '') + n; };
 
   /* ---------- Kiedy warto: 8 pozycji, licznik 01–08, segmenty ---------- */
@@ -59,7 +60,7 @@
     stageLis.forEach(function (el, k) { el.classList.toggle('is-active', k === i); el.classList.toggle('is-done', k < i || done); });
     if (!changed) return;
     function fill() {
-      kicker.textContent = 'Etap ' + pad(i + 1) + ' / ' + pad(stages.length);
+      kicker.textContent = (EN ? 'Stage ' : 'Etap ') + pad(i + 1) + ' / ' + pad(stages.length);
       sName.innerHTML = nameHtml(stages[i].name);
       sDesc.textContent = stages[i].desc;
       stage.classList.remove('is-swapping');
@@ -127,7 +128,7 @@
     }
 
     /* Jak pracujemy */
-    var how = $('#jak-pracujemy');
+    var how = $('.section.how');
     if (how && stages.length && arc) {
       setHow(0, 0);
       var upd = function (self) {
@@ -151,7 +152,7 @@
       var o = { v: 0 };
       var fmt = function (v) {
         var s = String(Math.round(v));
-        if (s.length > 3) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        if (s.length > 3) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, EN ? ',' : ' ');
         return s + suffix;
       };
       b.textContent = fmt(0);
