@@ -1,5 +1,5 @@
 /* K+ PA – hero: bryła z punktów i linii (three.js r128, plik lokalny).
-   Pętla: plus → pierścienie → plus → kula → plus → fala. Paski tematów pokazują postęp, klik w temat przełącza bryłę.
+   Pętla: plus → mapa → plus → kula → plus → fala. Paski tematów pokazują postęp, klik w temat przełącza bryłę.
    Na bazie projektu kplus-hero; kolory przestawione na granat K+ PA.
    Bez WebGL zostaje statyczny obraz bryły; przy prefers-reduced-motion bryła stoi i nie przełącza się sama. */
 (function () {
@@ -86,35 +86,49 @@
     }
     return { p: p, y: y, th: .17, k: 3 };
   }
-  /* Koalicja: trzy splecione pierścienie (układ boromeuszowski). Żaden nie trzyma się sam,
-     razem tworzą trwałą całość. Akcent tam, gdzie pierścienie się przeplatają. */
-  function rings() {
-    var p = [], y = [], A = 1.02, B = .5, TR_ = .07, NA = 64, NT = 3, k, i, j;
-    var curve = function (k, th) { var u = A * Math.cos(th), v = B * Math.sin(th); return k === 0 ? [u, v, 0] : k === 1 ? [0, u, v] : [v, 0, u]; };
-    var near = function (q, k) {
-      var best = 9;
-      for (var m = 0; m < 3; m++) if (m !== k) for (var s = 0; s < 72; s++) { var c = curve(m, s / 72 * Math.PI * 2); best = Math.min(best, Math.hypot(q[0] - c[0], q[1] - c[1], q[2] - c[2])); }
-      return best;
+  /* Mapa interesariuszy jak mapa myśli: organizacja w centrum, gałęzie do kluczowych grup,
+     od nich mniejsze odgałęzienia. Węzły to okręgi, gałęzie to łuki; całość prawie płaska. */
+  function mindMap() {
+    var p = [], y = [];
+    var ring = function (c, r, acc) {
+      var n = Math.max(8, Math.round(Math.PI * 2 * r / .055));
+      for (var i = 0; i < n; i++) { var a = i / n * Math.PI * 2; p.push([c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r, c[2]]); y.push(acc ? 1 : 0); }
     };
-    for (k = 0; k < 3; k++) for (i = 0; i < NA; i++) {
-      var th = i / NA * Math.PI * 2, c = curve(k, th), c2 = curve(k, th + .01);
-      var t = [c2[0] - c[0], c2[1] - c[1], c2[2] - c[2]], tl = Math.hypot(t[0], t[1], t[2]);
-      t = [t[0] / tl, t[1] / tl, t[2] / tl];
-      /* normalna płaszczyzny pierścienia i druga oś przekroju rury */
-      var n = k === 0 ? [0, 0, 1] : k === 1 ? [1, 0, 0] : [0, 1, 0];
-      var bq = [t[1] * n[2] - t[2] * n[1], t[2] * n[0] - t[0] * n[2], t[0] * n[1] - t[1] * n[0]];
-      var hot = near(c, k) < .3;
-      for (j = 0; j < NT; j++) {
-        var ph = j / NT * Math.PI * 2 + (i % 2) * Math.PI / NT, cs = Math.cos(ph) * TR_, sn = Math.sin(ph) * TR_;
-        p.push([c[0] + n[0] * cs + bq[0] * sn, c[1] + n[1] * cs + bq[1] * sn, c[2] + n[2] * cs + bq[2] * sn]);
-        y.push(hot ? 1 : 0);
+    var branch = function (A, ra, B, rb, bend) {
+      var dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L;
+      var M = [(A[0] + B[0]) / 2 + nx * bend * L, (A[1] + B[1]) / 2 + ny * bend * L, (A[2] + B[2]) / 2];
+      var m = Math.round(L / .06);
+      for (var k = 0; k <= m; k++) {
+        var u = k / m, v = 1 - u, q = [v * v * A[0] + 2 * v * u * M[0] + u * u * B[0], v * v * A[1] + 2 * v * u * M[1] + u * u * B[1], v * v * A[2] + 2 * v * u * M[2] + u * u * B[2]];
+        if (Math.hypot(q[0] - A[0], q[1] - A[1]) < ra + .03 || Math.hypot(q[0] - B[0], q[1] - B[1]) < rb + .03) continue;
+        p.push(q); y.push(0);
       }
-    }
-    return { p: p, y: y, th: .15, k: 3 };
+    };
+    var C = [0, 0, 0];
+    ring(C, .24, true); ring(C, .13, true);
+    /* kluczowe grupy: kąt, odległość, głębokość, odgałęzienia [kąt względny, odległość] */
+    var G = [
+      [.35, .78, .12, [[-.45, .5], [.4, .46]]],
+      [1.55, .7, -.1, [[-.5, .44], [.15, .52], [.6, .4]]],
+      [2.65, .82, .08, [[-.35, .48], [.45, .44]]],
+      [3.75, .74, -.12, [[0, .5]]],
+      [5.0, .8, .1, [[-.75, .44], [.05, .52], [.8, .46]]]
+    ];
+    G.forEach(function (g, gi) {
+      var P = [Math.cos(g[0]) * g[1], Math.sin(g[0]) * g[1] * .82, g[2]];
+      ring(P, .12, gi === 1 || gi === 4);
+      branch(C, .24, P, .12, gi % 2 ? .12 : -.12);
+      g[3].forEach(function (s) {
+        var a = g[0] + s[0], Q = [P[0] + Math.cos(a) * s[1], P[1] + Math.sin(a) * s[1] * .82, g[2] + (s[0] > 0 ? .1 : -.1)];
+        ring(Q, .06, false);
+        branch(P, .12, Q, .06, s[0] > 0 ? .18 : -.18);
+      });
+    });
+    return { p: p, y: y, th: .1, k: 2 };
   }
 
-  /* 0 = plus, 1 = pierścienie, 2 = kula, 3 = fala (kolejność jak tematy 01–03) */
-  var RAW = [plusShape(), rings(), sphereShell(), ripple()];
+  /* 0 = plus, 1 = mapa, 2 = kula, 3 = fala (kolejność jak tematy 01–03) */
+  var RAW = [plusShape(), mindMap(), sphereShell(), ripple()];
   var N = Math.max.apply(null, RAW.map(function (s) { return s.p.length; }));
 
   function edges(s) {
@@ -214,10 +228,8 @@
     else if (k === 2) { a = t * .2; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; }
     else if (k === 3) { var r = Math.hypot(x, z); y = .3 * Math.sin(r * 6 - t * 2.6) * Math.exp(-r * .6); c = Math.cos(.32); s = Math.sin(.32); X = x; Y = c * y - s * z; Z = s * y + c * z; }
     else {
-      /* pierścienie: powolny obrót wokół osi (1,1,1), widać, jak się przeplatają */
-      a = t * .22; c = Math.cos(a); s = Math.sin(a);
-      var q = .57735, d = (x + y + z) * q, cx = q * (z - y), cy = q * (x - z), cz = q * (y - x);
-      X = x * c + cx * s + q * d * (1 - c); Y = y * c + cy * s + q * d * (1 - c); Z = z * c + cz * s + q * d * (1 - c);
+      /* mapa: kołysze się na boki, żeby było widać, że ma głębię, ale zawsze czyta się jak mapa */
+      a = Math.sin(t * .35) * .45; c = Math.cos(a); s = Math.sin(a); X = c * x - s * z; Z = s * x + c * z; Y = y + Math.sin(t * .9 + x * 2.5) * .015;
     }
     o[0] = X; o[1] = Y; o[2] = Z;
   }
@@ -227,10 +239,10 @@
     if (k === 0) return band((x + y) * .72, ((t / 2.8) % 1) * 3.4 - 1.7, 4.5);
     if (k === 2) return band(-y, ((t / 3.2) % 1) * 2.8 - 1.4, 5);
     if (k === 3) return band(Math.hypot(x, z), ((t / 2.6) % 1) * 1.9, 6);
-    return band(Math.atan2(y, x) / Math.PI, ((t / 3.4) % 1) * 2.6 - 1.3, 7);  /* pierścienie: światło obiega całość */
+    return band(Math.hypot(x, y), ((t / 3) % 1) * 1.9, 5.5);  /* mapa: impuls od centrum przez kolejne gałęzie */
   }
 
-  /* ---------- sekwencja: plus → pierścienie → plus → kula → plus → fala ---------- */
+  /* ---------- sekwencja: plus → mapa → plus → kula → plus → fala ---------- */
   var SEQ = [0, 1, 0, 2, 0, 3], HOLD = [2600, 5200], TR = 2300;
   var si = 1, kA = 1, kB = 1, T = 1, tStart = 0, stateStart = 0;
   var ord = new Float32Array(N), jit = new Float32Array(N);
@@ -318,7 +330,7 @@
     reduce = m.matches; select(cur); if (reduce) { pause(); T = 1; render(performance.now()); } else { last = performance.now(); loop(); }
   });
 
-  /* Start na temacie 01 (pierścienie). */
+  /* Start na temacie 01 (mapa). */
   var now0 = performance.now();
   setIdx(gA, SH[1].E); setIdx(gB, SH[1].E);
   tStart = now0 - HOLD[0]; stateStart = now0;
