@@ -17,8 +17,8 @@ return [
     'from_name'   => 'K+ Group | Public Affairs',
 
     // Adres, na który trafiają zapytania z formularza
-    'to_email'    => 'kontakt@example.com',
-    'to_name'     => 'K+ Group | Public Affairs',
+    'to_email'    => 'aknowska@kplus.agency',
+    'to_name'     => 'Anna Knowska',
 
     // Ochrona przed spamem
     'min_seconds' => 3,              // minimalny czas wypełniania formularza
