@@ -10,7 +10,7 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 
 ## Stan
 - [x] 1. Szkielet PL, tokeny, wszystkie sekcje, desktop
-- [x] 2. Mobile  - [x] 3. GSAP, panel bio  - [ ] 4. Hero z bryłami  - [ ] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
+- [x] 2. Mobile  - [x] 3. GSAP, panel bio  - [x] 4. Hero z bryłami  - [ ] 5. PHP  - [ ] 6. EN  - [ ] 7. Akceptacja i FTP
 
 ## Assety tymczasowe
 - `tomasz-alberski.webp`: zdjęcie z sesji (1.1), bo w Figmie jest tylko 590 px. Podmienić na oryginał.
@@ -23,3 +23,9 @@ Po każdej zmianie tekstów: `python3 tools/sieroty.py index.html` (idempotentne
 - Mobile: bez przypinania i nakładania, stany zmieniają się przy zwykłym przewijaniu.
 - `prefers-reduced-motion: reduce`: brak animacji, widoczny statyczny stan z HTML.
 - Panel bio zespołu: `assets/js/main.js` (focus trap, Esc, klik w tło, powrót fokusu na kartę).
+
+## Hero (krok 4)
+- Bryła w WebGL: three.js r128 lokalnie w `assets/vendor/three/` (licencja MIT w `LICENSE.txt`), logika w `assets/js/hero.js` (na bazie `kplus-hero/`, kolory przestawione na granat).
+- Pętla: plus → sieć → plus → kula → plus → fala. Paski tematów pokazują postęp, klik (albo strzałki na klawiaturze) przełącza bryłę.
+- Animacja pauzuje, gdy hero jest poza ekranem lub karta jest w tle.
+- Bez WebGL zostaje statyczny `bryla-siec.png`; przy `prefers-reduced-motion` bryła stoi i nie przełącza się sama (klik nadal działa).

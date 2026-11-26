@@ -470,3 +470,11 @@ html.bio-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){
   .bio__scrim,.bio__panel,.stage__swap,.when__item,.segs i{transition:none}
 }
+
+/* ===== Krok 4: hero z bryłą WebGL ===== */
+.hero__visual{position:relative}
+.hero__gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero__visual.is-gl img{visibility:hidden}
+.topic{cursor:pointer}
+.topic:hover .topic__title{color:var(--ink)}
+.topic__bar i{will-change:transform}
