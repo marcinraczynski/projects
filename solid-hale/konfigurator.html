@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konfigurator - Solid Hale</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#1F2124}a:hover{color:#000}
+*{box-sizing:border-box}
+.sh h1,.sh h2,.sh h3{text-wrap:balance}
+.sh p{text-wrap:pretty}
+.navl{color:#E9EAEC;text-decoration:none;font-weight:500;font-size:15px;padding:8px 2px;border-bottom:2px solid transparent}
+.navl:hover{color:#FFDA00;border-bottom-color:#FFDA00}
+.btn-y{background:#FFDA00;color:#1A1C1E;text-decoration:none;transition:background .2s,transform .2s}
+.btn-y:hover{background:#FFE640;color:#1A1C1E;transform:translateY(-2px)}
+.btn-d{background:#1F2124;color:#FFFFFF;text-decoration:none;transition:background .2s}
+.btn-d:hover{background:#000;color:#FFDA00}
+.btn-o{color:#FFFFFF;text-decoration:none;border:1.5px solid rgba(255,255,255,.35);transition:border-color .2s,color .2s}
+.btn-o:hover{border-color:#FFDA00;color:#FFDA00}
+.lnk{color:#1F2124;text-decoration:none;border-bottom:2px solid #FFDA00;padding-bottom:3px;font-weight:600}
+.lnk:hover{color:#000;border-bottom-color:#1F2124}
+.card{transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,22,25,.14)}
+.card img{transition:transform .8s}
+.card:hover img{transform:scale(1.05)}
+.card .arr{transition:background .25s,transform .25s}
+.card:hover .arr{background:#FFDA00;transform:translateX(3px)}
+.proj img{transition:transform .9s}
+.proj:hover img{transform:scale(1.04)}
+.cut{clip-path:polygon(0 0,calc(100% - 44px) 0,100% 44px,100% 100%,0 100%)}
+.cut-s{clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.bp{background-color:#17191B;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px}
+.sh-svg{width:100%;height:100%;display:block;overflow:visible}
+.sh-svg line,.sh-svg polygon{vector-effect:non-scaling-stroke}
+.gridl line{stroke:rgba(255,255,255,.06);stroke-width:1}
+.fr{stroke:#FFDA00;stroke-width:2.2;stroke-dasharray:1;stroke-dashoffset:1;stroke-linecap:round}
+.sec{stroke:rgba(255,255,255,.55);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1}
+.dim{stroke:rgba(255,255,255,.45);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1}
+.edge{stroke:#FFDA00;stroke-width:2.2;stroke-dasharray:1;stroke-dashoffset:1;fill:none}
+.slab{stroke:rgba(255,255,255,.7);stroke-width:1.2;fill:rgba(255,255,255,.04);stroke-dasharray:1;stroke-dashoffset:1}
+.pan{opacity:0}
+.seam line{stroke:rgba(0,0,0,.28);stroke-width:1}
+.dimt{fill:rgba(255,255,255,.65);font:500 15px 'JetBrains Mono',monospace;letter-spacing:.12em}
+.wire-in{animation:wi 14s linear infinite}
+@keyframes wi{0%{opacity:0}1%,74%{opacity:1}77%,100%{opacity:0}}
+.wire-ed{animation:we 14s linear infinite}
+@keyframes we{0%{opacity:0}1%,84%{opacity:1}90%,100%{opacity:0}}
+.scan{animation:scan 14s cubic-bezier(.7,0,.3,1) infinite}
+@keyframes scan{0%,66%{left:0;opacity:0}67%{left:0;opacity:1}76%{left:100%;opacity:1}77%,100%{left:100%;opacity:0}}
+.cap{animation:cap 14s ease infinite}
+@keyframes cap{0%,74%{opacity:0;transform:translateY(8px)}78%,97%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+.prog{animation:prog 14s linear infinite}
+@keyframes prog{0%{width:0}96%{width:100%}100%{width:100%}}
+.st1{animation:st1 14s steps(1) infinite}.st2{animation:st2 14s steps(1) infinite}.st3{animation:st3 14s steps(1) infinite}.st4{animation:st4 14s steps(1) infinite}
+@keyframes st1{0%{color:#FFDA00}14%,100%{color:rgba(255,255,255,.42)}}
+@keyframes st2{0%{color:rgba(255,255,255,.42)}14%{color:#FFDA00}52%,100%{color:rgba(255,255,255,.42)}}
+@keyframes st3{0%{color:rgba(255,255,255,.42)}52%{color:#FFDA00}68%,100%{color:rgba(255,255,255,.42)}}
+@keyframes st4{0%{color:rgba(255,255,255,.42)}68%{color:#FFDA00}96%,100%{color:rgba(255,255,255,.42)}}
+.sl .cut{visibility:visible}
+.phk{animation-duration:42s;animation-timing-function:linear;animation-iteration-count:infinite;clip-path:inset(0 100% 0 0)}
+.ph1{animation-name:ph1}.ph2{animation-name:ph2}.ph3{animation-name:ph3}
+@keyframes ph1{0%{clip-path:inset(0 100% 0 0);opacity:1}22.333%{clip-path:inset(0 100% 0 0);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}25.333%,34.5%{clip-path:inset(0 0 0 0);opacity:1}37.5%{clip-path:inset(0 0 0 0);opacity:0}37.51%,99.99%{clip-path:inset(0 100% 0 0);opacity:0}100%{clip-path:inset(0 100% 0 0);opacity:1}}
+@keyframes ph2{0%{clip-path:inset(0 100% 0 0);opacity:1}55.667%{clip-path:inset(0 100% 0 0);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}58.667%,67.833%{clip-path:inset(0 0 0 0);opacity:1}70.833%{clip-path:inset(0 0 0 0);opacity:0}70.84%,99.99%{clip-path:inset(0 100% 0 0);opacity:0}100%{clip-path:inset(0 100% 0 0);opacity:1}}
+@keyframes ph3{0%,1.167%{clip-path:inset(0 0 0 0);opacity:1}4.167%{clip-path:inset(0 0 0 0);opacity:0}4.18%{clip-path:inset(0 100% 0 0);opacity:0}5%{clip-path:inset(0 100% 0 0);opacity:1}89%{clip-path:inset(0 100% 0 0);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}92%,100%{clip-path:inset(0 0 0 0);opacity:1}}
+.sl1{animation:sl1 42s steps(1) infinite}.sl2{animation:sl2 42s steps(1) infinite}.sl3{animation:sl3 42s steps(1) infinite}
+@keyframes sl1{0%{visibility:visible}33.333%,100%{visibility:hidden}}
+@keyframes sl2{0%{visibility:hidden}33.333%{visibility:visible}66.666%,100%{visibility:hidden}}
+@keyframes sl3{0%{visibility:hidden}66.666%,100%{visibility:visible}}
+.dt{background:rgba(255,255,255,.3)}
+.dt1{animation:dt1 42s steps(1) infinite}.dt2{animation:dt2 42s steps(1) infinite}.dt3{animation:dt3 42s steps(1) infinite}
+@keyframes dt1{0%{background:#FFDA00}33.333%,100%{background:rgba(255,255,255,.3)}}
+@keyframes dt2{0%{background:rgba(255,255,255,.3)}33.333%{background:#FFDA00}66.666%,100%{background:rgba(255,255,255,.3)}}
+@keyframes dt3{0%{background:rgba(255,255,255,.3)}66.666%,100%{background:#FFDA00}}
+
+@media (prefers-reduced-motion: reduce){.sl2,.sl3,.dt{display:none}.sh-anim *{animation:none!important}.ph1{clip-path:none!important;opacity:1!important}.ph2,.ph3{display:none}.cap{opacity:1!important;transform:none!important}}
+.fld{width:100%;height:48px;border:1px solid #CFD1D4;background:#FFFFFF;padding:0 14px;font:500 15px 'Barlow',sans-serif;color:#1F2124;border-radius:0}
+.fld:focus{outline:2px solid #FFDA00;outline-offset:0;border-color:#1F2124}
+.lbl{display:block;font:600 12px 'Barlow',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#4A4D52;margin-bottom:6px}
+.stick{background:rgba(23,25,27,0);border-bottom:1px solid rgba(255,255,255,0);transition:background .3s,border-color .3s}
+.stick.on{background:rgba(23,25,27,.94);border-bottom-color:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+@supports (animation-timeline: scroll()){.stick{animation:stk linear both;animation-timeline:scroll();animation-range:0 140px}}
+@keyframes stk{0%,50%{background:rgba(23,25,27,0);border-bottom-color:rgba(255,255,255,0);backdrop-filter:blur(0)}100%{background:rgba(23,25,27,.94);border-bottom-color:rgba(255,255,255,.08);backdrop-filter:blur(10px)}}
+.soc{color:#D9DBDE}.soc:hover{color:#FFDA00}
+.tabl{color:#B9BCC1;text-decoration:none;font:600 14px 'Barlow',sans-serif;padding:18px 16px;border-bottom:2px solid transparent}
+.tabl:hover{color:#FFFFFF;border-bottom-color:#FFDA00}
+.chk{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+.chk li{position:relative;padding-left:28px;font-size:16px;line-height:1.5;color:#1F2124}
+.chk li::before{content:"";position:absolute;left:0;top:5px;width:14px;height:8px;border-left:2.5px solid #1F2124;border-bottom:2.5px solid #1F2124;transform:rotate(-45deg)}
+.chk.sm li,.out li{font-size:15px}
+.chk.dk li{color:#FFFFFF}.chk.dk li::before{border-color:#FFDA00}
+.out{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.out li{position:relative;padding-left:28px;line-height:1.5;color:#55595E}
+.out li::before{content:"";position:absolute;left:2px;top:10px;width:12px;height:2px;background:#9A9DA2}
+.out.dk li{color:#B9BCC1}
+.tag{border:1px solid #CFD1D4;padding:9px 14px;font:600 14px 'Barlow',sans-serif;color:#1F2124}
+.vrow{display:flex;gap:16px;align-items:center;justify-content:space-between;text-decoration:none;color:#1F2124;background:#F3F3F1;padding:16px 18px;border-left:3px solid #FFDA00;transition:background .2s}
+.vrow:hover{background:#ECECE9;color:#1F2124}
+.vrow strong{display:block;font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.vrow span span{display:block;font-size:14px;color:#55595E;margin-top:2px}
+.static .fr,.static .sec,.static .dim,.static .edge,.static .slab{stroke-dashoffset:0}
+.static .pan,.static .seam{display:none}
+.static .wire-in,.static .wire-ed{animation:none}
+.navl.cur{color:#FFDA00;border-bottom-color:#FFDA00}
+.jrow{display:flex;gap:16px;align-items:center;justify-content:space-between;text-decoration:none;color:#1A1C1E;background:#FFFFFF;padding:20px 22px;transition:transform .2s}
+.jrow:hover{transform:translateX(4px);color:#1A1C1E}
+.jrow strong{display:block;font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.jrow span span{display:block;font-size:14px;color:#55595E;margin-top:2px}
+.pre{cursor:pointer;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:#FFFFFF;padding:16px 18px;display:flex;flex-direction:column;gap:4px;font-family:'Barlow',sans-serif;transition:border-color .2s,background .2s}
+.pre:hover{border-color:#FFDA00;background:rgba(255,218,0,.06)}
+.pre strong{font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.pre span{font-size:14px;color:#B9BCC1}
+.pre em{font-style:normal;font:700 16px 'Barlow',sans-serif;color:#FFDA00;margin-top:6px}
+.sn{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#6B6F75;font:600 13px 'Barlow',sans-serif;padding:8px 14px;border-radius:999px}
+.sn.done{color:#1F2124;border-color:#1F2124}
+.sn.cur{background:#1F2124;border-color:#1F2124;color:#FFDA00}
+.kh{font:800 clamp(30px,3vw,40px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:8px 0 0}
+.kl{font-size:16px;line-height:1.55;color:#55595E;margin:8px 0 0}
+.kts{display:grid;gap:12px;margin-top:22px}
+.kts.three{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.kts.two{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.kq .kts{margin-top:0}
+.kt{position:relative;cursor:pointer;text-align:left;background:#FFFFFF;border:1px solid #CFD1D4;padding:18px 16px 14px;display:flex;flex-direction:column;gap:4px;font-family:'Barlow',sans-serif;color:#1F2124;transition:border-color .2s,box-shadow .2s}
+.kt:hover{border-color:#1F2124;box-shadow:inset 0 -4px 0 #FFDA00}
+.kt.on{border:2px solid #1F2124;padding:17px 15px 13px}
+.kt.on::after{content:"";position:absolute;right:-2px;top:-2px;width:28px;height:28px;background:#FFDA00 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2124' stroke-width='3.2'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/14px no-repeat;border:2px solid #1F2124}
+.kt b{font:800 21px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase;padding-right:24px}
+.kt span{font-size:14px;line-height:1.45;color:#55595E;margin-bottom:8px}
+.kt i{font-style:normal;font-size:13px;line-height:1.4;color:#1F2124;font-weight:600;margin-top:auto;padding-top:10px;border-top:1px solid #E4E5E7;display:flex;gap:7px;align-items:flex-start}
+.kt i svg{flex:none;margin-top:1px}
+.kq{margin-top:24px}
+.kqt{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:15px;margin-bottom:10px}
+.kqt small{font-weight:500;color:#6B6F75;font-size:14px}
+.ch{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#1F2124;padding:9px 14px;font:600 14px 'Barlow',sans-serif}
+.ch:hover{border-color:#1F2124}
+.ch.on{background:#1F2124;border-color:#1F2124;color:#FFDA00}
+.kdim{display:grid;grid-template-columns:150px minmax(0,1fr) 96px;gap:16px;align-items:center}
+.kdim label{font-size:15px;color:#4A4D52}
+.sh input[type=range]{accent-color:#1F2124;width:100%}
+.knum{display:flex;align-items:center;gap:4px;border:1px solid #CFD1D4;padding:8px 10px;background:#FFFFFF}
+.knum:focus-within{outline:2px solid #FFDA00;border-color:#1F2124}
+.knum input{width:100%;border:0;font:600 15px 'Barlow',sans-serif;text-align:right;min-width:0;background:transparent;color:#1F2124}
+.knum input:focus{outline:none}
+.knum span{color:#6B6F75;font-size:14px}
+.knote{margin:14px 0 0;font-size:14px;line-height:1.5;color:#4A4D52;border-left:3px solid #FFDA00;padding:4px 0 4px 12px}
+.knote.grey{border-left-color:#CFD1D4}
+.krow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid #E4E5E7}
+.krow:first-child{border-top:0;padding-top:0}
+.krow b{font-weight:700;font-size:15px}
+.krow span{display:block;font-size:14px;color:#6B6F75}
+.kstep{display:flex;align-items:center;border:1px solid #CFD1D4;flex:none}
+.kstep button{cursor:pointer;border:0;background:#FFFFFF;width:44px;height:44px;font:600 20px 'Barlow',sans-serif;color:#1F2124}
+.kstep button:hover{background:#FFDA00}
+.kstep output{min-width:36px;text-align:center;font-weight:700}
+.ksw{position:relative;width:52px;height:30px;flex:none}
+.ksw input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0;z-index:1}
+.ksw i{position:absolute;inset:0;border-radius:999px;background:#E4E5E7;transition:background .2s}
+.ksw i::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.ksw input:checked+i{background:#1F2124}
+.ksw input:checked+i::after{transform:translateX(22px);background:#FFDA00}
+.ksw input:focus-visible+i{outline:2px solid #FFDA00;outline-offset:2px}
+.krad{display:flex;gap:10px;align-items:center;border:1px solid #CFD1D4;padding:12px 14px;cursor:pointer;font-size:15px}
+.krad:has(input:checked){border-color:#1F2124;box-shadow:inset 3px 0 0 #FFDA00}
+.krad input{accent-color:#1F2124;margin:0}
+.kbtn{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#1F2124;padding:16px 26px;font:700 15px 'Barlow',sans-serif}
+.kbtn[disabled]{opacity:.4;cursor:not-allowed}
+.kbtn.btn-d{background:#1F2124;border-color:#1F2124;color:#FFFFFF}.kbtn.btn-d:hover{background:#000;color:#FFDA00}
+.kbtn.btn-y{background:#FFDA00;border-color:#FFDA00;color:#1A1C1E}.kbtn.btn-y:hover{background:#FFE640}
+@media (max-width:640px){.kdim{grid-template-columns:minmax(0,1fr) 96px}.kdim input[type=range]{grid-column:1/-1;grid-row:2}}
+.chip{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#1F2124;padding:10px 14px;font:600 14px 'Barlow',sans-serif;display:inline-flex;gap:8px;align-items:center}
+.chip span{font-weight:500;color:#8A8D92}
+.chip:hover{border-color:#1F2124}
+.chip.on{background:#1F2124;border-color:#1F2124;color:#FFFFFF}.chip.on span{color:#FFDA00}
+.spec.dk li{border-bottom-color:rgba(255,255,255,.14)}.spec.dk li span{color:#B9BCC1}
+.feat img{transition:transform .9s}.feat:hover img{transform:scale(1.03)}
+.tabl.cur{color:#FFDA00;border-bottom-color:#FFDA00}
+.dcard{background:#F3F3F1;padding:28px 26px}
+.dcard .ic{width:52px;height:52px;background:#FFDA00;display:flex;align-items:center;justify-content:center}
+.dcard h3{font:800 24px 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:20px 0 0}
+.dcard p{font-size:15px;line-height:1.6;color:#55595E;margin:8px 0 0}
+.spec{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column}
+.spec li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #E4E5E7;font-size:15px}
+.spec li span{color:#55595E}.spec li b{font-weight:600;text-align:right}
+.faq{background:#FFFFFF;padding:0 24px}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 0;font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#F3F3F1;font:600 22px 'Barlow',sans-serif}
+.faq[open] summary::after{content:"−";background:#FFDA00}
+.faq p{margin:0;padding:0 0 22px;font-size:16px;line-height:1.65;color:#4A4D52;max-width:720px}
+.flink{color:#B9BCC1;text-decoration:none;font-size:15px}
+.flink:hover{color:#FFDA00}
+.ktile{transition:border-color .2s,box-shadow .2s}
+.ktile:hover{border-color:#1F2124!important;box-shadow:inset 0 -4px 0 #FFDA00}
+.kvar{color:#1A1C1E;transition:background .2s,color .2s}
+.kvar:hover{background:#1A1C1E;color:#FFDA00}
+.lnk-w{color:#FFFFFF;text-decoration:none;border-bottom:2px solid #FFDA00;padding-bottom:3px;font-weight:600}
+</style>
+
+<link rel="stylesheet" href="css/front.css">
+</head>
+<body>
+
+<div class="sh" style="font-family: 'Barlow', sans-serif; color: #1F2124; background: #FFFFFF; width: 100%; overflow-x: clip">
+
+<!-- HERO -->
+<div class="tbar" style="border-bottom: 1px solid rgba(255,255,255,.08); background: #141517">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 10px 32px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between; font-size: 13px; color: #A9ACB1">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center">
+        <a href="tel:+48507444570" style="color: #D9DBDE; text-decoration: none; display: flex; gap: 8px; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFDA00" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>+48 507 444 570</a>
+        <a class="tb-x" href="mailto:biuro@solidhale.pl" style="color: #D9DBDE; text-decoration: none; display: flex; gap: 8px; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFDA00" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"></rect><path d="m22 6-10 7L2 6"></path></svg>biuro@solidhale.pl</a>
+        <span class="tb-x">Pn.-Pt. 8:00-16:00</span>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center">
+        <a class="soc" href="#" aria-label="Facebook" style="display: flex; width: 32px; height: 32px; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a>
+        <a class="soc" href="#" aria-label="Instagram" style="display: flex; width: 32px; height: 32px; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a>
+        <a href="#" style="color: #D9DBDE; text-decoration: none; margin-left: 12px">Blog</a>
+      </div>
+    </div>
+  </div>
+<div class="stick" style="position: sticky; top: 0; z-index: 50; height: 69px; margin-bottom: -69px; color: #FFFFFF">
+  <input type="checkbox" id="mnav" class="mnav-t" aria-hidden="true" tabindex="-1">
+  <header class="hdr" style="max-width: 1320px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: nowrap; gap: 20px 40px; align-items: center; justify-content: space-between">
+    <a href="index.html" aria-label="Solid Hale, strona główna" style="display: block"><img src="img/logo.png" alt="Solid Hale, hale stalowe" style="height: 40px; width: auto; display: block"></a>
+    <nav class="mnav" id="menu" aria-label="Menu główne" style="display: flex; flex-wrap: wrap; gap: 6px 30px; align-items: center">
+      <a class="navl" href="oferta.html">Oferta</a>
+      <a class="navl" href="hale-stalowe.html">Hale stalowe</a>
+      <a class="navl" href="realizacje.html">Realizacje</a>
+      <a class="navl cur" href="konfigurator.html" aria-current="page">Konfigurator</a>
+      <a class="navl" href="o-nas.html">O&nbsp;nas</a>
+      <a class="navl" href="kontakt.html">Kontakt</a>
+      <div class="mextra">
+        <a class="btn-y cut-s" href="konfigurator.html" style="padding: 17px 26px; font: 700 16px 'Barlow', sans-serif; display: inline-flex; gap: 10px; align-items: center; justify-content: center">Skonfiguruj halę i&nbsp;sprawdź koszt</a>
+        <a href="tel:+48507444570" style="font: 800 30px/1 'Barlow Condensed', sans-serif; color: #FFDA00; text-decoration: none; margin-top: 28px; display: block">+48 507 444 570</a>
+        <a href="mailto:biuro@solidhale.pl" style="color: #FFFFFF; text-decoration: none; font-weight: 600; margin-top: 8px; display: block">biuro@solidhale.pl</a>
+        <span style="color: #8A8E94; font-size: 14px; margin-top: 6px; display: block">Pn.-Pt. 8:00-16:00</span>
+      </div>
+    </nav>
+    <div class="hact" style="display: flex; gap: 14px; align-items: center"><a class="btn-y cut-s hcta" href="konfigurator.html" style="padding: 14px 26px; font: 700 15px 'Barlow', sans-serif; letter-spacing: .02em">Wyceń halę</a><label for="mnav" class="burger" aria-label="Menu" aria-controls="menu"><span></span><span></span></label></div>
+  </header>
+</div>
+<!-- HERO PODSTRONY -->
+<section class="bp" style="color: #FFFFFF; position: relative; overflow: hidden; padding-top: 69px">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 44px 32px 56px">
+    <nav aria-label="Ścieżka" style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: #A9ACB1"><a href="index.html" style="color: #D9DBDE; text-decoration: none">Strona główna</a><span aria-hidden="true">/</span><span style="color: #FFDA00">Konfigurator</span></nav>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px 60px; align-items: flex-end; justify-content: space-between; margin-top: 20px">
+      <h1 style="flex: 1 1 520px; font: 800 clamp(44px, 4.6vw, 68px)/0.96 'Barlow Condensed', sans-serif; text-transform: uppercase; margin: 0">Skonfiguruj halę i&nbsp;<span style="color: #FFDA00">sprawdź koszt</span></h1>
+      <p style="flex: 1 1 340px; max-width: 440px; font-size: 17px; line-height: 1.6; color: #C9CCD0; margin: 0">Kilka kliknięć, bez podawania danych. Szacunek widzisz od&nbsp;razu, a&nbsp;szczegółowe zestawienie wyślemy na&nbsp;e-mail.</p>
+    </div>
+    <div style="margin-top: 40px">
+      <div style="font: 600 12px 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #FFDA00">Gotowe warianty: kliknij, żeby zacząć od&nbsp;nich</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 14px">
+        
+          <button type="button" class="pre"><strong>Magazyn na nawozy</strong><span>20&nbsp;× 20&nbsp;m&nbsp;· 400&nbsp;m²&nbsp;· hala zimna&nbsp;· 2&nbsp;bramy</span><em>od 300&nbsp;tys.&nbsp;zł netto</em></button>
+        
+          <button type="button" class="pre"><strong>Warsztat z zapleczem</strong><span>20&nbsp;× 25&nbsp;m&nbsp;· 500&nbsp;m²&nbsp;· hala ciepła&nbsp;· 30&nbsp;m² zaplecza</span><em>od 560&nbsp;tys.&nbsp;zł netto</em></button>
+        
+          <button type="button" class="pre"><strong>Magazyn pod wynajem</strong><span>30&nbsp;× 40&nbsp;m&nbsp;· 1200&nbsp;m²&nbsp;· 4&nbsp;moduły z&nbsp;bramami</span><em>od 1,1&nbsp;mln&nbsp;zł netto</em></button>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONFIGURATOR -->
+<section style="background: #F3F3F1; padding: 48px 0 110px">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 0 32px">
+    <nav aria-label="Kroki konfiguratora" style="display: flex; flex-wrap: wrap; gap: 6px">
+      <button type="button" class="sn cur" aria-current="step">1. Zakres</button><button type="button" class="sn" aria-current="false">2. Przeznaczenie</button><button type="button" class="sn" aria-current="false">3. Wymiary</button><button type="button" class="sn" aria-current="false">4. Obudowa</button><button type="button" class="sn" aria-current="false">5. Wyposażenie</button><button type="button" class="sn" aria-current="false">6. Lokalizacja</button><button type="button" class="sn" aria-current="false">7. Wynik</button>
+    </nav>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; margin-top: 18px">
+
+      <div class="cut" style="flex: 1.5 1 560px; min-width: 0; background: #FFFFFF; padding: 36px 36px 30px">
+        <div style="font: 600 13px 'Barlow', sans-serif; color: #55595E">Krok 1 z 7</div>
+
+        
+          <h2 class="kh">Czego potrzebujesz?</h2><p class="kl">Od tego zależy, jak dokładnie policzymy cenę.</p>
+          <div class="kts three">
+            <button type="button" class="kt on" aria-pressed="true"><b>Hala w standardzie</b><span>Fundamenty, posadzka, konstrukcja, obudowa, bramy i&nbsp;stolarka</span><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>6&nbsp;kroków, ok. 2&nbsp;min&nbsp;· widełki ceny od razu</i></button><button type="button" class="kt" aria-pressed="false"><b>Zaprojektuj i wybuduj</b><span>Stan deweloperski z&nbsp;instalacjami i&nbsp;projektem</span><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>4&nbsp;kroki&nbsp;· kwota orientacyjna i&nbsp;rozmowa</i></button><button type="button" class="kt" aria-pressed="false"><b>Nie wiem</b><span>Policzymy halę w&nbsp;standardzie, a&nbsp;doradca podpowie resztę</span><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>jak hala w&nbsp;standardzie</i></button>
+          </div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+          <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 24px; border-top: 1px solid #E4E5E7">
+            <button type="button" class="kbtn" disabled="">Wstecz</button>
+            <button type="button" class="btn-d kbtn" style="border: 0; display: inline-flex; gap: 10px; align-items: center">Dalej <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          </div>
+        
+      </div>
+
+      <aside style="flex: 1 1 420px; min-width: 0; max-width: 520px; position: sticky; top: 90px; display: flex; flex-direction: column; gap: 14px">
+        <div class="bp cut" style="padding: 18px 18px 14px; color: #FFFFFF">
+          <svg viewBox="0 0 560 310" role="img" aria-label="Podgląd hali: szczyt i ściana boczna" style="width: 100%; height: auto; display: block">
+            <polygon points="199.9,105 388.3,105 388.3,39.1 294.1,24 199.9,39.1" fill="#2B2E32" fill-opacity="1" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linejoin="round"></polygon><polygon points="138.7,194.1 421.3,194.1 421.3,179 138.7,179" fill="#3A3E43" fill-opacity="1" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linejoin="round"></polygon><polygon points="138.7,260 421.3,260 421.3,194.1 138.7,194.1" fill="#26282C" fill-opacity="1" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linejoin="round"></polygon><polygon points="228.2,105 265.9,105 265.9,67.3 228.2,67.3" fill="#17181A" fill-opacity="1" stroke="#FFDA00" stroke-width="1.4" stroke-linejoin="round"></polygon><polygon points="322.4,105 360.1,105 360.1,67.3 322.4,67.3" fill="#17181A" fill-opacity="1" stroke="#FFDA00" stroke-width="1.4" stroke-linejoin="round"></polygon><polygon points="146.3,260 155.7,260 155.7,240.2 146.3,240.2" fill="#17181A" fill-opacity="1" stroke="#B9BCC1" stroke-width="0.9" stroke-linejoin="round"></polygon><polygon points="223.5,220.4 242.3,220.4 242.3,209.1 223.5,209.1" fill="#5D7384" fill-opacity="1" stroke="#B9BCC1" stroke-width="0.8" stroke-linejoin="round"></polygon><polygon points="317.7,220.4 336.5,220.4 336.5,209.1 317.7,209.1" fill="#5D7384" fill-opacity="1" stroke="#B9BCC1" stroke-width="0.8" stroke-linejoin="round"></polygon>
+            <line x1="171.7" y1="105" x2="397.7" y2="105" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-opacity="1" stroke-linecap="round"></line><line x1="129.3" y1="260" x2="430.7" y2="260" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-opacity="1" stroke-linecap="round"></line><line x1="199.9" y1="95.6" x2="388.3" y2="95.6" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="199.9" y1="86.2" x2="388.3" y2="86.2" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="199.9" y1="76.7" x2="388.3" y2="76.7" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="199.9" y1="67.3" x2="388.3" y2="67.3" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="199.9" y1="57.9" x2="388.3" y2="57.9" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="199.9" y1="48.5" x2="388.3" y2="48.5" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="138.7" y1="250.6" x2="421.3" y2="250.6" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="138.7" y1="241.2" x2="421.3" y2="241.2" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="138.7" y1="231.7" x2="421.3" y2="231.7" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="138.7" y1="222.3" x2="421.3" y2="222.3" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="138.7" y1="212.9" x2="421.3" y2="212.9" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="138.7" y1="203.5" x2="421.3" y2="203.5" stroke="rgba(255,255,255,.35)" stroke-width="0.8" stroke-opacity="0.5" stroke-linecap="round"></line><line x1="184.9" y1="91.4" x2="184.9" y2="97.9" stroke="#B9BCC1" stroke-width="1.130232558139535" stroke-opacity="1" stroke-linecap="round"></line><line x1="184.9" y1="97.9" x2="182.9" y2="105" stroke="#B9BCC1" stroke-width="1.130232558139535" stroke-opacity="1" stroke-linecap="round"></line><line x1="184.9" y1="97.9" x2="186.9" y2="105" stroke="#B9BCC1" stroke-width="1.130232558139535" stroke-opacity="1" stroke-linecap="round"></line><line x1="182.2" y1="93.5" x2="187.6" y2="93.5" stroke="#B9BCC1" stroke-width="1.130232558139535" stroke-opacity="1" stroke-linecap="round"></line><line x1="199.9" y1="119" x2="388.3" y2="119" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="199.9" y1="115" x2="199.9" y2="123" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="388.3" y1="115" x2="388.3" y2="123" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="138.7" y1="274" x2="421.3" y2="274" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="138.7" y1="270" x2="138.7" y2="278" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="421.3" y1="270" x2="421.3" y2="278" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="433.3" y1="260" x2="433.3" y2="194.1" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="429.3" y1="260" x2="437.3" y2="260" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line><line x1="429.3" y1="194.1" x2="437.3" y2="194.1" stroke="#FFDA00" stroke-width="1" stroke-opacity="1" stroke-linecap="round"></line>
+            <circle cx="184.9" cy="89.6" r="1.5" fill="none" stroke="#B9BCC1" stroke-width="1.1"></circle>
+            <text x="294.1" y="138" fill="#FFFFFF" font-family="Barlow, sans-serif" font-size="15" font-weight="600" letter-spacing="0" text-anchor="middle">20&nbsp;m</text><text x="280" y="293" fill="#FFFFFF" font-family="Barlow, sans-serif" font-size="15" font-weight="600" letter-spacing="0" text-anchor="middle">30&nbsp;m</text><text x="441.3" y="232.1" fill="#FFFFFF" font-family="Barlow, sans-serif" font-size="15" font-weight="600" letter-spacing="0" text-anchor="start">7&nbsp;m</text><text x="294.1" y="155" fill="rgba(255,255,255,.45)" font-family="Barlow, sans-serif" font-size="11" font-weight="600" letter-spacing="2" text-anchor="middle">SZCZYT</text><text x="280" y="310" fill="rgba(255,255,255,.45)" font-family="Barlow, sans-serif" font-size="11" font-weight="600" letter-spacing="2" text-anchor="middle">ŚCIANA BOCZNA</text>
+          </svg>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 6px; font-size: 14px; color: #B9BCC1"><span>Magazyn · hala ciepła</span><b style="color: #FFFFFF; font-weight: 600">600&nbsp;m²</b></div>
+        </div>
+        <div style="background: #FFFFFF; border-left: 6px solid #FFDA00; padding: 22px 24px">
+          
+          
+            <div class="lbl" style="color: #6B5B00">Szacunek</div>
+            <p style="margin: 6px 0 0; color: #55595E">Pojawi się po&nbsp;podaniu wymiarów.</p>
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- STOPKA -->
+<footer style="background: #121315; color: #B9BCC1">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px">
+    <div>
+      <img src="img/logo-white-y.png" alt="Solid Hale" style="height: 42px; width: auto; display: block">
+      <p style="font-size: 15px; line-height: 1.6; margin: 20px 0 0; max-width: 280px">Hale stalowe na zamówienie od producenta. Projekt, prefabrykacja i montaż.</p>
+    </div>
+    <nav aria-label="Oferta" style="display: flex; flex-direction: column; gap: 12px"><div style="font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px">Oferta</div><a class="flink" href="oferta.html">Budowa hal</a><a class="flink" href="oferta.html">Projektowanie</a><a class="flink" href="oferta.html">Gotowe rozwiązania</a><a class="flink" href="oferta.html">Konstrukcje stalowe</a><a class="flink" href="oferta.html">Wyposażenie obiektów</a></nav>
+    <nav aria-label="Hale stalowe" style="display: flex; flex-direction: column; gap: 12px"><div style="font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px">Hale stalowe</div><a class="flink" href="hale-magazynowe.html">Magazynowe</a><a class="flink" href="hale-produkcyjne.html">Produkcyjne</a><a class="flink" href="hale-uslugowe.html">Usługowe</a><a class="flink" href="hale-komercyjne.html">Komercyjne</a><a class="flink" href="hale-rolnicze.html">Rolnicze</a></nav>
+    <nav aria-label="Firma" style="display: flex; flex-direction: column; gap: 12px"><div style="font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px">Firma</div><a class="flink" href="o-nas.html">O nas</a><a class="flink" href="realizacje.html">Realizacje</a><a class="flink" href="konfigurator.html">Konfigurator</a><a class="flink" href="o-nas.html#kariera">Oferty pracy</a><a class="flink" href="#">Blog</a><a class="flink" href="kontakt.html">Kontakt</a></nav>
+  </div>
+  <div style="max-width: 1320px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid rgba(255,255,255,.08); display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-size: 13px">
+    <span>© 2026 Solid Hale Sp. z o.o.</span>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px"><a class="flink" href="#" style="font-size: 13px">Polityka prywatności</a><a class="flink" href="#" style="font-size: 13px">Polityka cookies</a><a class="flink" href="#" style="font-size: 13px">Facebook</a><a class="flink" href="#" style="font-size: 13px">Instagram</a></div>
+  </div>
+</footer>
+
+</div>
+
+<script>(function(){var h=document.querySelector(".stick");if(!h)return;function u(){h.classList.toggle("on",window.scrollY>60)}window.addEventListener("scroll",u,{passive:true});u();document.querySelectorAll(".mnav a").forEach(function(a){a.addEventListener("click",function(){var c=document.getElementById("mnav");if(c)c.checked=false})})})();</script>
+<script src="js/front.js" defer></script>
+</body>
+</html>
