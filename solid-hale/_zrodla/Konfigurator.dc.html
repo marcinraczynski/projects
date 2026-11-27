@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Konfigurator - Solid Hale</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#1F2124}a:hover{color:#000}
+*{box-sizing:border-box}
+.sh h1,.sh h2,.sh h3{text-wrap:balance}
+.sh p{text-wrap:pretty}
+.navl{color:#E9EAEC;text-decoration:none;font-weight:500;font-size:15px;padding:8px 2px;border-bottom:2px solid transparent}
+.navl:hover{color:#FFDA00;border-bottom-color:#FFDA00}
+.btn-y{background:#FFDA00;color:#1A1C1E;text-decoration:none;transition:background .2s,transform .2s}
+.btn-y:hover{background:#FFE640;color:#1A1C1E;transform:translateY(-2px)}
+.btn-d{background:#1F2124;color:#FFFFFF;text-decoration:none;transition:background .2s}
+.btn-d:hover{background:#000;color:#FFDA00}
+.btn-o{color:#FFFFFF;text-decoration:none;border:1.5px solid rgba(255,255,255,.35);transition:border-color .2s,color .2s}
+.btn-o:hover{border-color:#FFDA00;color:#FFDA00}
+.lnk{color:#1F2124;text-decoration:none;border-bottom:2px solid #FFDA00;padding-bottom:3px;font-weight:600}
+.lnk:hover{color:#000;border-bottom-color:#1F2124}
+.card{transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,22,25,.14)}
+.card img{transition:transform .8s}
+.card:hover img{transform:scale(1.05)}
+.card .arr{transition:background .25s,transform .25s}
+.card:hover .arr{background:#FFDA00;transform:translateX(3px)}
+.proj img{transition:transform .9s}
+.proj:hover img{transform:scale(1.04)}
+.cut{clip-path:polygon(0 0,calc(100% - 44px) 0,100% 44px,100% 100%,0 100%)}
+.cut-s{clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.bp{background-color:#17191B;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px}
+.sh-svg{width:100%;height:100%;display:block;overflow:visible}
+.sh-svg line,.sh-svg polygon{vector-effect:non-scaling-stroke}
+.gridl line{stroke:rgba(255,255,255,.06);stroke-width:1}
+.fr{stroke:#FFDA00;stroke-width:2.2;stroke-dasharray:1;stroke-dashoffset:1;stroke-linecap:round}
+.sec{stroke:rgba(255,255,255,.55);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1}
+.dim{stroke:rgba(255,255,255,.45);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1}
+.edge{stroke:#FFDA00;stroke-width:2.2;stroke-dasharray:1;stroke-dashoffset:1;fill:none}
+.slab{stroke:rgba(255,255,255,.7);stroke-width:1.2;fill:rgba(255,255,255,.04);stroke-dasharray:1;stroke-dashoffset:1}
+.pan{opacity:0}
+.seam line{stroke:rgba(0,0,0,.28);stroke-width:1}
+.dimt{fill:rgba(255,255,255,.65);font:500 15px 'JetBrains Mono',monospace;letter-spacing:.12em}
+.wire-in{animation:wi 14s linear infinite}
+@keyframes wi{0%{opacity:0}1%,74%{opacity:1}77%,100%{opacity:0}}
+.wire-ed{animation:we 14s linear infinite}
+@keyframes we{0%{opacity:0}1%,84%{opacity:1}90%,100%{opacity:0}}
+.scan{animation:scan 14s cubic-bezier(.7,0,.3,1) infinite}
+@keyframes scan{0%,66%{left:0;opacity:0}67%{left:0;opacity:1}76%{left:100%;opacity:1}77%,100%{left:100%;opacity:0}}
+.cap{animation:cap 14s ease infinite}
+@keyframes cap{0%,74%{opacity:0;transform:translateY(8px)}78%,97%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+.prog{animation:prog 14s linear infinite}
+@keyframes prog{0%{width:0}96%{width:100%}100%{width:100%}}
+.st1{animation:st1 14s steps(1) infinite}.st2{animation:st2 14s steps(1) infinite}.st3{animation:st3 14s steps(1) infinite}.st4{animation:st4 14s steps(1) infinite}
+@keyframes st1{0%{color:#FFDA00}14%,100%{color:rgba(255,255,255,.42)}}
+@keyframes st2{0%{color:rgba(255,255,255,.42)}14%{color:#FFDA00}52%,100%{color:rgba(255,255,255,.42)}}
+@keyframes st3{0%{color:rgba(255,255,255,.42)}52%{color:#FFDA00}68%,100%{color:rgba(255,255,255,.42)}}
+@keyframes st4{0%{color:rgba(255,255,255,.42)}68%{color:#FFDA00}96%,100%{color:rgba(255,255,255,.42)}}
+.sl .cut{visibility:visible}
+.phk{animation-duration:42s;animation-timing-function:linear;animation-iteration-count:infinite;clip-path:inset(0 100% 0 0)}
+.ph1{animation-name:ph1}.ph2{animation-name:ph2}.ph3{animation-name:ph3}
+@keyframes ph1{0%{clip-path:inset(0 100% 0 0);opacity:1}22.333%{clip-path:inset(0 100% 0 0);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}25.333%,34.5%{clip-path:inset(0 0 0 0);opacity:1}37.5%{clip-path:inset(0 0 0 0);opacity:0}37.51%,99.99%{clip-path:inset(0 100% 0 0);opacity:0}100%{clip-path:inset(0 100% 0 0);opacity:1}}
+@keyframes ph2{0%{clip-path:inset(0 100% 0 0);opacity:1}55.667%{clip-path:inset(0 100% 0 0);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}58.667%,67.833%{clip-path:inset(0 0 0 0);opacity:1}70.833%{clip-path:inset(0 0 0 0);opacity:0}70.84%,99.99%{clip-path:inset(0 100% 0 0);opacity:0}100%{clip-path:inset(0 100% 0 0);opacity:1}}
+@keyframes ph3{0%,1.167%{clip-path:inset(0 0 0 0);opacity:1}4.167%{clip-path:inset(0 0 0 0);opacity:0}4.18%{clip-path:inset(0 100% 0 0);opacity:0}5%{clip-path:inset(0 100% 0 0);opacity:1}89%{clip-path:inset(0 100% 0 0);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}92%,100%{clip-path:inset(0 0 0 0);opacity:1}}
+.sl1{animation:sl1 42s steps(1) infinite}.sl2{animation:sl2 42s steps(1) infinite}.sl3{animation:sl3 42s steps(1) infinite}
+@keyframes sl1{0%{visibility:visible}33.333%,100%{visibility:hidden}}
+@keyframes sl2{0%{visibility:hidden}33.333%{visibility:visible}66.666%,100%{visibility:hidden}}
+@keyframes sl3{0%{visibility:hidden}66.666%,100%{visibility:visible}}
+.dt{background:rgba(255,255,255,.3)}
+.dt1{animation:dt1 42s steps(1) infinite}.dt2{animation:dt2 42s steps(1) infinite}.dt3{animation:dt3 42s steps(1) infinite}
+@keyframes dt1{0%{background:#FFDA00}33.333%,100%{background:rgba(255,255,255,.3)}}
+@keyframes dt2{0%{background:rgba(255,255,255,.3)}33.333%{background:#FFDA00}66.666%,100%{background:rgba(255,255,255,.3)}}
+@keyframes dt3{0%{background:rgba(255,255,255,.3)}66.666%,100%{background:#FFDA00}}
+
+@media (prefers-reduced-motion: reduce){.sl2,.sl3,.dt{display:none}.sh-anim *{animation:none!important}.ph1{clip-path:none!important;opacity:1!important}.ph2,.ph3{display:none}.cap{opacity:1!important;transform:none!important}}
+.fld{width:100%;height:48px;border:1px solid #CFD1D4;background:#FFFFFF;padding:0 14px;font:500 15px 'Barlow',sans-serif;color:#1F2124;border-radius:0}
+.fld:focus{outline:2px solid #FFDA00;outline-offset:0;border-color:#1F2124}
+.lbl{display:block;font:600 12px 'Barlow',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#4A4D52;margin-bottom:6px}
+.stick{background:rgba(23,25,27,0);border-bottom:1px solid rgba(255,255,255,0);transition:background .3s,border-color .3s}
+.stick.on{background:rgba(23,25,27,.94);border-bottom-color:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+@supports (animation-timeline: scroll()){.stick{animation:stk linear both;animation-timeline:scroll();animation-range:0 140px}}
+@keyframes stk{0%,50%{background:rgba(23,25,27,0);border-bottom-color:rgba(255,255,255,0);backdrop-filter:blur(0)}100%{background:rgba(23,25,27,.94);border-bottom-color:rgba(255,255,255,.08);backdrop-filter:blur(10px)}}
+.soc{color:#D9DBDE}.soc:hover{color:#FFDA00}
+.tabl{color:#B9BCC1;text-decoration:none;font:600 14px 'Barlow',sans-serif;padding:18px 16px;border-bottom:2px solid transparent}
+.tabl:hover{color:#FFFFFF;border-bottom-color:#FFDA00}
+.chk{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+.chk li{position:relative;padding-left:28px;font-size:16px;line-height:1.5;color:#1F2124}
+.chk li::before{content:"";position:absolute;left:0;top:5px;width:14px;height:8px;border-left:2.5px solid #1F2124;border-bottom:2.5px solid #1F2124;transform:rotate(-45deg)}
+.chk.sm li,.out li{font-size:15px}
+.chk.dk li{color:#FFFFFF}.chk.dk li::before{border-color:#FFDA00}
+.out{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.out li{position:relative;padding-left:28px;line-height:1.5;color:#55595E}
+.out li::before{content:"";position:absolute;left:2px;top:10px;width:12px;height:2px;background:#9A9DA2}
+.out.dk li{color:#B9BCC1}
+.tag{border:1px solid #CFD1D4;padding:9px 14px;font:600 14px 'Barlow',sans-serif;color:#1F2124}
+.vrow{display:flex;gap:16px;align-items:center;justify-content:space-between;text-decoration:none;color:#1F2124;background:#F3F3F1;padding:16px 18px;border-left:3px solid #FFDA00;transition:background .2s}
+.vrow:hover{background:#ECECE9;color:#1F2124}
+.vrow strong{display:block;font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.vrow span span{display:block;font-size:14px;color:#55595E;margin-top:2px}
+.static .fr,.static .sec,.static .dim,.static .edge,.static .slab{stroke-dashoffset:0}
+.static .pan,.static .seam{display:none}
+.static .wire-in,.static .wire-ed{animation:none}
+.navl.cur{color:#FFDA00;border-bottom-color:#FFDA00}
+.jrow{display:flex;gap:16px;align-items:center;justify-content:space-between;text-decoration:none;color:#1A1C1E;background:#FFFFFF;padding:20px 22px;transition:transform .2s}
+.jrow:hover{transform:translateX(4px);color:#1A1C1E}
+.jrow strong{display:block;font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.jrow span span{display:block;font-size:14px;color:#55595E;margin-top:2px}
+.pre{cursor:pointer;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:#FFFFFF;padding:16px 18px;display:flex;flex-direction:column;gap:4px;font-family:'Barlow',sans-serif;transition:border-color .2s,background .2s}
+.pre:hover{border-color:#FFDA00;background:rgba(255,218,0,.06)}
+.pre strong{font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.pre span{font-size:14px;color:#B9BCC1}
+.pre em{font-style:normal;font:700 16px 'Barlow',sans-serif;color:#FFDA00;margin-top:6px}
+.sn{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#6B6F75;font:600 13px 'Barlow',sans-serif;padding:8px 14px;border-radius:999px}
+.sn.done{color:#1F2124;border-color:#1F2124}
+.sn.cur{background:#1F2124;border-color:#1F2124;color:#FFDA00}
+.kh{font:800 clamp(30px,3vw,40px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:8px 0 0}
+.kl{font-size:16px;line-height:1.55;color:#55595E;margin:8px 0 0}
+.kts{display:grid;gap:12px;margin-top:22px}
+.kts.three{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.kts.two{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.kq .kts{margin-top:0}
+.kt{position:relative;cursor:pointer;text-align:left;background:#FFFFFF;border:1px solid #CFD1D4;padding:18px 16px 14px;display:flex;flex-direction:column;gap:4px;font-family:'Barlow',sans-serif;color:#1F2124;transition:border-color .2s,box-shadow .2s}
+.kt:hover{border-color:#1F2124;box-shadow:inset 0 -4px 0 #FFDA00}
+.kt.on{border:2px solid #1F2124;padding:17px 15px 13px}
+.kt.on::after{content:"";position:absolute;right:-2px;top:-2px;width:28px;height:28px;background:#FFDA00 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2124' stroke-width='3.2'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/14px no-repeat;border:2px solid #1F2124}
+.kt b{font:800 21px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase;padding-right:24px}
+.kt span{font-size:14px;line-height:1.45;color:#55595E;margin-bottom:8px}
+.kt i{font-style:normal;font-size:13px;line-height:1.4;color:#1F2124;font-weight:600;margin-top:auto;padding-top:10px;border-top:1px solid #E4E5E7;display:flex;gap:7px;align-items:flex-start}
+.kt i svg{flex:none;margin-top:1px}
+.kq{margin-top:24px}
+.kqt{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:15px;margin-bottom:10px}
+.kqt small{font-weight:500;color:#6B6F75;font-size:14px}
+.ch{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#1F2124;padding:9px 14px;font:600 14px 'Barlow',sans-serif}
+.ch:hover{border-color:#1F2124}
+.ch.on{background:#1F2124;border-color:#1F2124;color:#FFDA00}
+.kdim{display:grid;grid-template-columns:150px minmax(0,1fr) 96px;gap:16px;align-items:center}
+.kdim label{font-size:15px;color:#4A4D52}
+.sh input[type=range]{accent-color:#1F2124;width:100%}
+.knum{display:flex;align-items:center;gap:4px;border:1px solid #CFD1D4;padding:8px 10px;background:#FFFFFF}
+.knum:focus-within{outline:2px solid #FFDA00;border-color:#1F2124}
+.knum input{width:100%;border:0;font:600 15px 'Barlow',sans-serif;text-align:right;min-width:0;background:transparent;color:#1F2124}
+.knum input:focus{outline:none}
+.knum span{color:#6B6F75;font-size:14px}
+.knote{margin:14px 0 0;font-size:14px;line-height:1.5;color:#4A4D52;border-left:3px solid #FFDA00;padding:4px 0 4px 12px}
+.knote.grey{border-left-color:#CFD1D4}
+.krow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid #E4E5E7}
+.krow:first-child{border-top:0;padding-top:0}
+.krow b{font-weight:700;font-size:15px}
+.krow span{display:block;font-size:14px;color:#6B6F75}
+.kstep{display:flex;align-items:center;border:1px solid #CFD1D4;flex:none}
+.kstep button{cursor:pointer;border:0;background:#FFFFFF;width:44px;height:44px;font:600 20px 'Barlow',sans-serif;color:#1F2124}
+.kstep button:hover{background:#FFDA00}
+.kstep output{min-width:36px;text-align:center;font-weight:700}
+.ksw{position:relative;width:52px;height:30px;flex:none}
+.ksw input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0;z-index:1}
+.ksw i{position:absolute;inset:0;border-radius:999px;background:#E4E5E7;transition:background .2s}
+.ksw i::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.ksw input:checked+i{background:#1F2124}
+.ksw input:checked+i::after{transform:translateX(22px);background:#FFDA00}
+.ksw input:focus-visible+i{outline:2px solid #FFDA00;outline-offset:2px}
+.krad{display:flex;gap:10px;align-items:center;border:1px solid #CFD1D4;padding:12px 14px;cursor:pointer;font-size:15px}
+.krad:has(input:checked){border-color:#1F2124;box-shadow:inset 3px 0 0 #FFDA00}
+.krad input{accent-color:#1F2124;margin:0}
+.kbtn{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#1F2124;padding:16px 26px;font:700 15px 'Barlow',sans-serif}
+.kbtn[disabled]{opacity:.4;cursor:not-allowed}
+.kbtn.btn-d{background:#1F2124;border-color:#1F2124;color:#FFFFFF}.kbtn.btn-d:hover{background:#000;color:#FFDA00}
+.kbtn.btn-y{background:#FFDA00;border-color:#FFDA00;color:#1A1C1E}.kbtn.btn-y:hover{background:#FFE640}
+@media (max-width:640px){.kdim{grid-template-columns:minmax(0,1fr) 96px}.kdim input[type=range]{grid-column:1/-1;grid-row:2}}
+.chip{cursor:pointer;border:1px solid #CFD1D4;background:#FFFFFF;color:#1F2124;padding:10px 14px;font:600 14px 'Barlow',sans-serif;display:inline-flex;gap:8px;align-items:center}
+.chip span{font-weight:500;color:#8A8D92}
+.chip:hover{border-color:#1F2124}
+.chip.on{background:#1F2124;border-color:#1F2124;color:#FFFFFF}.chip.on span{color:#FFDA00}
+.spec.dk li{border-bottom-color:rgba(255,255,255,.14)}.spec.dk li span{color:#B9BCC1}
+.feat img{transition:transform .9s}.feat:hover img{transform:scale(1.03)}
+.tabl.cur{color:#FFDA00;border-bottom-color:#FFDA00}
+.dcard{background:#F3F3F1;padding:28px 26px}
+.dcard .ic{width:52px;height:52px;background:#FFDA00;display:flex;align-items:center;justify-content:center}
+.dcard h3{font:800 24px 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:20px 0 0}
+.dcard p{font-size:15px;line-height:1.6;color:#55595E;margin:8px 0 0}
+.spec{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column}
+.spec li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #E4E5E7;font-size:15px}
+.spec li span{color:#55595E}.spec li b{font-weight:600;text-align:right}
+.faq{background:#FFFFFF;padding:0 24px}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 0;font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#F3F3F1;font:600 22px 'Barlow',sans-serif}
+.faq[open] summary::after{content:"−";background:#FFDA00}
+.faq p{margin:0;padding:0 0 22px;font-size:16px;line-height:1.65;color:#4A4D52;max-width:720px}
+.flink{color:#B9BCC1;text-decoration:none;font-size:15px}
+.flink:hover{color:#FFDA00}
+.ktile{transition:border-color .2s,box-shadow .2s}
+.ktile:hover{border-color:#1F2124!important;box-shadow:inset 0 -4px 0 #FFDA00}
+.kvar{color:#1A1C1E;transition:background .2s,color .2s}
+.kvar:hover{background:#1A1C1E;color:#FFDA00}
+.lnk-w{color:#FFFFFF;text-decoration:none;border-bottom:2px solid #FFDA00;padding-bottom:3px;font-weight:600}
+</style>
+</helmet>
+<div class="sh" style="font-family: 'Barlow', sans-serif; color: #1F2124; background: #FFFFFF; width: 100%; overflow-x: clip">
+
+<!-- HERO -->
+<div style="border-bottom: 1px solid rgba(255,255,255,.08); background: #141517">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 10px 32px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between; font-size: 13px; color: #A9ACB1">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center">
+        <a href="tel:+48507444570" style="color: #D9DBDE; text-decoration: none; display: flex; gap: 8px; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFDA00" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>+48 507 444 570</a>
+        <a href="mailto:biuro@solidhale.pl" style="color: #D9DBDE; text-decoration: none; display: flex; gap: 8px; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFDA00" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"></rect><path d="m22 6-10 7L2 6"></path></svg>biuro@solidhale.pl</a>
+        <span>Pn.-Pt. 8:00-16:00</span>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center">
+        <a class="soc" href="#" aria-label="Facebook" style="display: flex; width: 32px; height: 32px; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a>
+        <a class="soc" href="#" aria-label="Instagram" style="display: flex; width: 32px; height: 32px; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a>
+        <a href="#" style="color: #D9DBDE; text-decoration: none; margin-left: 12px">Blog</a>
+      </div>
+    </div>
+  </div>
+<div class="stick" style="position: sticky; top: 0; z-index: 50; height: 69px; margin-bottom: -69px; color: #FFFFFF">
+  <header style="max-width: 1320px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center; justify-content: space-between">
+    <a href="Main.dc.html" aria-label="Solid Hale, strona główna" style="display: block"><img src="/_blob/adca11fea2e2240e0576e268221987a5" alt="Solid Hale, hale stalowe" style="height: 40px; width: auto; display: block"></a>
+    <nav aria-label="Menu główne" style="display: flex; flex-wrap: wrap; gap: 6px 30px; align-items: center">
+      <a class="navl" href="Oferta.dc.html">Oferta</a>
+      <a class="navl" href="HaleStalowe.dc.html">Hale stalowe</a>
+      <a class="navl" href="Realizacje.dc.html">Realizacje</a>
+      <a class="navl cur" href="#" aria-current="page">Konfigurator</a>
+      <a class="navl" href="ONas.dc.html">O nas</a>
+      <a class="navl" href="Kontakt.dc.html">Kontakt</a>
+    </nav>
+    <a class="btn-y cut-s" href="#" style="padding: 14px 26px; font: 700 15px 'Barlow', sans-serif; letter-spacing: .02em">Wyceń halę</a>
+  </header>
+</div>
+<!-- HERO PODSTRONY -->
+<section class="bp" style="color: #FFFFFF; position: relative; overflow: hidden; padding-top: 69px">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 44px 32px 56px">
+    <nav aria-label="Ścieżka" style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: #A9ACB1"><a href="Main.dc.html" style="color: #D9DBDE; text-decoration: none">Strona główna</a><span aria-hidden="true">/</span><span style="color: #FFDA00">Konfigurator</span></nav>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px 60px; align-items: flex-end; justify-content: space-between; margin-top: 20px">
+      <h1 style="flex: 1 1 520px; font: 800 clamp(44px, 4.6vw, 68px)/0.96 'Barlow Condensed', sans-serif; text-transform: uppercase; margin: 0">Skonfiguruj halę i&nbsp;<span style="color: #FFDA00">sprawdź koszt</span></h1>
+      <p style="flex: 1 1 340px; max-width: 440px; font-size: 17px; line-height: 1.6; color: #C9CCD0; margin: 0">Kilka kliknięć, bez podawania danych. Szacunek widzisz od&nbsp;razu, a&nbsp;szczegółowe zestawienie wyślemy na&nbsp;e-mail.</p>
+    </div>
+    <div style="margin-top: 40px">
+      <div style="font: 600 12px 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #FFDA00">Gotowe warianty: kliknij, żeby zacząć od&nbsp;nich</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 14px">
+        <sc-for list="{{presets}}" as="p" hint-placeholder-count="3">
+          <button type="button" class="pre" onClick="{{p.pick}}"><strong>{{p.n}}</strong><span>{{p.d}}</span><em>{{p.price}}</em></button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONFIGURATOR -->
+<section style="background: #F3F3F1; padding: 48px 0 110px">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 0 32px">
+    <nav aria-label="Kroki konfiguratora" style="display: flex; flex-wrap: wrap; gap: 6px">
+      <sc-for list="{{steps}}" as="st" hint-placeholder-count="7"><button type="button" class="{{st.cls}}" aria-current="{{st.cur}}" onClick="{{st.pick}}">{{st.label}}</button></sc-for>
+    </nav>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; margin-top: 18px">
+
+      <div class="cut" style="flex: 1.5 1 560px; min-width: 0; background: #FFFFFF; padding: 36px 36px 30px">
+        <div style="font: 600 13px 'Barlow', sans-serif; color: #55595E">{{stepNo}}</div>
+
+        <sc-if value="{{isZakres}}" hint-placeholder-val="{{ true }}">
+          <h2 class="kh">Czego potrzebujesz?</h2><p class="kl">Od tego zależy, jak dokładnie policzymy cenę.</p>
+          <div class="kts three">
+            <sc-for list="{{paths}}" as="t" hint-placeholder-count="3"><button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><b>{{t.b}}</b><span>{{t.d}}</span><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>{{t.i}}</i></button></sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isPrzezn}}" hint-placeholder-val="{{ false }}">
+          <h2 class="kh">Do czego będzie hala?</h2><p class="kl">Ustawimy na&nbsp;tej podstawie typowe parametry. Każdy zmienisz w&nbsp;kolejnych krokach.</p>
+          <div class="kts three">
+            <sc-for list="{{uses}}" as="t" hint-placeholder-count="6"><button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><b>{{t.b}}</b><span>{{t.d}}</span></button></sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isWym}}" hint-placeholder-val="{{ false }}">
+          <h2 class="kh">Wymiary hali</h2><p class="kl">Wymiary zewnętrzne. Wysokość liczymy do&nbsp;okapu, czyli do&nbsp;krawędzi dachu na&nbsp;ścianie bocznej.</p>
+          <div class="kq"><div class="kqt">Szybki wybór <small>szerokość&nbsp;×&nbsp;długość</small></div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{sizes}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+          </div>
+          <div class="kq" style="display: flex; flex-direction: column; gap: 14px">
+            <div class="kdim"><label for="r-w">Szerokość</label><input type="range" id="r-w" min="8" max="40" step="1" value="{{w}}" onChange="{{onW}}"><div class="knum"><input type="number" min="8" max="40" step="1" value="{{w}}" onChange="{{onW}}" aria-label="Szerokość w metrach"><span>m</span></div></div>
+            <div class="kdim"><label for="r-l">Długość</label><input type="range" id="r-l" min="10" max="120" step="1" value="{{l}}" onChange="{{onL}}"><div class="knum"><input type="number" min="10" max="120" step="1" value="{{l}}" onChange="{{onL}}" aria-label="Długość w metrach"><span>m</span></div></div>
+            <div class="kdim"><label for="r-h">Wysokość w&nbsp;okapie</label><input type="range" id="r-h" min="4" max="12" step="0.5" value="{{h}}" onChange="{{onH}}"><div class="knum"><input type="number" min="4" max="12" step="0.5" value="{{h}}" onChange="{{onH}}" aria-label="Wysokość w okapie w metrach"><span>m</span></div></div>
+            <div style="display: flex; gap: 10px; align-items: baseline; color: #55595E">Powierzchnia <strong style="font: 800 32px 'Barlow Condensed', sans-serif; color: #1F2124">{{area}}</strong></div>
+            <sc-if value="{{small}}" hint-placeholder-val="{{ false }}"><p class="knote">Hale poniżej 200&nbsp;m² wyceniamy indywidualnie. Dokończ konfigurację, a&nbsp;doradca przygotuje ofertę.</p></sc-if>
+          </div>
+          <div class="kq"><div class="kqt">Dach</div>
+            <div class="kts two"><sc-for list="{{roofs}}" as="t" hint-placeholder-count="2"><button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><b>{{t.b}}</b><span>{{t.d}}</span></button></sc-for></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isObud}}" hint-placeholder-val="{{ false }}">
+          <h2 class="kh">Hala ciepła czy zimna?</h2><p class="kl">Największy czynnik ceny po&nbsp;metrażu.</p>
+          <div class="kts two"><sc-for list="{{covers}}" as="t" hint-placeholder-count="2"><button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><b>{{t.b}}</b><span>{{t.d}}</span><i>{{t.i}}</i></button></sc-for></div>
+          <p class="knote grey">Rynny i&nbsp;obróbki blacharskie są w&nbsp;cenie każdej hali.</p>
+        </sc-if>
+
+        <sc-if value="{{isWypos}}" hint-placeholder-val="{{ false }}">
+          <h2 class="kh">Wyposażenie</h2><p class="kl">Ustawiliśmy typowy zestaw dla tego przeznaczenia. Rozmieszczenie na&nbsp;ścianach ustalimy w&nbsp;projekcie.</p>
+          <div class="kq">
+            <div class="krow"><div><b>{{cGates.label}}</b><span>{{cGates.sub}}</span></div><div class="kstep"><button type="button" onClick="{{cGates.dec}}" aria-label="{{cGates.decLabel}}">−</button><output>{{cGates.val}}</output><button type="button" onClick="{{cGates.inc}}" aria-label="{{cGates.incLabel}}">+</button></div></div>
+            <div class="krow"><div><b>Rozmiar bram</b><span>szerokość&nbsp;×&nbsp;wysokość</span></div><div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{gateSizes}}" as="c" hint-placeholder-count="3"><button type="button" class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div></div>
+            <div class="krow"><div><b>{{cDoors.label}}</b><span>{{cDoors.sub}}</span></div><div class="kstep"><button type="button" onClick="{{cDoors.dec}}" aria-label="{{cDoors.decLabel}}">−</button><output>{{cDoors.val}}</output><button type="button" onClick="{{cDoors.inc}}" aria-label="{{cDoors.incLabel}}">+</button></div></div>
+            <div class="krow"><div><b>{{cWin.label}}</b><span>{{cWin.sub}}</span></div><div class="kstep"><button type="button" onClick="{{cWin.dec}}" aria-label="{{cWin.decLabel}}">−</button><output>{{cWin.val}}</output><button type="button" onClick="{{cWin.inc}}" aria-label="{{cWin.incLabel}}">+</button></div></div>
+            <div class="krow"><div><b>Świetliki dachowe</b><span>naturalne światło w&nbsp;środku hali</span></div><label class="ksw"><input type="checkbox" checked="{{sky}}" onChange="{{onSky}}" aria-label="Świetliki dachowe"><i></i></label></div>
+          </div>
+          <div class="kq"><div class="kqt">Posadzka</div>
+            <div class="kts two"><sc-for list="{{floors}}" as="t" hint-placeholder-count="2"><button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><b>{{t.b}}</b><span>{{t.d}}</span><i>{{t.i}}</i></button></sc-for></div>
+          </div>
+          <div class="kq"><div class="kqt"><label for="k-off">Zaplecze socjalne lub biuro</label> <small>{{officeVal}}</small></div>
+            <input type="range" id="k-off" min="0" max="120" step="5" value="{{office}}" onChange="{{onOffice}}" style="width: 100%">
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isLok}}" hint-placeholder-val="{{ false }}">
+          <h2 class="kh">Gdzie i&nbsp;kiedy?</h2><p class="kl">Kod pocztowy wystarczy, żeby uwzględnić strefę śniegową i&nbsp;dojazd ekipy.</p>
+          <div class="kq" style="max-width: 280px"><label class="lbl" for="k-zip">Kod pocztowy działki</label><input class="fld" id="k-zip" inputmode="numeric" placeholder="np. 05-500" autocomplete="postal-code" value="{{zip}}" onChange="{{onZip}}"></div>
+          <div class="kq"><div class="kqt">Na jakim etapie jesteś?</div>
+            <div role="radiogroup" style="display: flex; flex-direction: column; gap: 8px"><sc-for list="{{stages}}" as="o" hint-placeholder-count="4"><label class="krad"><input type="radio" name="k-stage" checked="{{o.on}}" onChange="{{o.pick}}">{{o.t}}</label></sc-for></div>
+          </div>
+          <div class="kq"><div class="kqt">Kiedy chcesz zacząć budowę?</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{starts}}" as="c" hint-placeholder-count="3"><button type="button" class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isWynik}}" hint-placeholder-val="{{ false }}">
+          <h2 class="kh">Twoja hala</h2>
+          <div style="font: 800 clamp(34px, 3.6vw, 48px)/1.05 'Barlow Condensed', sans-serif; margin-top: 10px">{{bigAmount}}</div>
+          <p class="kl">{{bigLead}}</p>
+          <sc-if value="{{noZip}}" hint-placeholder-val="{{ true }}"><p class="knote">Bez kodu pocztowego nie uwzględniamy strefy śniegowej i&nbsp;dojazdu. Kwota może wzrosnąć o&nbsp;kilka procent.</p></sc-if>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 22px">
+            <div style="background: #F3F3F1; padding: 20px 20px 18px"><div class="lbl">W&nbsp;cenie</div><ul class="chk sm" style="margin-top: 10px"><sc-for list="{{inList}}" as="x" hint-placeholder-count="5"><li>{{x.t}}</li></sc-for></ul></div>
+            <div style="border: 1px solid #DADCDF; padding: 20px 20px 18px"><div class="lbl">Poza ceną</div><ul class="out" style="margin-top: 10px"><sc-for list="{{outList}}" as="x" hint-placeholder-count="4"><li>{{x.t}}</li></sc-for></ul></div>
+          </div>
+          <h3 style="font: 800 26px 'Barlow Condensed', sans-serif; text-transform: uppercase; margin: 32px 0 0">{{sendTitle}}</h3>
+          <p class="kl">{{sendLead}}</p>
+          <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top: 18px; border-left: 4px solid #FFDA00; background: #FFFBE6; padding: 18px 20px"><b style="font: 800 22px 'Barlow Condensed', sans-serif; text-transform: uppercase">Wysłano</b><p style="margin: 6px 0 0; color: #4A4D52">Zestawienie trafi na&nbsp;podany adres. Doradca skontaktuje się, żeby potwierdzić szczegóły.</p></div>
+          </sc-if>
+          <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 18px">
+              <div><label class="lbl" for="k-name">Imię i&nbsp;nazwisko</label><input class="fld" id="k-name" autocomplete="name" value="{{fname}}" onChange="{{onName}}"></div>
+              <div><label class="lbl" for="k-co">Firma (opcjonalnie)</label><input class="fld" id="k-co" autocomplete="organization" value="{{fco}}" onChange="{{onCo}}"></div>
+              <div><label class="lbl" for="k-tel">Telefon</label><input class="fld" id="k-tel" type="tel" autocomplete="tel" value="{{fphone}}" onChange="{{onPhone}}"></div>
+              <div><label class="lbl" for="k-mail">E-mail</label><input class="fld" id="k-mail" type="email" autocomplete="email" value="{{fmail}}" onChange="{{onMail}}"></div>
+            </div>
+            <div style="margin-top: 14px"><label class="lbl" for="k-note">Uwagi (opcjonalnie)</label><textarea class="fld" id="k-note" rows="3" placeholder="np. potrzebna suwnica, hala przy granicy działki" style="height: 96px; padding: 12px 14px; resize: vertical" value="{{fnote}}" onChange="{{onNote}}"></textarea></div>
+            <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 13px; line-height: 1.5; color: #55595E"><input type="checkbox" style="margin-top: 3px; accent-color: #1F2124" checked="{{rodo}}" onChange="{{onRodo}}">Zgadzam się na&nbsp;przetwarzanie danych w&nbsp;celu przygotowania oferty. Szczegóły w&nbsp;polityce prywatności.</label>
+            <sc-if value="{{hasErr}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 12px 0 0; color: #A23B1E; font-weight: 600; font-size: 14px">{{err}}</p></sc-if>
+            <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 24px">
+              <button type="button" class="kbtn" onClick="{{back}}">Wstecz</button>
+              <button type="button" class="btn-y kbtn" style="border: 0" onClick="{{onSubmit}}">{{sendBtn}}</button>
+            </div>
+          </sc-if>
+        </sc-if>
+
+        <sc-if value="{{notWynik}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 24px; border-top: 1px solid #E4E5E7">
+            <button type="button" class="kbtn" disabled="{{noBack}}" onClick="{{back}}">Wstecz</button>
+            <button type="button" class="btn-d kbtn" style="border: 0; display: inline-flex; gap: 10px; align-items: center" onClick="{{next}}">{{nextLabel}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          </div>
+        </sc-if>
+      </div>
+
+      <aside style="flex: 1 1 420px; min-width: 0; max-width: 520px; position: sticky; top: 90px; display: flex; flex-direction: column; gap: 14px">
+        <div class="bp cut" style="padding: 18px 18px 14px; color: #FFFFFF">
+          <svg viewBox="0 0 560 310" role="img" aria-label="Podgląd hali: szczyt i ściana boczna" style="width: 100%; height: auto; display: block">
+            <sc-for list="{{polys}}" as="p" hint-placeholder-count="0"><polygon points="{{p.pts}}" fill="{{p.fill}}" fill-opacity="{{p.fo}}" stroke="{{p.stroke}}" stroke-width="{{p.sw}}" stroke-linejoin="round"></polygon></sc-for>
+            <sc-for list="{{lines}}" as="q" hint-placeholder-count="0"><line x1="{{q.x1}}" y1="{{q.y1}}" x2="{{q.x2}}" y2="{{q.y2}}" stroke="{{q.stroke}}" stroke-width="{{q.sw}}" stroke-opacity="{{q.op}}" stroke-linecap="round"></line></sc-for>
+            <sc-for list="{{circles}}" as="c" hint-placeholder-count="0"><circle cx="{{c.cx}}" cy="{{c.cy}}" r="{{c.r}}" fill="none" stroke="#B9BCC1" stroke-width="{{c.sw}}"></circle></sc-for>
+            <sc-for list="{{texts}}" as="t" hint-placeholder-count="0"><text x="{{t.x}}" y="{{t.y}}" fill="{{t.fill}}" font-family="Barlow, sans-serif" font-size="{{t.size}}" font-weight="{{t.weight}}" letter-spacing="{{t.ls}}" text-anchor="{{t.anchor}}">{{t.t}}</text></sc-for>
+          </svg>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 6px; font-size: 14px; color: #B9BCC1"><span>{{capUse}}</span><b style="color: #FFFFFF; font-weight: 600">{{capArea}}</b></div>
+        </div>
+        <div style="background: #FFFFFF; border-left: 6px solid #FFDA00; padding: 22px 24px">
+          <sc-if value="{{showEst}}" hint-placeholder-val="{{ false }}">
+            <div class="lbl" style="color: #6B5B00">{{estLabel}}</div>
+            <div style="font: 800 34px/1.1 'Barlow Condensed', sans-serif; margin-top: 6px">{{amount}}</div>
+            <div style="font-size: 14px; color: #55595E; margin-top: 4px">{{per}}</div>
+            <sc-if value="{{small}}" hint-placeholder-val="{{ false }}"><p class="knote" style="margin-top: 12px">Hale poniżej 200&nbsp;m² wyceniamy indywidualnie.</p></sc-if>
+            <dl style="display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid #E4E5E7; font-size: 14px">
+              <sc-for list="{{spec}}" as="r" hint-placeholder-count="5"><dt style="color: #6B6F75">{{r.k}}</dt><dd style="margin: 0; text-align: right; font-weight: 600">{{r.v}}</dd></sc-for>
+            </dl>
+          </sc-if>
+          <sc-if value="{{notShowEst}}" hint-placeholder-val="{{ true }}">
+            <div class="lbl" style="color: #6B5B00">Szacunek</div>
+            <p style="margin: 6px 0 0; color: #55595E">Pojawi się po&nbsp;podaniu wymiarów.</p>
+          </sc-if>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- STOPKA -->
+<footer style="background: #121315; color: #B9BCC1">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px">
+    <div>
+      <img src="/_blob/adca11fea2e2240e0576e268221987a5" alt="Solid Hale" style="height: 42px; width: auto; display: block">
+      <p style="font-size: 15px; line-height: 1.6; margin: 20px 0 0; max-width: 280px">Hale stalowe na zamówienie od producenta. Projekt, prefabrykacja i montaż.</p>
+    </div>
+    <nav aria-label="Oferta" style="display: flex; flex-direction: column; gap: 12px"><div style="font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px">Oferta</div><a class="flink" href="#">Budowa hal</a><a class="flink" href="#">Projektowanie</a><a class="flink" href="#">Gotowe rozwiązania</a><a class="flink" href="#">Konstrukcje stalowe</a><a class="flink" href="#">Wyposażenie obiektów</a></nav>
+    <nav aria-label="Hale stalowe" style="display: flex; flex-direction: column; gap: 12px"><div style="font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px">Hale stalowe</div><a class="flink" href="#">Magazynowe</a><a class="flink" href="#">Produkcyjne</a><a class="flink" href="#">Usługowe</a><a class="flink" href="#">Komercyjne</a><a class="flink" href="#">Rolnicze</a></nav>
+    <nav aria-label="Firma" style="display: flex; flex-direction: column; gap: 12px"><div style="font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px">Firma</div><a class="flink" href="#">O nas</a><a class="flink" href="#">Realizacje</a><a class="flink" href="#">Konfigurator</a><a class="flink" href="#">Oferty pracy</a><a class="flink" href="#">Blog</a><a class="flink" href="#">Kontakt</a></nav>
+  </div>
+  <div style="max-width: 1320px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid rgba(255,255,255,.08); display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-size: 13px">
+    <span>© 2026 Solid Hale Sp. z o.o.</span>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px"><a class="flink" href="#" style="font-size: 13px">Polityka prywatności</a><a class="flink" href="#" style="font-size: 13px">Polityka cookies</a><a class="flink" href="#" style="font-size: 13px">Facebook</a><a class="flink" href="#" style="font-size: 13px">Instagram</a></div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+var GATE = {'3x3':{p:9000,w:3,h:3},'4x4':{p:13500,w:4,h:4},'5x5':{p:19000,w:5,h:5}};
+var USES = [
+  {id:'magazyn', n:'Magazyn', d:'Składowanie, logistyka', def:{cover:'ciepla', h:7, gates:2, gate:'4x4', floor:'beton'}},
+  {id:'warsztat', n:'Warsztat lub serwis', d:'Pierwsza własna hala firmy', def:{cover:'ciepla', h:6, gates:1, gate:'4x4', floor:'przem', office:30}},
+  {id:'produkcja', n:'Produkcja', d:'Maszyny, linie, suwnice', def:{cover:'ciepla', h:7, gates:2, gate:'5x5', floor:'przem', office:40}},
+  {id:'rolnicza', n:'Hala rolnicza', d:'Maszyny, nawozy, zboże', def:{cover:'zimna', h:6, gates:2, gate:'5x5', floor:'beton'}},
+  {id:'wynajem', n:'Pod wynajem', d:'Moduły dla najemców', def:{cover:'ciepla', h:7, gates:4, gate:'4x4', floor:'przem'}},
+  {id:'inne', n:'Inne', d:'Opiszesz w uwagach', def:{}}
+];
+var PRESETS = [
+  {n:'Magazyn na nawozy', d:'20 × 20 m · 400 m² · hala zimna · 2 bramy', s:{path:'std',unsure:false,use:'rolnicza',w:20,l:20,h:6,cover:'zimna',gates:2,gate:'5x5',floor:'beton',office:0,windows:0}},
+  {n:'Warsztat z zapleczem', d:'20 × 25 m · 500 m² · hala ciepła · 30 m² zaplecza', s:{path:'std',unsure:false,use:'warsztat',w:20,l:25,h:6,cover:'ciepla',gates:2,gate:'4x4',floor:'przem',office:30,windows:4}},
+  {n:'Magazyn pod wynajem', d:'30 × 40 m · 1200 m² · 4 moduły z bramami', s:{path:'std',unsure:false,use:'wynajem',w:30,l:40,h:7,cover:'ciepla',gates:4,gate:'4x4',floor:'przem',office:0,windows:0}}
+];
+var NAMES = {zakres:'Zakres', przeznaczenie:'Przeznaczenie', wymiary:'Wymiary', obudowa:'Obudowa', wyposazenie:'Wyposażenie', lokalizacja:'Lokalizacja', wynik:'Wynik'};
+var STAGES = ['Szukam działki','Mam działkę','Mam warunki zabudowy lub plan miejscowy','Mam pozwolenie na budowę'];
+var STARTS = ['W ciągu 6 miesięcy','Za 6-12 miesięcy','Później'];
+var INIT = {unsure:false, path:'std', use:'magazyn', w:20, l:30, h:7, roof:'dwu', cover:'ciepla', gates:2, gate:'4x4', doors:1, windows:2, sky:false, floor:'beton', office:0, zip:'', stage:'', start:'', sent:false, step:0, err:'', fname:'', fco:'', fphone:'', fmail:'', fnote:'', rodo:false};
+
+function fmt(n){ return Math.round(n).toLocaleString('pl-PL').replace(/\s/g, ' '); }
+function tys(n){ return fmt(Math.round(n/10000)*10); }
+function mln(n){ var v = Math.round(n/50000)*0.05; return v.toFixed(2).replace(/0$/,'').replace(/\.0$/,'').replace('.',','); }
+function money(n){ return n>=995000 ? mln(n)+' mln' : tys(n)+' tys.'; }
+function range(a,b){ var big = function(x){ return x>=995000; }; if(big(a)===big(b)) return (big(a) ? mln(a)+' - '+mln(b)+' mln' : tys(a)+' - '+tys(b)+' tys.')+' zł'; return money(a)+' - '+money(b)+' zł'; }
+function fmtM(v){ return (Math.round(v*10)/10).toString().replace('.',','); }
+function nb(t){ var p; do { p = t; t = t.replace(/(^|[\s(])([aiouwzAIOUWZ])\s+/g, '$1$2 '); } while(t !== p); return t.replace(/(\d)\s+(?=[^\s\d-])/g, '$1 ').replace(/\s+·\s+/g, ' · '); }
+function stepsFor(s){ return s.path==='dib' ? ['zakres','przeznaczenie','wymiary','lokalizacja','wynik'] : ['zakres','przeznaczenie','wymiary','obudowa','wyposazenie','lokalizacja','wynik']; }
+function locFactor(s){ var m = String(s.zip).match(/^(\d)\d-?\d{3}$/); if(!m) return {f:0, known:false}; var map = {0:0,1:.05,2:.02,3:.05,4:.04,5:.05,6:.04,7:.05,8:.04,9:.02}; return {f:map[m[1]], known:true}; }
+function sizeFactor(a){ return a<300?1.15: a<500?1.06: a<1000?1: a<2000?.94:.9; }
+function calc(s){
+  var area = s.w*s.l, loc = locFactor(s);
+  if(s.path==='dib'){ return {area:area, lo:area*2500*(1+loc.f), hi:area*3200*(1+loc.f), per:[2500,3200], loc:loc}; }
+  var base = s.cover==='ciepla'?880:680;
+  var hf = 1 + (s.h>6 ? (s.h-6)*.04 : (s.h-6)*.02);
+  var t = area*base*sizeFactor(area)*hf;
+  if(s.floor==='przem') t += area*90;
+  t += s.gates*GATE[s.gate].p;
+  t += Math.max(0,s.doors-1)*3500;
+  t += s.windows*2500;
+  if(s.sky) t += area*35;
+  t += s.office*2800;
+  t *= 1+loc.f;
+  return {area:area, lo:t*.92, hi:t*1.12, per:[t*.92/area, t*1.12/area], loc:loc};
+}
+
+/* rysunek hali: szczyt i ściana boczna w jednej skali */
+function draw(s){
+  var W=s.w, L=s.l, H=s.h, two=s.roof==='dwu', rise = two ? W*.08 : W*.1, top = H+rise;
+  var VW=560, VH=310, padX=60, padTop=24, gap=56, lab=50, man=3;
+  var availW = VW-2*padX, availH = VH-padTop-lab;
+  var scRow = Math.min((availW-gap)/(man+W+L), availH/top);
+  var mid = 74;
+  var scCol = Math.min(availW/Math.max(L, man+W), (availH-mid)/(2*top));
+  var stacked = scCol > scRow*1.2;
+  var sc = Math.min(stacked ? scCol : scRow, 22);
+  var fx, fy, sx, sy;
+  if(!stacked){ var tw = (man+W+L)*sc + gap; fx = (VW-tw)/2 + man*sc; sx = fx + W*sc + gap; fy = sy = padTop + (availH - top*sc)/2 + top*sc; }
+  else { var th = 2*top*sc + mid; var y0 = padTop + (VH - padTop - lab - th)/2; fx = (VW - (man+W)*sc)/2 + man*sc; fy = y0 + top*sc; sx = (VW - L*sc)/2; sy = fy + mid + top*sc; }
+  var P = function(ox,oy){ return function(x,y){ return [+(ox+x*sc).toFixed(1), +(oy-y*sc).toFixed(1)]; }; };
+  var F = P(fx,fy), S = P(sx,sy);
+  var C = {wall:'#2B2E32', side:'#26282C', roof:'#3A3E43', line:'rgba(255,255,255,.35)', dim:'#FFDA00', txt:'#B9BCC1'};
+  var polys=[], lines=[], texts=[], circles=[];
+  var poly = function(T, arr, fill, stroke, sw, fo){ polys.push({pts: arr.map(function(p){ return T(p[0],p[1]).join(','); }).join(' '), fill:fill, stroke:stroke||C.line, sw:sw||1.2, fo:fo==null?1:fo}); };
+  var line = function(T,a,b,stroke,sw,op){ var p=T(a[0],a[1]), q=T(b[0],b[1]); lines.push({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:stroke,sw:sw||1,op:op==null?1:op}); };
+  var rline = function(x1,y1,x2,y2,stroke,sw){ lines.push({x1:+x1.toFixed(1),y1:+y1.toFixed(1),x2:+x2.toFixed(1),y2:+y2.toFixed(1),stroke:stroke,sw:sw||1,op:1}); };
+  var txt = function(x,y,t,anchor,size,fill,weight,ls){ texts.push({x:+x.toFixed(1), y:+y.toFixed(1), t:t, anchor:anchor||'middle', size:size||15, fill:fill||C.txt, weight:weight||'500', ls:ls||'0'}); };
+  var stepM = Math.max(1, Math.ceil(7/sc));
+  line(F,[-man,0],[W+1,0],'rgba(255,255,255,.25)',1.5); line(S,[-1,0],[L+1,0],'rgba(255,255,255,.25)',1.5);
+  var front = two ? [[0,0],[W,0],[W,H],[W/2,top],[0,H]] : [[0,0],[W,0],[W,H],[0,top]];
+  poly(F, front, C.wall);
+  var roofY = function(x){ return two ? (x<=W/2 ? H+rise*(x/(W/2)) : H+rise*((W-x)/(W/2))) : H+rise*(1-x/W); };
+  var y, x, i;
+  if(s.cover==='ciepla'){ for(y=stepM; y<H; y+=stepM) line(F,[0,y],[W,y],C.line,.8,.5); } else { for(x=stepM; x<W; x+=stepM) line(F,[x,0],[x,roofY(x)],C.line,.8,.5); }
+  poly(S, [[0,H],[L,H],[L,top],[0,top]], C.roof);
+  poly(S, [[0,0],[L,0],[L,H],[0,H]], C.side);
+  if(s.cover==='ciepla'){ for(y=stepM; y<H; y+=stepM) line(S,[0,y],[L,y],C.line,.8,.5); } else { for(x=stepM; x<L; x+=stepM) line(S,[x,0],[x,H],C.line,.8,.5); }
+  if(s.sky){ var n = Math.max(2, Math.min(8, Math.round(L/10))); for(i=0;i<n;i++){ var z=L*(i+.5)/n-1.2; poly(S,[[z,top],[z+2.4,top],[z+2.4,top+.35],[z,top+.35]],'#8FB3C9','#B9BCC1',.8,.7); } }
+  var g = GATE[s.gate], fit = Math.max(0, Math.floor((W-1)/(g.w+1.5)));
+  var onFront = Math.min(s.gates, fit), onSide = s.gates-onFront;
+  var gate = function(T,x0){ poly(T, [[x0,0],[x0+g.w,0],[x0+g.w,g.h],[x0,g.h]], '#17181A', C.dim, 1.4); };
+  var slot;
+  for(i=0;i<onFront;i++){ slot=W/onFront; gate(F, slot*i+(slot-g.w)/2); }
+  var sideStart = 3, sideLen = L - sideStart - 1;
+  for(i=0;i<onSide;i++){ slot=sideLen/onSide; gate(S, sideStart+slot*i+(slot-g.w)/2); }
+  for(i=0;i<s.doors;i++){ var zd=.8+i*1.8; if(zd+1>sideStart && onSide) break; if(zd+1>L) break; poly(S,[[zd,0],[zd+1,0],[zd+1,2.1],[zd,2.1]],'#17181A','#B9BCC1',.9); }
+  var wy = Math.min(H-1.6, Math.max(2.8, H*.6));
+  for(i=0;i<s.windows;i++){ var zw=L*(i+1)/(s.windows+1)-1; poly(S,[[zw,wy],[zw+2,wy],[zw+2,wy+1.2],[zw,wy+1.2]],'#5D7384','#B9BCC1',.8); }
+  var m = F(-1.6,0), hpx = 1.8*sc, msw = Math.max(1,sc*.12);
+  circles.push({cx:m[0], cy:+(m[1]-hpx+hpx*.09).toFixed(1), r:+(hpx*.09).toFixed(1), sw:+msw.toFixed(1)});
+  rline(m[0], m[1]-hpx*.8, m[0], m[1]-hpx*.42, '#B9BCC1', msw);
+  rline(m[0], m[1]-hpx*.42, m[0]-hpx*.12, m[1], '#B9BCC1', msw);
+  rline(m[0], m[1]-hpx*.42, m[0]+hpx*.12, m[1], '#B9BCC1', msw);
+  rline(m[0]-hpx*.16, m[1]-hpx*.68, m[0]+hpx*.16, m[1]-hpx*.68, '#B9BCC1', msw);
+  var dimH = function(T,len){ var a=T(0,0), b=T(len,0), yy=a[1]+14; rline(a[0],yy,b[0],yy,C.dim,1); rline(a[0],yy-4,a[0],yy+4,C.dim,1); rline(b[0],yy-4,b[0],yy+4,C.dim,1); txt((a[0]+b[0])/2, yy+19, fmtM(len)+' m', 'middle', 15, '#FFFFFF', '600'); };
+  dimH(F,W); dimH(S,L);
+  var a2=S(L,0), b2=S(L,H), xx=a2[0]+12;
+  rline(xx,a2[1],xx,b2[1],C.dim,1); rline(xx-4,a2[1],xx+4,a2[1],C.dim,1); rline(xx-4,b2[1],xx+4,b2[1],C.dim,1);
+  txt(xx+8, (a2[1]+b2[1])/2+5, fmtM(H)+' m', 'start', 15, '#FFFFFF', '600');
+  txt(F(W/2,0)[0], F(0,0)[1]+50, 'SZCZYT','middle',11,'rgba(255,255,255,.45)','600','2');
+  txt(S(L/2,0)[0], S(0,0)[1]+50, 'ŚCIANA BOCZNA','middle',11,'rgba(255,255,255,.45)','600','2');
+  return {polys:polys, lines:lines, texts:texts, circles:circles};
+}
+
+class Component extends DCLogic {
+  constructor(p){ super(p); this.state = Object.assign({}, INIT); }
+  up(o){ this.setState(o); }
+  go(i){ var n = stepsFor(this.state).length; this.setState({step: Math.max(0, Math.min(n-1, i))}); }
+  applyUse(id){ var d = (USES.find(function(u){ return u.id===id; })||{}).def || {}; this.setState(Object.assign({use:id, office:0}, d)); }
+  dimSet(k, min, max){ var self = this; return function(e){ var v = parseFloat(e.target.value); if(isNaN(v)) return; v = Math.max(min, Math.min(max, v)); var o = {}; o[k] = v; self.setState(o); }; }
+  field(k){ var self = this; return function(e){ var o = {}; o[k] = e.target.type==='checkbox' ? e.target.checked : e.target.value; self.setState(o); }; }
+  submit(){
+    var s = this.state, msg = '';
+    if(!s.fname.trim()) msg = 'Wpisz imię i nazwisko.';
+    else if(!s.fphone.trim() && !s.fmail.trim()) msg = 'Podaj telefon albo e-mail, żebyśmy mogli wysłać zestawienie.';
+    else if(!s.rodo) msg = 'Zaznacz zgodę na przetwarzanie danych.';
+    this.setState(msg ? {err: msg} : {err:'', sent:true});
+  }
+  renderVals(){
+    var self = this, s = this.state, list = stepsFor(s), step = Math.min(s.step, list.length-1), key = list[step];
+    var r = calc(s), tile = function(on){ return on ? 'kt on' : 'kt'; };
+    var lim = {gates:[0,12], doors:[1,6], windows:[0,20]};
+    var cnt = function(k, label, sub){ return {label:label, sub:sub, val:s[k], dec:function(){ var o={}; o[k]=Math.max(lim[k][0], s[k]-1); self.setState(o); }, inc:function(){ var o={}; o[k]=Math.min(lim[k][1], s[k]+1); self.setState(o); }, decLabel:'Mniej: '+label, incLabel:'Więcej: '+label}; };
+    var idxW = list.indexOf('wymiary');
+    var spec = [{k:'Wymiary', v:fmtM(s.w)+' × '+fmtM(s.l)+' × '+fmtM(s.h)+' m'}];
+    if(s.path==='std'){
+      spec.push({k:'Obudowa', v: s.cover==='ciepla'?'płyta warstwowa':'blacha trapezowa'});
+      spec.push({k:'Bramy', v: s.gates ? s.gates+' × '+s.gate.replace('x',' × ')+' m' : 'brak'});
+      spec.push({k:'Posadzka', v: s.floor==='przem'?'przemysłowa':'betonowa'});
+      if(s.office) spec.push({k:'Zaplecze', v: s.office+' m²'});
+    }
+    spec.push({k:'Lokalizacja', v: r.loc.known ? (r.loc.f ? '+'+Math.round(r.loc.f*100)+'% strefa i dojazd' : 'bez dopłaty') : 'doliczymy po kodzie'});
+    var plural = function(n, a, b, c){ return n===1 ? a : (n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? b : c; };
+    var inA = ['Fundamenty i posadzka '+(s.floor==='przem'?'przemysłowa':'betonowa'), 'Konstrukcja stalowa z projektem wykonawczym', 'Obudowa: '+(s.cover==='ciepla'?'płyta warstwowa':'blacha trapezowa')+', rynny i obróbki', (s.gates ? s.gates+' '+plural(s.gates,'brama','bramy','bram')+' '+s.gate.replace('x',' × ')+' m' : 'Bez bram')+', '+s.doors+' drzwi'+(s.windows ? ', '+s.windows+' '+plural(s.windows,'okno','okna','okien') : ''), s.sky?'Świetliki dachowe':null, s.office?'Zaplecze socjalne '+s.office+' m²':null, 'Transport i montaż'].filter(Boolean);
+    var inB = ['Projekt budowlany i pozwolenie','Hala z obudową, bramami i stolarką','Instalacje: elektryczna, wod-kan, ogrzewanie','Stan deweloperski części socjalnej','Nadzór i odbiory'];
+    var outA = ['Projekt budowlany i formalności','Przyłącza mediów i instalacje wewnętrzne','Drogi, plac manewrowy, ogrodzenie','VAT'];
+    var outB = ['Przyłącza do granicy działki','Drogi, plac, ogrodzenie','Wyposażenie technologiczne','VAT'];
+    var d = draw(s);
+    var useN = (USES.find(function(u){ return u.id===s.use; })||{}).n;
+    return {
+      presets: PRESETS.map(function(p){ var t = Object.assign({}, s, p.s); return {n:p.n, d:nb(p.d), price:'od '+money(calc(t).lo)+' zł netto', pick:function(){ self.setState(Object.assign({}, p.s, {sent:false, step:2})); }}; }),
+      steps: list.map(function(k, i){ return {label:(i+1)+'. '+NAMES[k], cls: i===step ? 'sn cur' : (i<step ? 'sn done' : 'sn'), cur: i===step ? 'step' : 'false', pick:function(){ self.go(i); }}; }),
+      isZakres:key==='zakres', isPrzezn:key==='przeznaczenie', isWym:key==='wymiary', isObud:key==='obudowa', isWypos:key==='wyposazenie', isLok:key==='lokalizacja', isWynik:key==='wynik', notWynik:key!=='wynik',
+      paths:[
+        {cls:tile(s.path==='std' && !s.unsure), on:s.path==='std' && !s.unsure ? 'true':'false', b:'Hala w standardzie', d:nb('Fundamenty, posadzka, konstrukcja, obudowa, bramy i stolarka'), i:nb('6 kroków, ok. 2 min · widełki ceny od razu'), pick:function(){ self.setState({unsure:false, path:'std'}); }},
+        {cls:tile(s.path==='dib'), on:s.path==='dib' ? 'true':'false', b:'Zaprojektuj i wybuduj', d:nb('Stan deweloperski z instalacjami i projektem'), i:nb('4 kroki · kwota orientacyjna i rozmowa'), pick:function(){ self.setState({unsure:false, path:'dib'}); }},
+        {cls:tile(s.unsure), on:s.unsure ? 'true':'false', b:'Nie wiem', d:nb('Policzymy halę w standardzie, a doradca podpowie resztę'), i:nb('jak hala w standardzie'), pick:function(){ self.setState({unsure:true, path:'std'}); }}
+      ],
+      uses: USES.map(function(u){ return {cls:tile(s.use===u.id), on:s.use===u.id ? 'true':'false', b:u.n, d:nb(u.d), pick:function(){ self.applyUse(u.id); }}; }),
+      sizes: [[15,20],[20,25],[20,40],[25,40]].map(function(x){ var on = s.w===x[0] && s.l===x[1]; return {cls: on ? 'ch on':'ch', on: on?'true':'false', label: (x[0]*x[1])+' m²', pick:function(){ self.setState({w:x[0], l:x[1]}); }}; }),
+      w:s.w, l:s.l, h:s.h, onW:this.dimSet('w',8,40), onL:this.dimSet('l',10,120), onH:this.dimSet('h',4,12),
+      area: fmt(s.w*s.l)+' m²', small: s.w*s.l < 200,
+      roofs: [{cls:tile(s.roof==='dwu'), on:s.roof==='dwu'?'true':'false', b:'Dwuspadowy', d:nb('Najczęstszy, kalenica na środku'), pick:function(){ self.setState({roof:'dwu'}); }},
+              {cls:tile(s.roof==='jedno'), on:s.roof==='jedno'?'true':'false', b:'Jednospadowy', d:nb('Spadek na jedną stronę, np. przy granicy działki'), pick:function(){ self.setState({roof:'jedno'}); }}],
+      covers: [{cls:tile(s.cover==='ciepla'), on:s.cover==='ciepla'?'true':'false', b:'Ciepła', d:nb('Płyta warstwowa z izolacją. Magazyn, warsztat, produkcja, praca przez cały rok'), i:'ok. 880 zł/m²', pick:function(){ self.setState({cover:'ciepla'}); }},
+               {cls:tile(s.cover==='zimna'), on:s.cover==='zimna'?'true':'false', b:'Zimna', d:nb('Blacha trapezowa bez izolacji. Maszyny, płody rolne, materiały'), i:'ok. 680 zł/m²', pick:function(){ self.setState({cover:'zimna'}); }}],
+      cGates: cnt('gates','Bramy segmentowe','z napędem elektrycznym'), cDoors: cnt('doors','Drzwi stalowe','jedne w cenie'), cWin: cnt('windows','Okna','na ścianach bocznych'),
+      gateSizes: Object.keys(GATE).map(function(k){ var on = s.gate===k; return {cls: on?'ch on':'ch', on: on?'true':'false', label:k.replace('x',' × ')+' m', pick:function(){ self.setState({gate:k}); }}; }),
+      sky: s.sky, onSky: this.field('sky'),
+      floors: [{cls:tile(s.floor==='beton'), on:s.floor==='beton'?'true':'false', b:'Betonowa', d:nb('Wystarczy do magazynu i maszyn rolniczych'), i:'w cenie', pick:function(){ self.setState({floor:'beton'}); }},
+               {cls:tile(s.floor==='przem'), on:s.floor==='przem'?'true':'false', b:'Przemysłowa', d:nb('Zbrojona, zacierana, pod wózki i ciężki sprzęt'), i:'+90 zł/m²', pick:function(){ self.setState({floor:'przem'}); }}],
+      office: s.office, officeVal: s.office ? s.office+' m²' : 'bez zaplecza', onOffice: function(e){ self.setState({office: +e.target.value}); },
+      zip: s.zip, onZip: function(e){ self.setState({zip: e.target.value.trim()}); },
+      stages: STAGES.map(function(t){ return {t:nb(t), on: s.stage===t, pick:function(){ self.setState({stage:t}); }}; }),
+      starts: STARTS.map(function(t){ var on = s.start===t; return {cls: on?'ch on':'ch', on: on?'true':'false', label:nb(t), pick:function(){ self.setState({start:t}); }}; }),
+      showEst: step >= idxW, notShowEst: step < idxW, estLabel: s.path==='dib' ? 'Orientacyjnie, zaprojektuj i wybuduj' : 'Szacunek netto',
+      amount: range(r.lo, r.hi), per: fmt(r.per[0])+' - '+fmt(r.per[1])+' zł/m² · '+fmt(r.area)+' m²', spec: spec,
+      bigAmount: range(r.lo, r.hi)+' netto', bigLead: fmt(r.area)+' m² · '+fmt(r.per[0])+' - '+fmt(r.per[1])+' zł/m² · '+(s.path==='dib' ? 'zaprojektuj i wybuduj, kwota orientacyjna' : 'szacunek na podstawie Twoich wyborów'),
+      noZip: !r.loc.known,
+      inList: (s.path==='dib' ? inB : inA).map(function(x){ return {t:nb(x)}; }), outList: (s.path==='dib' ? outB : outA).map(function(x){ return {t:nb(x)}; }),
+      sendTitle: s.path==='dib' ? 'Umów rozmowę z doradcą' : 'Wyślij konfigurację do doradcy',
+      sendLead: nb(s.path==='dib' ? 'Omówimy zakres i przygotujemy ofertę.' : 'Dostaniesz zestawienie na e-mail, a doradca zadzwoni, żeby doprecyzować szczegóły.'),
+      sendBtn: s.path==='dib' ? 'Umów rozmowę' : 'Wyślij zestawienie',
+      sent: s.sent, notSent: !s.sent, err: s.err, hasErr: !!s.err,
+      fname:s.fname, fco:s.fco, fphone:s.fphone, fmail:s.fmail, fnote:s.fnote, rodo:s.rodo,
+      onName:this.field('fname'), onCo:this.field('fco'), onPhone:this.field('fphone'), onMail:this.field('fmail'), onNote:this.field('fnote'), onRodo:this.field('rodo'),
+      onSubmit: function(){ self.submit(); },
+      canBack: step > 0, noBack: step === 0, back: function(){ self.go(step-1); }, next: function(){ self.go(step+1); },
+      nextLabel: list[step+1]==='wynik' ? 'Pokaż wynik' : 'Dalej',
+      stepNo: 'Krok '+(step+1)+' z '+list.length,
+      polys: d.polys, lines: d.lines, texts: d.texts, circles: d.circles,
+      capUse: useN + (s.path==='dib' ? ' · zaprojektuj i wybuduj' : ' · '+(s.cover==='ciepla' ? 'hala ciepła' : 'hala zimna')),
+      capArea: fmt(s.w*s.l)+' m²'
+    };
+  }
+}
+</script>
+</body>
+</html>
